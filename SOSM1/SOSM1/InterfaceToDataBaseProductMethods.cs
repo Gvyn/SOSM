@@ -21,7 +21,7 @@ namespace SOSM1
         }
 
         /// <summary>
-        /// Checks if user with user name equal to ProductName exists in database and is Active or Created.
+        /// Checks if product with product name equal to ProductName exists in database and is Active or Created.
         /// </summary>
         /// <param name="ProductName">String with product name that we want to check.</param>
         /// <returns>True if exists, false otherwise.</returns>
@@ -35,20 +35,20 @@ namespace SOSM1
         /// </summary>
         /// <param name="NewProduct">Product data object for creating new product.</param>
         /// <returns>True if it could add, false otherwise.</returns>
-        public static bool AddUser(User NewProduct)
+        public static bool AddProduct(Product NewProduct)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
         /// Changes the state of a specified product in database.
-        /// If user state is Active, sets him as Archival.
-        /// If user state is Created, sets him as Active.
-        /// If user state is Archival, does nothing.
+        /// If product state is Active, sets him as Archival.
+        /// If product state is Created, sets him as Active.
+        /// If product state is Archival, does nothing.
         /// </summary>
         /// <param name="ProductName">Product name of the product we want to modify.</param>
         /// <returns>True if success, false otherwise.</returns>
-        public static bool DeleteUser(string ProductName)
+        public static bool DeleteProduct(string ProductName)
         {
             throw new NotImplementedException();
         }
