@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Maciej Rybak\Source\Repos\SOSM\SOSM1\SOSM1\SOSM Entity Data Model.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Oskar\Documents\studia\dot net\SOSM\SOSM1\SOSM1\SOSM Entity Data Model.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

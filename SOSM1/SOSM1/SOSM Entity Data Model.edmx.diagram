@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e5fa57f443cd4516b5ed481203c19d56" Name="Diagram1">
+      <Diagram DiagramId="e5fa57f443cd4516b5ed481203c19d56" Name="Diagram1" ZoomLevel="85">
         <EntityTypeShape EntityType="SOSMModel.Baskets" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SOSMModel.Categories" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SOSMModel.Orders" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />

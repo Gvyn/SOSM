@@ -10,21 +10,15 @@ namespace SOSM1
     static class InterfaceToDataBaseUserMethods
     {
         /// <summary>
-        /// Checks if user with user name equal to UserName exists in database and is Active or Created.
+        /// Attempts to log in using specified user name and password.
+        /// Checks Active and Created users.
+        /// If the state is Created changes state to Active.
         /// </summary>
-        /// <param name="UserName">String with user name that we want to check.</param>
-        /// <returns>True if exists, false otherwise.</returns>
-        public static bool UserExists(string UserName)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Creates User data object from the user with specified name in the database.
-        /// </summary>
-        /// <param name="UserName">Nameof the user we want to get data from.</param>
-        /// <returns>User data object if user exists, null otherwise.</returns>
-        public static User GetUserData(string UserName)
+        /// <param name="userName">Username to be checked.</param>
+        /// <param name="password">Password to be checked.</param>
+        /// <param name="loggedUserData">User data object of the logged user.</param>
+        /// <returns>True if succeded. False otherwise.</returns>
+        public static bool LogIn(string userName, SecureString password, User loggedUserData)
         {
             throw new NotImplementedException();
         }
@@ -32,9 +26,9 @@ namespace SOSM1
         /// <summary>
         /// Adds new user to database created from the User data object
         /// </summary>
-        /// <param name="NewUser">User data object for creating new user.</param>
+        /// <param name="newUser">User data object for creating new user.</param>
         /// <returns>True if it could add, false otherwise.</returns>
-        public static bool AddUser(User NewUser)
+        public static bool AddUser(User newUser)
         {
             throw new NotImplementedException();
         }
@@ -45,25 +39,80 @@ namespace SOSM1
         /// If user state is Created, sets him as Active.
         /// If user state is Archival, does nothing.
         /// </summary>
-        /// <param name="UserName">User name of the user we want to modify.</param>
+        /// <param name="userName">User name of the user we want to modify.</param>
         /// <returns>True if success, false otherwise.</returns>
-        public static bool DeleteUser(string UserName)
+        public static bool DeleteUser(string userName)
         {
             throw new NotImplementedException();
         }
 
         /// <summary>
-        /// Attempts to log in using specified Username and password.
-        /// Checks Active and Created users.
-        /// If the state is Created changes state to Active.
+        /// Gets User data object from the user with the specified userID
         /// </summary>
-        /// <param name="Username">Username to be checked.</param>
-        /// <param name="Password">Password to be checked.</param>
-        /// <returns>True if succeded. False otherwise.</returns>
-        public static bool LogIn(string Username, SecureString Password)
+        /// <param name="UserID">Specified userID</param>
+        /// <returns>User data object if user exists, null otherwise.</returns>
+        public static User GetUserData(int userID)
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Gets list of users who match terms specified by arguments.
+        /// If the argument is null, it's not checked.
+        /// </summary>
+        /// <param name="searchArgument">User contains searchArgument in name or e-mail address.</param>
+        /// <param name="type">User is of specified type.</param>
+        /// <param name="state">User is of specified state.</param>
+        /// <returns>List of User data objects who match the terms.</returns>
+        public static List<User> CatalogUsers(string searchArgument=null, int? type = null, int? state = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Attempts to modify data of user with specified user ID.
+        /// If argument is null it's not modified.
+        /// </summary>
+        /// <param name="userID">Specifies a user.</param>
+        /// <param name="userName">New user name.</param>
+        /// <param name="mail">New e-mail address.</param>
+        /// <param name="password">New password.</param>
+        /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
+        public static bool UserModification(int userID,string userName=null, string mail = null, SecureString password = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        ///// <summary>
+        ///// Checks if there is an active user with specified user name and admin privileges.
+        ///// </summary>
+        ///// <param name="userName">Specified user name.</param>
+        ///// <returns>True if is an admin, false otherwise.</returns>
+        //public static bool CheckPrivilege(string userName)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        ///// <summary>
+        ///// Checks if user with user name equal to UserName exists in database and is Active or Created.
+        ///// </summary>
+        ///// <param name="userName">String with user name that we want to check.</param>
+        ///// <returns>True if exists, false otherwise.</returns>
+        //public static bool UserExists(string userName)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        ///// <summary>
+        ///// Creates User data object from the active user with specified name in the database.
+        ///// </summary>
+        ///// <param name="userName">Nameof the user we want to get data from.</param>
+        ///// <returns>User data object if user exists, null otherwise.</returns>
+        //public static User GetUserData(string userName)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
 
     }
 }
