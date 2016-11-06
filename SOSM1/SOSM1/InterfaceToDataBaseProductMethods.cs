@@ -56,32 +56,36 @@ namespace SOSM1
             throw new NotImplementedException();
         }
 
-        ///// <summary>
-        ///// Attempts to modify data of product with specified ID.
-        ///// If argument is null it's not modified.
-        ///// </summary>
-        ///// <param name="productID">Specifies a product.</param>
-        ///// <param name="productName">New product name.</param>
-        ///// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        ///// 
-        
         /// <summary>
-        /// 
+        /// Attempts to modify data of product with specified product ID.
+        /// If argument is null it's not modified.
         /// </summary>
-        /// <param name="productID"></param>
-        /// <param name="productName"></param>
-        /// <param name="prise"></param>
-        /// <param name="priceType"></param>
-        /// <param name="discount"></param>
-        /// <param name="amount"></param>
-        /// <param name="description"></param>
-        /// <param name="picture"></param>
-        /// <param name="categoryID"></param>
-        /// <returns></returns>
-        public static bool UserModification(int productID, string productName = null, decimal? prise = null, int? priceType = null, decimal? discount = null, decimal? amount = null, string description = null, Bitmap picture = null, int? categoryID = null)
+        /// <param name="productID">Specifies a product.</param>
+        /// <param name="productName">New product name.</param>
+        /// <param name="prise">New prise.</param>
+        /// <param name="priceType">New price type.</param>
+        /// <param name="discount">New discount.</param>
+        /// <param name="amount">New amount.</param>
+        /// <param name="description">New description.</param>
+        /// <param name="picture">New picture.</param>
+        /// <param name="categoryID">New categoryID.</param>
+        /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
+        public static bool ProductModification(int productID, string productName = null, decimal? prise = null, int? priceType = null, decimal? discount = null, decimal? amount = null, string description = null, Bitmap picture = null, int? categoryID = null)
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Attempts to modify data of product with specified product ID.
+        /// </summary>
+        /// <param name="productID">Specifies a product.</param>
+        /// <param name="ProductData">Contains data of modified product.</param>
+        /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
+        public static bool ProductModificationFromProductData(int productID, Product ProductData)
+        {
+            throw new NotImplementedException();
+        }
+
 
         ///// <summary>
         ///// Creates Product data object from the product with specified name in the database.
