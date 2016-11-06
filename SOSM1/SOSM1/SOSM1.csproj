@@ -83,12 +83,15 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfaceToDataBaseProductMethods.cs" />
+    <Compile Include="InterfaceToDataBaseUserMethods.cs" />
     <Compile Include="Orders.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Other.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Product.cs" />
     <Compile Include="Products.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
@@ -112,6 +115,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SOSM Entity Data Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Compile Include="Users.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
