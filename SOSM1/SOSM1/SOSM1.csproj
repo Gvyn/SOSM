@@ -85,8 +85,11 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfaceToDataBaseBasketMethods.cs" />
+    <Compile Include="InterfaceToDataBaseOrderMethods.cs" />
     <Compile Include="InterfaceToDataBaseProductMethods.cs" />
+    <Compile Include="InterfaceToDataBaseSaleMethods.cs" />
     <Compile Include="InterfaceToDataBaseUserMethods.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="Orders.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
@@ -99,6 +102,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sale.cs" />
     <Compile Include="Sale_history.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
