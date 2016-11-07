@@ -62,15 +62,15 @@ namespace SOSM1
         /// </summary>
         /// <param name="productID">Specifies a product.</param>
         /// <param name="productName">New product name.</param>
-        /// <param name="prise">New prise.</param>
-        /// <param name="priceType">New price type.</param>
+        /// <param name="price">New prise.</param>
+        /// <param name="unitType">New unit type.</param>
         /// <param name="discount">New discount.</param>
         /// <param name="amount">New amount.</param>
         /// <param name="description">New description.</param>
         /// <param name="picture">New picture.</param>
         /// <param name="categoryID">New categoryID.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool ProductModification(int productID, string productName = null, decimal? prise = null, int? priceType = null, decimal? discount = null, decimal? amount = null, string description = null, Bitmap picture = null, int? categoryID = null)
+        public static bool ProductModification(int productID, string productName = null, decimal? price = null, int? unitType = null, decimal? discount = null, decimal? amount = null, string description = null, Bitmap picture = null, int? categoryID = null)
         {
             throw new NotImplementedException();
         }
