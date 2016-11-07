@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    class InterfaceToDataBaseBasketMethods
+    public static class InterfaceToDataBaseBasketMethods
     {
         /// <summary>
         /// Creates basket owned by logged in user with specified product.

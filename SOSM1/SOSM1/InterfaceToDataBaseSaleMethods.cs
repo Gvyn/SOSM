@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    class InterfaceToDataBaseSaleMethods
+    public static class InterfaceToDataBaseSaleMethods
     {
         /// <summary>
         /// Finilaize users' transaction, saves new Sale_history object in
