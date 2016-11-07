@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    class InterfaceToDataBaseOrderMethods
+    public static class InterfaceToDataBaseOrderMethods
     {
         /// <summary>
         /// Creates list of Orders from Baskets. Should be used by function finalizing

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    class Basket
-    {
+    public class Basket
+    { 
     }
 }
