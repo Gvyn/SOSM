@@ -47,5 +47,31 @@ namespace SOSM1
             }
         }
 
+        private int type;
+        public int Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
+
+        private int state;
+        public int State
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                state = value;
+            }
+        }
+
     }
 }

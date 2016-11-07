@@ -84,6 +84,17 @@ namespace SOSM1
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Attempts to change the type of user with specified user ID
+        /// </summary>
+        /// <param name="userID">Specifies a user.</param>
+        /// <param name="type">New type.</param>
+        /// <returns>True if operation could be completed, false otherwise.</returns>
+        public static bool ChangeType(int userID, int type)
+        {
+            throw new NotImplementedException();
+        }
+
         ///// <summary>
         ///// Checks if there is an active user with specified user name and admin privileges.
         ///// </summary>
