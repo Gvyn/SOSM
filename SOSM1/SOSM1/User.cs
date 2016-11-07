@@ -8,6 +8,15 @@ namespace SOSM1
 {
     public class User
     {
+        User(string UserName, string Mail, int Type, int State)
+        {
+            UserID = -1;
+            this.UserName = UserName;
+            this.Mail = Mail;
+            this.Type = Type;
+            this.State = State;
+        }
+
         private int userID;
         public int UserID
         {
