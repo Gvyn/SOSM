@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    class User
+    public class User
     {
+        int userID;
+        string userName;
+        string mail;
+
     }
 }

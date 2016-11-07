@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    static class InterfaceToDataBaseProductMethods
+    public static class InterfaceToDataBaseProductMethods
     {
         /// <summary>
         /// Adds new product to database created from the Product data object

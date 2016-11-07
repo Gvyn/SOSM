@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    class Product
+    public class Product
     {
+
     }
 }

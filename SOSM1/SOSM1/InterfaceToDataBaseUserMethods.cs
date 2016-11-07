@@ -7,7 +7,7 @@ using System.Security;
 
 namespace SOSM1
 {
-    static class InterfaceToDataBaseUserMethods
+    public static class InterfaceToDataBaseUserMethods
     {
         /// <summary>
         /// Attempts to log in using specified user name and password.
@@ -18,7 +18,7 @@ namespace SOSM1
         /// <param name="password">Password to be checked.</param>
         /// <param name="loggedUserData">User data object of the logged user.</param>
         /// <returns>True if succeded. False otherwise.</returns>
-        public static bool LogIn(string userName, SecureString password, User loggedUserData)
+        public static bool LogIn(string userName, SecureString password,out User loggedUserData)
         {
             throw new NotImplementedException();
         }
@@ -27,8 +27,9 @@ namespace SOSM1
         /// Adds new user to database created from the User data object
         /// </summary>
         /// <param name="newUser">User data object for creating new user.</param>
+        /// <param name="password">Password of created user.</param>
         /// <returns>True if it could add, false otherwise.</returns>
-        public static bool AddUser(User newUser)
+        public static bool AddUser(User newUser, SecureString password)
         {
             throw new NotImplementedException();
         }
@@ -39,9 +40,9 @@ namespace SOSM1
         /// If user state is Created, sets him as Active.
         /// If user state is Archival, does nothing.
         /// </summary>
-        /// <param name="userName">User name of the user we want to modify.</param>
+        /// <param name="userID">ID of modified user.</param>
         /// <returns>True if success, false otherwise.</returns>
-        public static bool DeleteUser(string userName)
+        public static bool DeleteUser(int userID)
         {
             throw new NotImplementedException();
         }
