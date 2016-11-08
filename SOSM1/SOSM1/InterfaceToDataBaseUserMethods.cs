@@ -131,7 +131,20 @@ namespace SOSM1
         /// <returns>User data object if user exists, null otherwise.</returns>
         public static User GetUserData(long userID)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                Users dbUser = context.Users.Find(userID);
+                if (dbUser == null)
+                    return null;
+
+                User user = new User(
+                    dbUser.Name,
+                    dbUser.E_mail,
+                    dbUser.Type,
+                    dbUser.State
+                );
+                return user;
+            }
         }
 
         /// <summary>
@@ -142,7 +155,7 @@ namespace SOSM1
         /// <param name="type">User is of specified type.</param>
         /// <param name="state">User is of specified state.</param>
         /// <returns>List of User data objects who match the terms.</returns>
-        public static List<User> CatalogUsers(string searchArgument=null, long? type = null, long? state = null)
+        public static List<User> CatalogUsers(string searchArgument = null, long? type = null, long? state = null)
         {
             throw new NotImplementedException();
         }
