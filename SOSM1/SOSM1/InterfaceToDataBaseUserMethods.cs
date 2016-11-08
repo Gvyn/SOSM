@@ -103,16 +103,21 @@ namespace SOSM1
                 {
                     case 0: // state - created, EREASE HIM
                         {
+                            context.Users.Remove(user);
+                            context.SaveChanges();
                             break;
                         }
                     case 1: // state - active, set as archival
                         {
                             user.State = 1;
+                            var entry = context.Entry(user);
+                            entry.Property(e => e.State).IsModified = true;
+                            context.SaveChanges();
                             break;
                         }
                     case 2: // state - archival, nothing
                         {
-                            break;
+                            return false;
                         }
                 }
                 return true;
