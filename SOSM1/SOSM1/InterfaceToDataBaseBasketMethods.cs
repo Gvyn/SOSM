@@ -9,20 +9,6 @@ namespace SOSM1
     public static class InterfaceToDataBaseBasketMethods
     {
         /// <summary>
-        /// Creates basket owned by logged in user with specified product.
-        /// Baskets should be kept in program memory and saved to 
-        /// database only in case of user logout without empty basket.
-        /// </summary>
-        /// <param name="user">Logged in user object.</param>
-        /// <param name="produkt">Product object added to basket.</param>
-        /// <param name="amount">Amount of added product. Size 10, precision 2.</param>
-        /// <returns>New Basket class object.</returns>
-        public static Basket CreateBasket(User user, Product product, decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
         /// Saves list of baskets, should be used to save users' buys in case
         /// hes logging out.
         /// </summary>
@@ -30,7 +16,34 @@ namespace SOSM1
         /// <returns>True if could save, false otherwise.</returns>
         public static bool SaveBaskets(List<Basket> basketsList)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        foreach (Basket basket in basketsList)
+                        {
+                            var basketEntity = new Baskets();
+                            basketEntity.UserID = basket.BasketOwner.UserID;
+                            basketEntity.ProductID = basket.ProductInBasket.ProductID;
+                            basketEntity.Amount = basket.Amount;
+                            basketEntity.Date = basket.Date;
+
+                            context.Baskets.Add(basketEntity);
+                        }
+                        context.SaveChanges();
+
+                        dbContextTransaction.Commit();
+                        return true;
+                    }
+                    catch (Exception)
+                    {
+                        dbContextTransaction.Rollback();
+                        return false;
+                    }
+                }
+            }
         }
 
         /// <summary>
