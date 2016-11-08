@@ -48,10 +48,11 @@ namespace SOSM1
                 MessageBox.Show("Wpisz hasło!");
                 return;
             }
-            passwordBox.Text += "PseudoSaltWhateverAKB48<3!";
-            byte[] data = Encoding.ASCII.GetBytes(passwordBox.Text);
+            
+            String hash = passwordBox.Text + "PseudoSaltWhateverAKB48<3!" + userNameBox.Text;
+            byte[] data = Encoding.ASCII.GetBytes(hash);
             data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
-            String hash = Encoding.ASCII.GetString(data);
+            hash = Encoding.ASCII.GetString(data);
 
             if(InterfaceToDataBaseUserMethods.LogIn(userNameBox.Text, hash, out loggedUserData))
             {
