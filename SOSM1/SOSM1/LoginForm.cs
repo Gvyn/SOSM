@@ -25,7 +25,6 @@ namespace SOSM1
                 case 1:
                     this.Visible = false;
                     (new Form1()).ShowDialog();
-
                     break;
             }
 
@@ -35,6 +34,11 @@ namespace SOSM1
         {
             exit = 1;
             Close();
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            Icon = Properties.Resources.logo;
         }
     }
 }
