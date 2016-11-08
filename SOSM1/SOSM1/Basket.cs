@@ -38,6 +38,8 @@ namespace SOSM1
             }
             set
             {
+                if (value.UserID < 0)
+                    throw new ArgumentOutOfRangeException(); 
                 basketOwner = value;
             }
         }
@@ -64,6 +66,9 @@ namespace SOSM1
             }
             set
             {
+                // UnitType 0 is 'pieces', amount must integer number
+                if (productInBasket.UnitType == 0 && value % 1 != 0)
+                    throw new ArgumentOutOfRangeException();
                 amount = value;
             }
         }

@@ -10,7 +10,7 @@ namespace SOSM1
     {
         public Sale(int UserID)
         {
-            saleID = -1;
+            SaleID = -1;
             this.UserID = UserID;
             Date = DateTime.Now;
         }
@@ -37,6 +37,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
                 userID = value;
             }
         }

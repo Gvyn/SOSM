@@ -50,6 +50,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
                 saleID = value;
             }
         }
@@ -63,6 +65,8 @@ namespace SOSM1
             }
             set
             {
+                if (value.ProductID < 0)
+                    throw new ArgumentException();
                 orderedProduct = value;
             }
         }
@@ -76,6 +80,9 @@ namespace SOSM1
             }
             set
             {
+                // UnitType 0 is 'pieces', amount must integer number
+                if (orderedProduct.UnitType == 0 && value % 1 != 0)
+                    throw new ArgumentOutOfRangeException();
                 amount = value;
             }
         }
@@ -89,6 +96,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
                 price = value;
             }
         }
