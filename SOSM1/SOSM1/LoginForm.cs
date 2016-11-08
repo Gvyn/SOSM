@@ -13,25 +13,28 @@ namespace SOSM1
 {
     public partial class LoginForm : Form
     {
+        private int exit = 0;
+        private User loggedUserData;
         public LoginForm()
         {
             InitializeComponent();
         }
 
-        private int exit = 0;
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             switch (exit)
             {
                 case 1:
                     this.Visible = false;
-                    (new Form1()).ShowDialog();
+                    (new Form1()).ShowDialog();//Put main form with User loggedUserData
+                    break;
+                case 2:
+                    this.Visible = false;
+                    (new SignUp()).ShowDialog();
                     break;
             }
 
         }
-
-        private User loggedUser;
         private void button1_Click(object sender, EventArgs e)
         {
             if(userNameBox.Text.Length==0)
@@ -45,17 +48,33 @@ namespace SOSM1
                 MessageBox.Show("Wpisz hasło!");
                 return;
             }
-            byte[] data = System.Text.Encoding.ASCII.GetBytes(passwordBox.Text);
-            data = new System.Security.Cryptography.SHA256Managed().ComputeHash(data);
-            String hash = System.Text.Encoding.ASCII.GetString(data);
-            InterfaceToDataBaseUserMethods.LogIn(userNameBox.Text, passwordBox.Text, out loggedUser);
-            exit = 1;
-            Close();
+            passwordBox.Text += "PseudoSaltWhateverAKB48<3!";
+            byte[] data = Encoding.ASCII.GetBytes(passwordBox.Text);
+            data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
+            String hash = Encoding.ASCII.GetString(data);
+
+            if(InterfaceToDataBaseUserMethods.LogIn(userNameBox.Text, hash, out loggedUserData))
+            {
+                exit = 1;
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Nieprawidłowe dane logowania!");
+                return;
+            }
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
             Icon = Properties.Resources.logo;
+        }
+
+        private void signButton_Click(object sender, EventArgs e)
+        {
+            exit = 2;
+            Close();
+
         }
     }
 }

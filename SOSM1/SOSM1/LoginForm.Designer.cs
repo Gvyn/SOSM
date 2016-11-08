@@ -54,9 +54,9 @@
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.Location = new System.Drawing.Point(84, 49);
             this.userNameLabel.Name = "userNameLabel";
-            this.userNameLabel.Size = new System.Drawing.Size(102, 13);
+            this.userNameLabel.Size = new System.Drawing.Size(105, 13);
             this.userNameLabel.TabIndex = 1;
-            this.userNameLabel.Text = "Nazwa użytkownika";
+            this.userNameLabel.Text = "Nazwa użytkownika:";
             this.userNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // passwordLabel
@@ -65,9 +65,9 @@
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Location = new System.Drawing.Point(117, 88);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(36, 13);
+            this.passwordLabel.Size = new System.Drawing.Size(39, 13);
             this.passwordLabel.TabIndex = 2;
-            this.passwordLabel.Text = "Hasło";
+            this.passwordLabel.Text = "Hasło:";
             this.passwordLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // signLabel
@@ -105,8 +105,9 @@
             this.signButton.Name = "signButton";
             this.signButton.Size = new System.Drawing.Size(75, 23);
             this.signButton.TabIndex = 6;
-            this.signButton.Text = "Zarejestruj";
+            this.signButton.Text = "Rejestracja";
             this.signButton.UseVisualStyleBackColor = true;
+            this.signButton.Click += new System.EventHandler(this.signButton_Click);
             // 
             // LoginForm
             // 
