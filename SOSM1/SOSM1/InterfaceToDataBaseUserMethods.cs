@@ -17,10 +17,42 @@ namespace SOSM1
         /// <param name="userName">Username to be checked.</param>
         /// <param name="password">Password to be checked.</param>
         /// <param name="loggedUserData">User data object of the logged user.</param>
-        /// <returns>True if succeded. False otherwise.</returns>
-        public static bool LogIn(string userName, string password,out User loggedUserData)
+        /// <returns>If operation succeded returns true, loggedUserDate is new User object.
+        /// False otherwise, loggedUserData is null</returns>
+        public static bool LogIn(string userName, string password, out User loggedUserData)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                var user = context.Users.First(
+                    x => x.Name == userName // search by userName
+                    && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
+                if (user == null)
+                {
+                    loggedUserData = null;
+                    return false;
+                }
+                if (user.Password != password)
+                {
+                    loggedUserData = null;
+                    return false;
+                }
+                if (user.State == 0)
+                {
+                    user.State = 1;
+                    context.Users.Attach(user);
+                    var entry = context.Entry(user);
+                    entry.Property(e => e.State).IsModified = true;
+
+                    context.SaveChanges();
+                }
+                loggedUserData = new User(
+                    user.Name,
+                    user.E_mail,
+                    user.Type,
+                    user.State);
+                loggedUserData.UserID = user.UserID;
+                return true;
+            }
         }
 
         /// <summary>
@@ -31,7 +63,25 @@ namespace SOSM1
         /// <returns>True if it could add, false otherwise.</returns>
         public static bool AddUser(User newUser, string password)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                int usersAlreadyInDB = context.Users.Where(
+                    x => x.Name == newUser.UserName // search by UserName
+                    && (x.State == 0 || x.State == 1)).Count(); //user 'created' or 'active'
+                if (usersAlreadyInDB != 0)
+                    return false;
+
+                Users user = new Users();
+                user.Name = newUser.UserName;
+                user.Password = password;
+                user.E_mail = newUser.Mail;
+                user.Type = newUser.Type;
+                user.State = newUser.State;
+
+                context.Users.Add(user);
+                context.SaveChanges();
+                return true;
+            }
         }
 
         /// <summary>

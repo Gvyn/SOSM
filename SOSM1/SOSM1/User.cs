@@ -9,7 +9,7 @@ namespace SOSM1
 {
     public class User
     {
-        User(string UserName, string Mail, long Type, long State)
+        public User(string UserName, string Mail, long Type, long State)
         {
             UserID = -1;
             this.UserName = UserName;
