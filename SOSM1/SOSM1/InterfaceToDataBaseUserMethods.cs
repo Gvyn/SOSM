@@ -95,6 +95,16 @@ namespace SOSM1
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Changes the state of user with userID from Created to Active.
+        /// </summary>
+        /// <param name="userID">Specifies a user.</param>
+        /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
+        public static bool Activate(int userID)
+        {
+            throw new NotImplementedException();
+        }
+
         ///// <summary>
         ///// Checks if there is an active user with specified user name and admin privileges.
         ///// </summary>

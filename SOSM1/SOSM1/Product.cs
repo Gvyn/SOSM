@@ -44,6 +44,8 @@ namespace SOSM1
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 productName = value;
             }
         }
@@ -57,6 +59,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
                 price = value;
             }
         }
@@ -67,6 +71,11 @@ namespace SOSM1
         /// 2 - litres
         /// </summary>
         private int unitType;
+        /// <summary>
+        /// 0 - pieces
+        /// 1 - kg
+        /// 2 - litres
+        /// </summary>
         public int UnitType
         {
             get
@@ -75,7 +84,8 @@ namespace SOSM1
             }
             set
             {
-
+                if (value < 0 || value > 2)
+                    throw new ArgumentOutOfRangeException();
                 unitType = value;
             }
         }
@@ -89,6 +99,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
                 discount = value;
             }
         }
@@ -102,6 +114,10 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
+                if (UnitType == 0 && value%1 != 0)
+                    throw new ArgumentOutOfRangeException();
                 amount = value;
             }
         }
@@ -115,6 +131,8 @@ namespace SOSM1
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 description = value;
             }
         }
@@ -132,7 +150,17 @@ namespace SOSM1
             }
         }
 
+        /// <summary>
+        /// 0 - Created
+        /// 1 - Active
+        /// 2 - Archival
+        /// </summary>
         private int state;
+        /// <summary>
+        /// 0 - Created
+        /// 1 - Active
+        /// 2 - Archival
+        /// </summary>
         public int State
         {
             get
@@ -141,6 +169,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0 || value > 2)
+                    throw new ArgumentOutOfRangeException();
                 state = value;
             }
         }
@@ -154,6 +184,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
                 categoryID = value;
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,11 +55,21 @@ namespace SOSM1
             }
             set
             {
+                if (!(new EmailAddressAttribute().IsValid(value)))
+                    throw new ArgumentException();
                 mail = value;
             }
         }
 
+        /// <summary>
+        /// 0 - normal
+        /// 1 - admin
+        /// </summary>
         private int type;
+        /// <summary>
+        /// 0 - normal
+        /// 1 - admin
+        /// </summary>
         public int Type
         {
             get
@@ -67,11 +78,23 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0 || value > 1)
+                    throw new ArgumentOutOfRangeException();
                 type = value;
             }
         }
 
+        /// <summary>
+        /// 0 - Created
+        /// 1 - Active
+        /// 2 - Archival
+        /// </summary>
         private int state;
+        /// <summary>
+        /// 0 - Created
+        /// 1 - Active
+        /// 2 - Archival
+        /// </summary>
         public int State
         {
             get
@@ -80,6 +103,8 @@ namespace SOSM1
             }
             set
             {
+                if (value < 0 || value > 2)
+                    throw new ArgumentOutOfRangeException();
                 state = value;
             }
         }

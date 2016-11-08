@@ -86,6 +86,15 @@ namespace SOSM1
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Changes the state of product with productID from Created to Active.
+        /// </summary>
+        /// <param name="productID">Specifies a product.</param>
+        /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
+        public static bool Activate(int productID)
+        {
+            throw new NotImplementedException();
+        }
 
         ///// <summary>
         ///// Creates Product data object from the product with specified name in the database.
