@@ -18,7 +18,7 @@ namespace SOSM1
         /// <param name="password">Password to be checked.</param>
         /// <param name="loggedUserData">User data object of the logged user.</param>
         /// <returns>True if succeded. False otherwise.</returns>
-        public static bool LogIn(string userName, SecureString password,out User loggedUserData)
+        public static bool LogIn(string userName, string password,out User loggedUserData)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace SOSM1
         /// <param name="newUser">User data object for creating new user.</param>
         /// <param name="password">Password of created user.</param>
         /// <returns>True if it could add, false otherwise.</returns>
-        public static bool AddUser(User newUser, SecureString password)
+        public static bool AddUser(User newUser, string password)
         {
             throw new NotImplementedException();
         }
@@ -79,7 +79,7 @@ namespace SOSM1
         /// <param name="mail">New e-mail address.</param>
         /// <param name="password">New password.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool UserModification(long userID,string userName=null, string mail = null, SecureString password = null)
+        public static bool UserModification(long userID,string userName=null, string mail = null, string password = null)
         {
             throw new NotImplementedException();
         }
