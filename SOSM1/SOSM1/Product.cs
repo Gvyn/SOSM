@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,21 +10,23 @@ namespace SOSM1
 {
     public class Product
     {
-        public Product(string ProductName, decimal Price, int UnitType, decimal Discount,decimal Amount, Bitmap Picture, int State, int CategoryID)
+        public Product(string ProductName, decimal Price, long UnitType, decimal? Discount,decimal Amount, Bitmap Picture, long State, long? CategoryID)
         {
+            if (Discount == null || CategoryID == null)
+                throw new NoNullAllowedException();
             ProductID = -1;
             this.ProductName = ProductName;
             this.Price = Price;
             this.UnitType = UnitType;
-            this.Discount = Discount;
+            this.Discount = (decimal)Discount;
             this.Amount = Amount;
             this.Picture = Picture;
             this.State = State;
-            this.CategoryID = CategoryID;
+            this.CategoryID = (long)CategoryID;
         }
 
-        private int productID;
-        public int ProductID
+        private long productID;
+        public long ProductID
         {
             get
             {
@@ -70,13 +73,13 @@ namespace SOSM1
         /// 1 - kg
         /// 2 - litres
         /// </summary>
-        private int unitType;
+        private long unitType;
         /// <summary>
         /// 0 - pieces
         /// 1 - kg
         /// 2 - litres
         /// </summary>
-        public int UnitType
+        public long UnitType
         {
             get
             {
@@ -155,13 +158,13 @@ namespace SOSM1
         /// 1 - Active
         /// 2 - Archival
         /// </summary>
-        private int state;
+        private long state;
         /// <summary>
         /// 0 - Created
         /// 1 - Active
         /// 2 - Archival
         /// </summary>
-        public int State
+        public long State
         {
             get
             {
@@ -175,8 +178,8 @@ namespace SOSM1
             }
         }
 
-        private int categoryID;
-        public int CategoryID
+        private long categoryID;
+        public long CategoryID
         {
             get
             {

@@ -20,26 +20,19 @@ namespace SOSM1
         {
             using (var context = new SOSMEntities())
             {
-                try
+                foreach (Basket basket in basketsList)
                 {
-                    foreach (Basket basket in basketsList)
-                    {
-                        var basketEntity = new Baskets();
-                        basketEntity.UserID = basket.BasketOwner.UserID;
-                        basketEntity.ProductID = basket.ProductInBasket.ProductID;
-                        basketEntity.Amount = basket.Amount;
-                        basketEntity.Date = basket.Date;
+                    var basketEntity = new Baskets();
+                    basketEntity.UserID = basket.UserID;
+                    basketEntity.ProductID = basket.ProductID;
+                    basketEntity.Amount = basket.Amount;
+                    basketEntity.Date = basket.Date;
 
-                        context.Baskets.Add(basketEntity);
-                    }
-                    context.SaveChanges();
+                    context.Baskets.Add(basketEntity);
+                }
+                context.SaveChanges();
 
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
+                return true;
             }
         }
 
@@ -57,34 +50,12 @@ namespace SOSM1
 
                 List<Basket> basketList = new List<Basket>();
                 foreach (var basket in basketsToRetrieve)
-                {
-                    var product = context.Products.Find(basket.ProductID);
-                    try
-                    {
-                        basketList.Add(new Basket(
-                            user,
-                            new Product(
-                                product.Name,
-                                product.Price,
-                                (int)product.Unit_type,
-                                (int)product.Discount,
-                                product.Amount,
-                                new Bitmap(Image.FromStream(new MemoryStream(product.Picture))),
-                                (int)product.State,
-                                (int)product.CategoryID),
-                            basket.Amount,
-                            basket.Date
-                        ));
-                    }
-                    catch (ArgumentNullException) // no picture provided
-                    {
-
-                    }
-                    catch (ArgumentException) // picture data is corrupted
-                    {
-
-                    }
-                }
+                    basketList.Add(new Basket(
+                        basket.UserID,
+                        basket.ProductID,
+                        basket.Amount,
+                        basket.Date)
+                    );
 
                 return basketList;
             }
@@ -99,20 +70,13 @@ namespace SOSM1
         {
             using (var context = new SOSMEntities())
             {
-                try
-                {
-                    var basketsToDelete = context.Baskets.Where(x => x.UserID == user.UserID);
-                    foreach (var basket in basketsToDelete)
-                        context.Baskets.Remove(basket);
+                var basketsToDelete = context.Baskets.Where(x => x.UserID == user.UserID);
+                foreach (var basket in basketsToDelete)
+                    context.Baskets.Remove(basket);
 
-                    context.SaveChanges();
+                context.SaveChanges();
 
-                    return true;
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
+                return true;
             }
         }
     }

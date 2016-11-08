@@ -42,7 +42,7 @@ namespace SOSM1
         /// </summary>
         /// <param name="userID">ID of modified user.</param>
         /// <returns>True if success, false otherwise.</returns>
-        public static bool DeleteUser(int userID)
+        public static bool DeleteUser(long userID)
         {
             throw new NotImplementedException();
         }
@@ -52,7 +52,7 @@ namespace SOSM1
         /// </summary>
         /// <param name="UserID">Specified userID</param>
         /// <returns>User data object if user exists, null otherwise.</returns>
-        public static User GetUserData(int userID)
+        public static User GetUserData(long userID)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +65,7 @@ namespace SOSM1
         /// <param name="type">User is of specified type.</param>
         /// <param name="state">User is of specified state.</param>
         /// <returns>List of User data objects who match the terms.</returns>
-        public static List<User> CatalogUsers(string searchArgument=null, int? type = null, int? state = null)
+        public static List<User> CatalogUsers(string searchArgument=null, long? type = null, long? state = null)
         {
             throw new NotImplementedException();
         }
@@ -79,7 +79,7 @@ namespace SOSM1
         /// <param name="mail">New e-mail address.</param>
         /// <param name="password">New password.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool UserModification(int userID,string userName=null, string mail = null, SecureString password = null)
+        public static bool UserModification(long userID,string userName=null, string mail = null, SecureString password = null)
         {
             throw new NotImplementedException();
         }
@@ -90,7 +90,7 @@ namespace SOSM1
         /// <param name="userID">Specifies a user.</param>
         /// <param name="type">New type.</param>
         /// <returns>True if operation could be completed, false otherwise.</returns>
-        public static bool ChangeType(int userID, int type)
+        public static bool ChangeType(long userID, long type)
         {
             throw new NotImplementedException();
         }
@@ -100,7 +100,7 @@ namespace SOSM1
         /// </summary>
         /// <param name="userID">Specifies a user.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool Activate(int userID)
+        public static bool Activate(long userID)
         {
             throw new NotImplementedException();
         }

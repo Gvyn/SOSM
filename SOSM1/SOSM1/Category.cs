@@ -8,8 +8,8 @@ namespace SOSM1
 {
     class Category
     {
-        private int categoryID;
-        public int CategoryID
+        private long categoryID;
+        public long CategoryID
         {
             get
             {

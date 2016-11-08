@@ -8,28 +8,26 @@ namespace SOSM1
 {
     public class Order
     {
-        public Order(int SaleID, Product OrderedProduct, decimal Amount, decimal Price)
+        public Order(long SaleID, int ProductID, decimal Amount, decimal Price)
         {
             this.OrderID = -1;
             this.SaleID = SaleID;
-            this.OrderedProduct = OrderedProduct;
+            this.ProductID = ProductID;
             this.Amount = Amount;
             this.Price = Price;
         }
 
-        public Order(int SaleID, Basket BasketToOrder, decimal ActualPrice = -1)
+        public Order(long SaleID, Basket BasketToOrder, decimal Price)
         {
             this.OrderID = -1;
             this.SaleID = SaleID;
-            this.OrderedProduct = BasketToOrder.ProductInBasket;
+            this.ProductID = BasketToOrder.ProductID;
             this.Amount = BasketToOrder.Amount;
-            if (ActualPrice == -1)
-                ActualPrice = BasketToOrder.ProductInBasket.Price;
-            this.Price = ActualPrice;
+            this.Price = Price;
         }
 
-        private int orderID;
-        public int OrderID
+        private long orderID;
+        public long OrderID
         {
             get
             {
@@ -41,8 +39,8 @@ namespace SOSM1
             }
         }
 
-        private int saleID;
-        public int SaleID
+        private long saleID;
+        public long SaleID
         {
             get
             {
@@ -56,18 +54,18 @@ namespace SOSM1
             }
         }
 
-        private Product orderedProduct;
-        public Product OrderedProduct
+        private long productID;
+        public long ProductID
         {
             get
             {
-                return orderedProduct;
+                return productID;
             }
             set
             {
-                if (value.ProductID < 0)
-                    throw new ArgumentException();
-                orderedProduct = value;
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
+                productID = value;
             }
         }
 
@@ -80,9 +78,6 @@ namespace SOSM1
             }
             set
             {
-                // UnitType 0 is 'pieces', amount must integer number
-                if (orderedProduct.UnitType == 0 && value % 1 != 0)
-                    throw new ArgumentOutOfRangeException();
                 amount = value;
             }
         }

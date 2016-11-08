@@ -8,15 +8,15 @@ namespace SOSM1
 {
     public class Sale
     {
-        public Sale(int UserID)
+        public Sale(long UserID)
         {
             SaleID = -1;
             this.UserID = UserID;
             Date = DateTime.Now;
         }
 
-        private int saleID;
-        public int SaleID
+        private long saleID;
+        public long SaleID
         {
             get
             {
@@ -28,8 +28,8 @@ namespace SOSM1
             }
         }
 
-        private int userID;
-        public int UserID
+        private long userID;
+        public long UserID
         {
             get
             {

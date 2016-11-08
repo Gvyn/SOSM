@@ -9,7 +9,7 @@ namespace SOSM1
 {
     public class User
     {
-        User(string UserName, string Mail, int Type, int State)
+        User(string UserName, string Mail, long Type, long State)
         {
             UserID = -1;
             this.UserName = UserName;
@@ -18,8 +18,8 @@ namespace SOSM1
             this.State = State;
         }
 
-        private int userID;
-        public int UserID
+        private long userID;
+        public long UserID
         {
             get
             {
@@ -65,12 +65,12 @@ namespace SOSM1
         /// 0 - normal
         /// 1 - admin
         /// </summary>
-        private int type;
+        private long type;
         /// <summary>
         /// 0 - normal
         /// 1 - admin
         /// </summary>
-        public int Type
+        public long Type
         {
             get
             {
@@ -89,13 +89,13 @@ namespace SOSM1
         /// 1 - Active
         /// 2 - Archival
         /// </summary>
-        private int state;
+        private long state;
         /// <summary>
         /// 0 - Created
         /// 1 - Active
         /// 2 - Archival
         /// </summary>
-        public int State
+        public long State
         {
             get
             {

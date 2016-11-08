@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security;
 using System.Text;
@@ -38,9 +39,43 @@ namespace SOSM1
         /// </summary>
         /// <param name="productID">ID of the product we want to get data from.</param>
         /// <returns>Product data object if product exists, null otherwise.</returns>
-        public static Product GetProductData(int productID)
+        public static Product GetProductData(long productID)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                var product = context.Products.Find(productID);
+                if (product == null)
+                    return null;
+                try
+                {
+                    Product p = new Product(
+                        product.Name,
+                        product.Price,
+                        product.Unit_type,
+                        product.Discount,
+                        product.Amount,
+                        new Bitmap(Image.FromStream(new MemoryStream(product.Picture))),
+                        product.State,
+                        product.CategoryID
+                    );
+                    return p;
+                }
+                // picture corrupted or no picture provided
+                catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException)  
+                {
+                    Product p = new Product(
+                        product.Name,
+                        product.Price,
+                        product.Unit_type,
+                        product.Discount,
+                        product.Amount,
+                        null,
+                        product.State,
+                        product.CategoryID
+                    );
+                    return p;
+                }
+            }
         }
 
         /// <summary>
@@ -51,7 +86,7 @@ namespace SOSM1
         /// <param name="categoryID">Product is of specified category.</param>
         /// <param name="state">Product is of specified state.</param>
         /// <returns>List of Product data objects who match the terms.</returns>
-        public static List<Product> CatalogProducts(string searchArgument = null, int? categoryID = null, int? state = null)
+        public static List<Product> CatalogProducts(string searchArgument = null, long? categoryID = null, long? state = null)
         {
             throw new NotImplementedException();
         }
@@ -70,7 +105,7 @@ namespace SOSM1
         /// <param name="picture">New picture.</param>
         /// <param name="categoryID">New categoryID.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool ProductModification(int productID, string productName = null, decimal? price = null, int? unitType = null, decimal? discount = null, decimal? amount = null, string description = null, Bitmap picture = null, int? categoryID = null)
+        public static bool ProductModification(long productID, string productName = null, decimal? price = null, long? unitType = null, decimal? discount = null, decimal? amount = null, string description = null, Bitmap picture = null, long? categoryID = null)
         {
             throw new NotImplementedException();
         }
@@ -81,7 +116,7 @@ namespace SOSM1
         /// <param name="productID">Specifies a product.</param>
         /// <param name="ProductData">Contains data of modified product.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool ProductModificationFromProductData(int productID, Product ProductData)
+        public static bool ProductModificationFromProductData(long productID, Product ProductData)
         {
             throw new NotImplementedException();
         }
@@ -91,7 +126,7 @@ namespace SOSM1
         /// </summary>
         /// <param name="productID">Specifies a product.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool Activate(int productID)
+        public static bool Activate(long productID)
         {
             throw new NotImplementedException();
         }

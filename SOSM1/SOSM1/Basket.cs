@@ -8,11 +8,11 @@ namespace SOSM1
 {
     public class Basket
     {
-        public Basket(User BasketOwner, Product ProductInBasket, decimal Amount, System.DateTime? date = null)
+        public Basket(long UserID, long ProductID, decimal Amount, System.DateTime? date = null)
         {
             this.BasketID = -1;
-            this.BasketOwner = BasketOwner;
-            this.ProductInBasket = ProductInBasket;
+            this.UserID = UserID;
+            this.ProductID = ProductID;
             this.Amount = Amount;
             if (date != null)
                 this.Date = (System.DateTime)date;
@@ -20,8 +20,8 @@ namespace SOSM1
                 this.Date = System.DateTime.Now;
         }
 
-        private int basketID;
-        public int BasketID
+        private long basketID;
+        public long BasketID
         {
             get
             {
@@ -32,31 +32,31 @@ namespace SOSM1
                 basketID = value;
             }
         }
-        private User basketOwner;
-        public User BasketOwner
+        private long userID;
+        public long UserID
         {
             get
             {
-                return basketOwner;
+                return userID;
             }
             set
             {
-                if (value.UserID < 0)
-                    throw new ArgumentOutOfRangeException(); 
-                basketOwner = value;
+                if (value < 0)
+                    throw new ArgumentOutOfRangeException();
+                userID = value;
             }
         }
 
-        private Product productInBasket;
-        public Product ProductInBasket
+        private long productID;
+        public long ProductID
         {
             get
             {
-                return productInBasket;
+                return productID;
             }
             set
             {
-                productInBasket = value;
+                productID = value;
             }
         }
 
@@ -69,9 +69,6 @@ namespace SOSM1
             }
             set
             {
-                // UnitType 0 is 'pieces', amount must integer number
-                if (productInBasket.UnitType == 0 && value % 1 != 0)
-                    throw new ArgumentOutOfRangeException();
                 amount = value;
             }
         }
