@@ -100,6 +100,12 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindowForm.Designer.cs">
+      <DependentUpon>MainWindowForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Order.cs" />
     <Compile Include="Orders.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindowForm.resx">
+      <DependentUpon>MainWindowForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

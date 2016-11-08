@@ -79,6 +79,8 @@ namespace SOSM1
 
                 if (InterfaceToDataBaseUserMethods.AddUser(newUser, hash))
                 {
+                    this.Visible = false;
+                    MessageBox.Show("Rejestracja przebiegła pomyślnie");
                     exit = 1;
                     Close();
                 }

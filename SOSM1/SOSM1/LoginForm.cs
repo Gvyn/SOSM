@@ -26,7 +26,8 @@ namespace SOSM1
             {
                 case 1:
                     this.Visible = false;
-                    (new Form1()).ShowDialog();//Put main form with User loggedUserData
+                    (new MainWindowForm(loggedUserData)).ShowDialog();
+                    //(new Form1()).ShowDialog();//Put main form with User loggedUserData
                     break;
                 case 2:
                     this.Visible = false;
