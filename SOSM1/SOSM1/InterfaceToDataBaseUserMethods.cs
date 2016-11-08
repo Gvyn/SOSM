@@ -23,7 +23,7 @@ namespace SOSM1
         {
             using (var context = new SOSMEntities())
             {
-                var user = context.Users.First(
+                var user = context.Users.FirstOrDefault(
                     x => x.Name == userName // search by userName
                     && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
                 if (user == null)
@@ -85,16 +85,38 @@ namespace SOSM1
         }
 
         /// <summary>
-        /// Changes the state of a specified user in database.
+        /// Changes the state of a specified user in database / EAREASES HIM.
         /// If user state is Active, sets him as Archival.
-        /// If user state is Created, sets him as Active.
+        /// If user state is Created, EREASES HIM!!!
         /// If user state is Archival, does nothing.
         /// </summary>
         /// <param name="userID">ID of modified user.</param>
         /// <returns>True if success, false otherwise.</returns>
         public static bool DeleteUser(long userID)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                Users user = context.Users.Find(userID);
+                if (user == null)
+                    return false;
+                switch (user.State)
+                {
+                    case 0: // state - created, EREASE HIM
+                        {
+                            break;
+                        }
+                    case 1: // state - active, set as archival
+                        {
+                            user.State = 1;
+                            break;
+                        }
+                    case 2: // state - archival, nothing
+                        {
+                            break;
+                        }
+                }
+                return true;
+            }
         }
 
         /// <summary>
