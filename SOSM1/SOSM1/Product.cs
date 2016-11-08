@@ -9,7 +9,7 @@ namespace SOSM1
 {
     public class Product
     {
-        Product(string ProductName, decimal Price, int UnitType, decimal Discount,decimal Amount, Bitmap Picture, int State, int CategoryID)
+        public Product(string ProductName, decimal Price, int UnitType, decimal Discount,decimal Amount, Bitmap Picture, int State, int CategoryID)
         {
             ProductID = -1;
             this.ProductName = ProductName;

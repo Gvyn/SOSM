@@ -8,13 +8,16 @@ namespace SOSM1
 {
     public class Basket
     {
-        public Basket(User BasketOwner, Product ProductInBasket, decimal Amount)
+        public Basket(User BasketOwner, Product ProductInBasket, decimal Amount, System.DateTime? date = null)
         {
             this.BasketID = -1;
             this.BasketOwner = BasketOwner;
             this.ProductInBasket = ProductInBasket;
             this.Amount = Amount;
-            this.Date = System.DateTime.Now;
+            if (date != null)
+                this.Date = (System.DateTime)date;
+            else
+                this.Date = System.DateTime.Now;
         }
 
         private int basketID;
