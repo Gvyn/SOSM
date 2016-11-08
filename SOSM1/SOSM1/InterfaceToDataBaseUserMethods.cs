@@ -192,9 +192,31 @@ namespace SOSM1
         /// <param name="mail">New e-mail address.</param>
         /// <param name="password">New password.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool UserModification(long userID,string userName=null, string mail = null, string password = null)
+        public static bool UserModification(long userID, string userName = null, string mail = null, string password = null)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                Users user = context.Users.Find(userID);
+                if (user == null)
+                    return false;
+                if (userName != null)
+                {
+                    user.Name = userName;
+                    context.Entry(user).Property(e => e.Name).IsModified = true;
+                }
+                if (mail != null)
+                {
+                    user.E_mail = mail;
+                    context.Entry(user).Property(e => e.E_mail).IsModified = true;
+                }
+                if (password != null)
+                {
+                    user.Password = password;
+                    context.Entry(user).Property(e => e.Password).IsModified = true;
+                }
+                context.SaveChanges();
+                return true;
+            }
         }
 
         /// <summary>
@@ -205,7 +227,16 @@ namespace SOSM1
         /// <returns>True if operation could be completed, false otherwise.</returns>
         public static bool ChangeType(long userID, long type)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                Users user = context.Users.Find(userID);
+                if (user == null)
+                    return false;
+                user.Type = type;
+                context.Entry(user).Property(e => e.Type).IsModified = true;
+                context.SaveChanges();
+                return true;
+            }
         }
 
         /// <summary>
@@ -215,7 +246,18 @@ namespace SOSM1
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
         public static bool Activate(long userID)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                Users user = context.Users.Find(userID);
+                if (user == null)
+                    return false;
+                if (user.State != 0)
+                    return false;
+                user.State = 1;
+                context.Entry(user).Property(e => e.State).IsModified = true;
+                context.SaveChanges();
+                return true;
+            }
         }
 
         ///// <summary>
