@@ -131,6 +131,17 @@ namespace SOSM1
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Finds the product with the biggest sale (difference between price and discount) and returns it's Product data object.
+        /// If there are multiple such products, returns one of them.
+        /// </summary>
+        /// <param name="ProductData">Data object of the product with biggest sale.</param>
+        /// <returns>True if there was at least one product with sale, false otherwise.</returns>
+        public static bool GetBiggestSale(out Product ProductData)
+        {
+            throw new NotImplementedException();
+        }
+
         ///// <summary>
         ///// Creates Product data object from the product with specified name in the database.
         ///// </summary>
