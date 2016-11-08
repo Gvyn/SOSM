@@ -29,7 +29,7 @@ namespace SOSM1
             {
                 case 1:
                     this.Visible = false;
-                    (new Form1()).ShowDialog();//Put main form with User loggedUserData
+                    (new LoginForm()).ShowDialog();
                     break;
             }
         }
@@ -52,6 +52,11 @@ namespace SOSM1
                 MessageBox.Show("Wpisz hasło!");
                 return;
             }
+            if (passwordBox.Text.Length < 6) 
+            {
+                MessageBox.Show("Hasło musi mieć przynajmniej 6 znaków.");
+                return;
+            }
             if (repeatPasswordBox.Text.Length == 0)
             {
                 MessageBox.Show("Powtórz hasło!");
@@ -67,10 +72,10 @@ namespace SOSM1
             {
                 User newUser = new User(userNameBox.Text, mailBox.Text, 0, 0);
 
-                passwordBox.Text += "PseudoSaltWhateverAKB48<3!";
-                byte[] data = Encoding.ASCII.GetBytes(passwordBox.Text);
+                String hash = passwordBox.Text + "PseudoSaltWhateverAKB48<3!" + userNameBox.Text;
+                byte[] data = Encoding.ASCII.GetBytes(hash);
                 data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
-                String hash = Encoding.ASCII.GetString(data);
+                hash = Encoding.ASCII.GetString(data);
 
                 if (InterfaceToDataBaseUserMethods.AddUser(newUser, hash))
                 {
