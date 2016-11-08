@@ -29,7 +29,12 @@ namespace SOSM1
         }
 
 
-
+        private void SwapUserControl(UserControl newUserControl)
+        {
+            newUserControl.Dock = DockStyle.Fill;
+            userControlPanel.Controls.Clear();
+            userControlPanel.Controls.Add(newUserControl);
+        }
         private void homeButton_Click(object sender, EventArgs e)
         {
             SetHomeUserControl();
@@ -38,6 +43,7 @@ namespace SOSM1
         private void SetHomeUserControl()
         {
             sectionLabel.Text = "Strona główna";
+            SwapUserControl(new HomeUserControl());
         }
 
 
@@ -48,16 +54,18 @@ namespace SOSM1
         private void SetProductsUserControl()
         {
             sectionLabel.Text = "Katalog produktów";
+            SwapUserControl(new ProductUserControl());
         }
 
 
         private void adminButton_Click(object sender, EventArgs e)
         {
-            SetAdminsUserControl();
+            SetAdminUserControl();
         }
-        private void SetAdminsUserControl()
+        private void SetAdminUserControl()
         {
             sectionLabel.Text = "Panel administracyjny";
+            SwapUserControl(new AdminUserControl());
         }
 
 
@@ -68,6 +76,7 @@ namespace SOSM1
         private void SetContactsUserControl()
         {
             sectionLabel.Text = "Kontakt";
+            SwapUserControl(new ContactUserControl());
         }
 
 

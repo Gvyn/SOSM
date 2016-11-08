@@ -74,6 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminUserControl.Designer.cs">
+      <DependentUpon>AdminUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Basket.cs" />
     <Compile Include="Baskets.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
@@ -82,11 +88,23 @@
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs" />
+    <Compile Include="ContactUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactUserControl.Designer.cs">
+      <DependentUpon>ContactUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HomeUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HomeUserControl.Designer.cs">
+      <DependentUpon>HomeUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="InterfaceToDataBaseBasketMethods.cs" />
     <Compile Include="InterfaceToDataBaseCategoryMethods.cs" />
@@ -116,6 +134,12 @@
     <Compile Include="Product.cs" />
     <Compile Include="Products.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProductUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProductUserControl.Designer.cs">
+      <DependentUpon>ProductUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,6 +174,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomeUserControl.resx">
+      <DependentUpon>HomeUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
