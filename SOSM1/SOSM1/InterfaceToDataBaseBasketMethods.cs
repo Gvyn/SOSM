@@ -46,7 +46,7 @@ namespace SOSM1
         {
             using (var context = new SOSMEntities())
             {
-                var basketsToRetrieve = context.Baskets.Where(x => x.UserID == user.UserID);
+                var basketsToRetrieve = context.Baskets.Where(x => x.UserID == user.UserID).ToList();
 
                 List<Basket> basketList = new List<Basket>();
                 foreach (var basket in basketsToRetrieve)

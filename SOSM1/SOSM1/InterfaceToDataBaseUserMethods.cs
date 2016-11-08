@@ -157,7 +157,30 @@ namespace SOSM1
         /// <returns>List of User data objects who match the terms.</returns>
         public static List<User> CatalogUsers(string searchArgument = null, long? type = null, long? state = null)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                var users = context.Users.Where(x => 1 == 1);
+                if (searchArgument != null)
+                    users = users.Where(
+                        x => x.Name.Contains(searchArgument)
+                        || x.E_mail.Contains(searchArgument));
+                if (type != null)
+                    users = users.Where(x => x.Type == type);
+                if (state != null)
+                    users = users.Where(x => x.State == state);
+
+                var dbUsersList = users.ToList();
+                List<User> usersList = new List<User>();
+                foreach (Users dbUser in dbUsersList)
+                    usersList.Add(new User(
+                        dbUser.Name,
+                        dbUser.E_mail,
+                        dbUser.Type,
+                        dbUser.State
+                    ));
+
+                return usersList;
+            }
         }
 
         /// <summary>
