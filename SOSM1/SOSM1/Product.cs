@@ -9,13 +9,14 @@ namespace SOSM1
 {
     public class Product
     {
-        Product(string ProductName, decimal Price, int UnitType, decimal Discount, Bitmap Picture, int State, int CategoryID)
+        Product(string ProductName, decimal Price, int UnitType, decimal Discount,decimal Amount, Bitmap Picture, int State, int CategoryID)
         {
             ProductID = -1;
             this.ProductName = ProductName;
             this.Price = Price;
             this.UnitType = UnitType;
             this.Discount = Discount;
+            this.Amount = Amount;
             this.Picture = Picture;
             this.State = State;
             this.CategoryID = CategoryID;
@@ -60,7 +61,11 @@ namespace SOSM1
             }
         }
 
-
+        /// <summary>
+        /// 0 - pieces
+        /// 1 - kg
+        /// 2 - litres
+        /// </summary>
         private int unitType;
         public int UnitType
         {
@@ -70,6 +75,7 @@ namespace SOSM1
             }
             set
             {
+
                 unitType = value;
             }
         }
@@ -84,6 +90,19 @@ namespace SOSM1
             set
             {
                 discount = value;
+            }
+        }
+
+        private decimal amount;
+        public decimal Amount
+        {
+            get
+            {
+                return amount;
+            }
+            set
+            {
+                amount = value;
             }
         }
 

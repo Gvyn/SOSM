@@ -39,6 +39,8 @@ namespace SOSM1
             }
             set
             {
+                if (value == null)
+                    throw new ArgumentNullException();
                 userName = value;
             }
         }
