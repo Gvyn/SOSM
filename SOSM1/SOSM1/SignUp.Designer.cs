@@ -37,6 +37,7 @@
             this.passwordBox = new System.Windows.Forms.TextBox();
             this.repeatPasswordBox = new System.Windows.Forms.TextBox();
             this.signButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // userNameLabel
@@ -119,11 +120,22 @@
             this.signButton.UseVisualStyleBackColor = true;
             this.signButton.Click += new System.EventHandler(this.signButton_Click);
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(111, 227);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 9;
+            this.cancelButton.Text = "Wróć";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // SignUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(294, 232);
+            this.ClientSize = new System.Drawing.Size(294, 262);
+            this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.signButton);
             this.Controls.Add(this.repeatPasswordBox);
             this.Controls.Add(this.passwordBox);
@@ -137,7 +149,6 @@
             this.Name = "SignUp";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Rejestracja";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SignUp_FormClosed);
             this.Load += new System.EventHandler(this.SignUp_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,5 +166,6 @@
         private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.TextBox repeatPasswordBox;
         private System.Windows.Forms.Button signButton;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

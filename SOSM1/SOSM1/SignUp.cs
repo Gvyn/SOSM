@@ -21,19 +21,6 @@ namespace SOSM1
         {
             Icon = Properties.Resources.logo;
         }
-
-        private int exit = 0;
-        private void SignUp_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            switch (exit)
-            {
-                case 1:
-                    this.Visible = false;
-                    (new LoginForm()).ShowDialog();
-                    break;
-            }
-        }
-
         private void signButton_Click(object sender, EventArgs e)
         {
             if (userNameBox.Text.Length == 0)
@@ -80,9 +67,8 @@ namespace SOSM1
                 if (InterfaceToDataBaseUserMethods.AddUser(newUser, hash))
                 {
                     this.Visible = false;
-                    MessageBox.Show("Rejestracja przebiegła pomyślnie");
-                    exit = 1;
-                    Close();
+                    MessageBox.Show("Rejestracja przebiegła pomyślnie.");
+                    ToLogin();
                 }
                 else
                 {
@@ -106,5 +92,18 @@ namespace SOSM1
                 return;
             }
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            ToLogin();
+        }
+
+        private void ToLogin()
+        {
+
+            this.Visible = false;
+            (new LoginForm()).ShowDialog();
+            Close();
+        } 
     }
 }

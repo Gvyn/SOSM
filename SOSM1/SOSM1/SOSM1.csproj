@@ -194,6 +194,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\logo.ico" />
+    <None Include="Resources\logo.png" />
+    <None Include="Resources\logoBig.png" />
     <Content Include="SOSM Entity Data Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>SOSM Entity Data Model.edmx</DependentUpon>

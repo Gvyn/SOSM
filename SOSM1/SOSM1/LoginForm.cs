@@ -13,29 +13,12 @@ namespace SOSM1
 {
     public partial class LoginForm : Form
     {
-        private int exit = 0;
         private User loggedUserData;
         public LoginForm()
         {
             InitializeComponent();
         }
-
-        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            switch (exit)
-            {
-                case 1:
-                    this.Visible = false;
-                    (new MainWindowForm(loggedUserData)).ShowDialog();
-                    //(new Form1()).ShowDialog();//Put main form with User loggedUserData
-                    break;
-                case 2:
-                    this.Visible = false;
-                    (new SignUp()).ShowDialog();
-                    break;
-            }
-
-        }
+        
         private void button1_Click(object sender, EventArgs e)
         {
             if(userNameBox.Text.Length==0)
@@ -57,8 +40,7 @@ namespace SOSM1
 
             if(InterfaceToDataBaseUserMethods.LogIn(userNameBox.Text, hash, out loggedUserData))
             {
-                exit = 1;
-                Close();
+                ToMain();
             }
             else
             {
@@ -74,7 +56,21 @@ namespace SOSM1
 
         private void signButton_Click(object sender, EventArgs e)
         {
-            exit = 2;
+            ToSignUp();
+
+        }
+
+        private void ToMain()
+        {
+            this.Visible = false;
+            (new MainWindowForm(loggedUserData)).ShowDialog();
+            Close();
+        }
+
+        private void ToSignUp()
+        {
+            this.Visible = false;
+            (new SignUp()).ShowDialog();
             Close();
 
         }
