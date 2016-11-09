@@ -251,6 +251,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="sosm mail.txt" />
     <None Include="Resources\logo.ico" />
     <None Include="Resources\logo.png" />
     <None Include="Resources\logoBig.png" />
