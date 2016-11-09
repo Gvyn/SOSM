@@ -13,7 +13,7 @@ namespace SOSM1
     public partial class MainWindowForm : Form
     {
         private User loggedUserData;
-        private int basketSize;
+        private List<Basket> loggedUserBasket;
         public MainWindowForm(User loggedUserData)
         {
             InitializeComponent();
@@ -21,8 +21,9 @@ namespace SOSM1
             profileButton.Text = this.loggedUserData.UserName;
             if (this.loggedUserData.Type == 1)
                 adminButton.Visible = true;
-            basketSize = 0; //insert Userc basket count
-            basketSizeLabel.Text = basketSize.ToString();
+            loggedUserBasket = InterfaceToDataBaseBasketMethods.RetrieveBaskets(loggedUserData.UserID);
+            InterfaceToDataBaseBasketMethods.DeleteBaskets(loggedUserData.UserID);
+            basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             SetHomeUserControl();
         }
 
@@ -154,13 +155,6 @@ namespace SOSM1
             sectionLabel.Text = "Katalog produktów";
             SwapUserControl(new ProductsUserControl(SearchArgument));
         }
-
-
-
-        public void IncreaceBasketSize()
-        {
-            basketSize++;
-            basketSizeLabel.Text = basketSize.ToString();
-        }
+        
     }
 }

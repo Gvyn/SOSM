@@ -40,13 +40,13 @@ namespace SOSM1
         /// If user quited without empty basket, last session buys should
         /// be retrieved.
         /// </summary>
-        /// <param name="user">User object whose baskets will be retrieved.</param>
+        /// <param name="user">Specifies user object whose baskets will be retrieved.</param>
         /// <returns>List of baskets. Empty list if user has no buys.</returns>
-        public static List<Basket> RetrieveBaskets(User user)
+        public static List<Basket> RetrieveBaskets(long UserID)
         {
             using (var context = new SOSMEntities())
             {
-                var basketsToRetrieve = context.Baskets.Where(x => x.UserID == user.UserID).ToList();
+                var basketsToRetrieve = context.Baskets.Where(x => x.UserID == UserID).ToList();
 
                 List<Basket> basketList = new List<Basket>();
                 foreach (var basket in basketsToRetrieve)
@@ -64,13 +64,13 @@ namespace SOSM1
         /// <summary>
         /// Deletes all baskets in database owned by specified user.
         /// </summary>
-        /// <param name="user">User object whose baskets should be deleted.</param>
+        /// <param name="user">Specifies user object whose baskets should be deleted.</param>
         /// <returns>True if succeded, false otherwise</returns>
-        public static bool DeleteBaskets(User user)
+        public static bool DeleteBaskets(long UserID)
         {
             using (var context = new SOSMEntities())
             {
-                var basketsToDelete = context.Baskets.Where(x => x.UserID == user.UserID);
+                var basketsToDelete = context.Baskets.Where(x => x.UserID == UserID);
                 foreach (var basket in basketsToDelete)
                     context.Baskets.Remove(basket);
 
