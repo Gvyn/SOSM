@@ -16,7 +16,7 @@ namespace SOSM1
         {
             InitializeComponent();
         }
-        public ProductsUserControl(int CategoryID)
+        public ProductsUserControl(long CategoryID)
         {
             InitializeComponent();
         }

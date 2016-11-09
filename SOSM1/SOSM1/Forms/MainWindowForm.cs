@@ -32,6 +32,11 @@ namespace SOSM1
             Icon = Properties.Resources.logo;
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            InterfaceToDataBaseBasketMethods.SaveBaskets(loggedUserBasket);
+            base.OnClosed(e);
+        }
 
         private void SwapUserControl(UserControl newUserControl)
         {
@@ -124,10 +129,6 @@ namespace SOSM1
 
         public void CreateProductWindow(Product ProductDataObject)
         {
-            SetProductWindowUserControl(ProductDataObject);
-        }
-        private void SetProductWindowUserControl(Product ProductDataObject)
-        {
             sectionLabel.Text = ProductDataObject.ProductName;
             SwapUserControl(new ProductWindowUserControl(ProductDataObject));
         }
@@ -136,25 +137,28 @@ namespace SOSM1
         {
             SetProductsUserControl();
         }
-        public void CreateProductsCatalog(int CategoryID)
-        {
-            SetProductsUserControl(CategoryID);
 
-        }
-        public void CreateProductsCatalog(string SearchArgument)
-        {
-            SetProductsUserControl(SearchArgument);
-        }
-        private void SetProductsUserControl(int CategoryID)
+        public void CreateProductsCatalog(long CategoryID)
         {
             sectionLabel.Text = "Katalog produktów";
             SwapUserControl(new ProductsUserControl(CategoryID));
         }
-        private void SetProductsUserControl(string SearchArgument)
+
+        public void CreateProductsCatalog(string SearchArgument)
         {
             sectionLabel.Text = "Katalog produktów";
             SwapUserControl(new ProductsUserControl(SearchArgument));
         }
         
+        public decimal GetBasket(long ProductID)
+        {
+            if (loggedUserBasket == null)
+                return 0;
+            Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
+            sectionLabel.Text = "lololo";
+            if (found != null)
+                return found.Amount;
+            return 0;
+        }
     }
 }

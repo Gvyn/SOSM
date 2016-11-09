@@ -18,6 +18,7 @@ namespace SOSM1
             InitializeComponent();
             this.productDataObject = productDataObject;
             SetProductData();
+            SetBasketData();
         }
 
         private void SetProductData()
@@ -36,10 +37,25 @@ namespace SOSM1
 
             priceLabel.Text = ProductPriceInfoFormat(productDataObject.Discount, productDataObject.UnitType);
             amountLabel.Text = ProductAmountInforFormat(productDataObject.Amount, productDataObject.UnitType);
+            switch (productDataObject.UnitType)
+            {
+                case 0:
+                    unitLabel.Text = "Sztuk:";
+                    break;
+                case 1:
+                    unitLabel.Text = "Kilogramów:";
+                    break;
+                case 2:
+                    unitLabel.Text = "Litrów:";
+                    break;
+            }
 
-               
+
         }
-
+        private void SetBasketData()
+        {
+            inBasketLabel.Text = (ParentForm as MainWindowForm).GetBasket(productDataObject.ProductID).ToString();
+        }
         private string ProductPriceInfoFormat(decimal price, long unitType)
         {
             string result = "Cena: " + price + "zł za ";
@@ -106,6 +122,11 @@ namespace SOSM1
         {
             if(searchTextBox.ForeColor == SystemColors.WindowText && searchTextBox.Text != "")
                 (ParentForm as MainWindowForm).CreateProductsCatalog(searchTextBox.Text);
+        }
+
+        private void toBasketButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
