@@ -70,6 +70,15 @@ namespace SOSM1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Przykro nam, ale brakuje zdjęcia tego produktu..
+        /// </summary>
+        internal static string DefaultNoProductPictureText {
+            get {
+                return ResourceManager.GetString("DefaultNoProductPictureText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Aktualnie brak oferty promocyjnej..
         /// </summary>
         internal static string DefaultSale {
@@ -114,6 +123,16 @@ namespace SOSM1.Properties {
         internal static string SOSMContactInfo {
             get {
                 return ResourceManager.GetString("SOSMContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YukoCrying {
+            get {
+                object obj = ResourceManager.GetObject("YukoCrying", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

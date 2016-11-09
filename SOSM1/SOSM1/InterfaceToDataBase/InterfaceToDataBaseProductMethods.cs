@@ -54,6 +54,7 @@ namespace SOSM1
                         product.Unit_type,
                         product.Discount,
                         product.Amount,
+                        product.Description,
                         new Bitmap(Image.FromStream(new MemoryStream(product.Picture))),
                         product.State,
                         product.CategoryID
@@ -69,6 +70,7 @@ namespace SOSM1
                         product.Unit_type,
                         product.Discount,
                         product.Amount,
+                        product.Description,
                         null,
                         product.State,
                         product.CategoryID

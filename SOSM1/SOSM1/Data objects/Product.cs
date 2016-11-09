@@ -10,7 +10,7 @@ namespace SOSM1
 {
     public class Product
     {
-        public Product(string ProductName, decimal Price, long UnitType, decimal? Discount,decimal Amount, Bitmap Picture, long State, long? CategoryID)
+        public Product(string ProductName, decimal Price, long UnitType, decimal? Discount,decimal Amount, string Description, Bitmap Picture, long State, long? CategoryID)
         {
             if (Discount == null || CategoryID == null)
                 throw new NoNullAllowedException();
@@ -20,6 +20,7 @@ namespace SOSM1
             this.UnitType = UnitType;
             this.Discount = (decimal)Discount;
             this.Amount = Amount;
+            this.Description = Description;
             this.Picture = Picture;
             this.State = State;
             this.CategoryID = (long)CategoryID;

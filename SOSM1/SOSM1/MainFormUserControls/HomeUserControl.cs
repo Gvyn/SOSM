@@ -72,7 +72,7 @@ namespace SOSM1
 
         private void salePanel_Click(object sender, EventArgs e)
         {
-            productOnSale = new Product("testkek", 1, 1, 1, 1, new Bitmap(100, 100), 1, 1);//kick when testing finished
+            productOnSale = new Product("testkek", 1, 1, 1, 1,"lolololo", null, 1, 1);//kick when testing finished
             if (productOnSale != null)
             {
                 (ParentForm as MainWindowForm).CreatePoductWindow(productOnSale);

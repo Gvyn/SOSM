@@ -6306,7 +6306,7 @@
   <data name="logoBig" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACw8AAAsPAZL5A6UAAAAGYktHRAApAH4AszmVUWYAAAAHdElNRQfgCwMSOBs9rS3U
+        YQUAAAAJcEhZcwAACw4AAAsOAUC+4UEAAAAGYktHRAApAH4AszmVUWYAAAAHdElNRQfgCwMSOBs9rS3U
         AAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAP9XSURBVHhe7J0FWFRZ/8f/
         KqCIqKiAHdjd3d2ggoqKCAYYYKAgGNgIdnfXuru63d3dHW65ne/Gu/Fu+P3/fnfumTn3zplhUHSN832e
         z3NP3LkDw3A/c87c+D8dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0d
@@ -7884,5 +7884,13 @@
   <data name="SOSMContactInfo" xml:space="preserve">
     <value>Kontakt z obsługą systemu SOSM dostępny pod adresem mailowym: sosm@interia.com</value>
     <comment>SOSM Contact Info</comment>
+  </data>
+  <data name="DefaultNoProductPictureText" xml:space="preserve">
+    <value>Przykro nam, ale brakuje zdjęcia tego produktu.</value>
+    <comment>default no Product Picture text</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="YukoCrying" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\YukoCrying.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
