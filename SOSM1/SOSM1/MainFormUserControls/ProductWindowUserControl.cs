@@ -54,10 +54,8 @@ namespace SOSM1
         }
         private void SetBasketData()
         {
-            //if(ParentFrom is null)
-            (ParentForm as MainWindowForm).test();
-            //(ParentForm as MainWindowForm).GetBasketAmount(productDataObject.ProductID);
-            //inBasketLabel.Text = (ParentForm as MainWindowForm).GetBasketAmount(productDataObject.ProductID).ToString();
+            MainWindowForm test = (MainWindowForm)Application.OpenForms["MainWindowForm"];
+            inBasketLabel.Text = test.GetBasketAmount(productDataObject.ProductID).ToString();
         }
         private string ProductPriceInfoFormat(decimal price, long unitType)
         {

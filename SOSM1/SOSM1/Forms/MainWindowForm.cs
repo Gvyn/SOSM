@@ -155,19 +155,10 @@ namespace SOSM1
         
         public decimal GetBasketAmount(long ProductID)
         {
-            //foreach(Basket basket in loggedUserBasket)
-            //sectionLabel.Text = loggedUserBasket.Count.ToString();
-            //for (int i = 0; i < loggedUserBasket.Count; i++)
-            //    if (loggedUserBasket[i].ProductID == ProductID)
-            //        return loggedUserBasket[i].Amount;
             Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
             if (found != null)
                 return found.Amount;
             return 0;
-        }
-        public void test(string kek = "")
-        {
-            basketButton.Text = "lolo" + kek;
         }
     }
 }

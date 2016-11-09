@@ -183,6 +183,7 @@
             // 
             // inBasketLabel
             // 
+            this.inBasketLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.inBasketLabel.Font = new System.Drawing.Font("Arial", 11.25F);
             this.inBasketLabel.Location = new System.Drawing.Point(609, 406);
             this.inBasketLabel.Name = "inBasketLabel";
