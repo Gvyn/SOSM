@@ -39,7 +39,7 @@
             this.searchButton = new System.Windows.Forms.Button();
             this.toBasketButton = new System.Windows.Forms.Button();
             this.unitLabel = new System.Windows.Forms.Label();
-            this.unitBox = new System.Windows.Forms.TextBox();
+            this.amountBox = new System.Windows.Forms.TextBox();
             this.inBasketDescriptionLabel = new System.Windows.Forms.Label();
             this.inBasketLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).BeginInit();
@@ -160,15 +160,15 @@
             this.unitLabel.Text = "Unit_type";
             this.unitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // unitBox
+            // amountBox
             // 
-            this.unitBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.unitBox.Location = new System.Drawing.Point(609, 383);
-            this.unitBox.Name = "unitBox";
-            this.unitBox.Size = new System.Drawing.Size(75, 20);
-            this.unitBox.TabIndex = 11;
-            this.unitBox.Text = "0";
-            this.unitBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.amountBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.amountBox.Location = new System.Drawing.Point(609, 383);
+            this.amountBox.Name = "amountBox";
+            this.amountBox.Size = new System.Drawing.Size(75, 20);
+            this.amountBox.TabIndex = 11;
+            this.amountBox.Text = "0";
+            this.amountBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // inBasketDescriptionLabel
             // 
@@ -198,7 +198,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.inBasketLabel);
             this.Controls.Add(this.inBasketDescriptionLabel);
-            this.Controls.Add(this.unitBox);
+            this.Controls.Add(this.amountBox);
             this.Controls.Add(this.unitLabel);
             this.Controls.Add(this.toBasketButton);
             this.Controls.Add(this.searchButton);
@@ -231,7 +231,7 @@
         private System.Windows.Forms.Button searchButton;
         private System.Windows.Forms.Button toBasketButton;
         private System.Windows.Forms.Label unitLabel;
-        private System.Windows.Forms.TextBox unitBox;
+        private System.Windows.Forms.TextBox amountBox;
         private System.Windows.Forms.Label inBasketDescriptionLabel;
         private System.Windows.Forms.Label inBasketLabel;
     }

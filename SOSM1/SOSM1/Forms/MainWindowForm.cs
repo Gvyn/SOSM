@@ -160,5 +160,19 @@ namespace SOSM1
                 return found.Amount;
             return 0;
         }
+        public void addBasket(long ProductID,decimal Amount, decimal newAmount)
+        {
+            Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
+            if (found != null)
+            {
+                found.Amount = Amount;
+            }
+            else
+            {
+                loggedUserBasket.Add(new Basket(loggedUserData.UserID, ProductID, Amount));
+                basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            }
+            InterfaceToDataBaseProductMethods.ProductModification(ProductID, null, null, null, null, newAmount);
+        }
     }
 }

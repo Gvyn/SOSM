@@ -49,13 +49,12 @@ namespace SOSM1
                     unitLabel.Text = "Litrów:";
                     break;
             }
-
-
+            GenerateCategoryLabelChain();
         }
         private void SetBasketData()
         {
-            MainWindowForm test = (MainWindowForm)Application.OpenForms["MainWindowForm"];
-            inBasketLabel.Text = test.GetBasketAmount(productDataObject.ProductID).ToString();
+            MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
+            inBasketLabel.Text = mainForm.GetBasketAmount(productDataObject.ProductID).ToString();
         }
         private string ProductPriceInfoFormat(decimal price, long unitType)
         {
@@ -93,7 +92,10 @@ namespace SOSM1
             return result;
 
         }
+        private void GenerateCategoryLabelChain()
+        {
 
+        }
         private void searchTextBox_Enter(object sender, EventArgs e)
         {
             setSearchWatermarkOff();
@@ -127,7 +129,56 @@ namespace SOSM1
 
         private void toBasketButton_Click(object sender, EventArgs e)
         {
+            decimal amount;
+            if(decimal.TryParse(amountBox.Text,out amount))
+            {
+                if (productDataObject.UnitType == 0 && amount % 1 != 0)
+                    MessageBox.Show("Możesz dodać tylko całkowitą liczbę sztuk!");
+                else
+                {
+                    if (amount <= 0)
+                        MessageBox.Show("Możesz dodać tylko dodatnią ilość!");
+                    else
+                    {
+                        if(amount>productDataObject.Amount)
+                        {
+                            string question = "Maksymalnie dostępnych ";
 
+                            switch (productDataObject.UnitType)
+                            {
+                                case 0:
+                                    question += "sztuk";
+                                    break;
+                                case 1:
+                                    question += "kilogramów";
+                                    break;
+                                case 2:
+                                    question += "litrów";
+                                    break;
+                            }
+                            question += ": " + productDataObject.Amount + ".\n Czy chciał(a)byś je dodać?";
+                            DialogResult dialogResult = MessageBox.Show(question, "Brak produktu na stanie", MessageBoxButtons.YesNo);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                AddBasket(productDataObject.Amount);
+                            }
+                        }
+                        else
+                            AddBasket(amount);
+                    }
+                }
+            }
+            else
+                MessageBox.Show("Wprowadź prawidłową ilość produktu!");
+        }
+        
+        private void AddBasket(decimal amount)
+        {
+            productDataObject.Amount -= amount;
+            amountLabel.Text = ProductAmountInforFormat(productDataObject.Amount, productDataObject.UnitType);
+            MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
+            mainForm.addBasket(productDataObject.ProductID, amount, productDataObject.Amount);
+            MessageBox.Show("Dodano do koszyka.");
         }
     }
 }
