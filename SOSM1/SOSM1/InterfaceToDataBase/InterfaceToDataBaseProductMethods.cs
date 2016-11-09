@@ -276,7 +276,7 @@ namespace SOSM1
         /// </summary>
         /// <param name="ProductData">Data object of the product with biggest sale.</param>
         /// <returns>True if there was at least one product with sale, false otherwise.</returns>
-        public static bool GetRandomtSale(out Product ProductData)
+        public static bool GetRandomSale(out Product ProductData)
         {
             using (var context = new SOSMEntities())
             {
