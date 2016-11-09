@@ -61,6 +61,34 @@ namespace SOSM1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brak informacji kontaktowych sklepu..
+        /// </summary>
+        internal static string DefaultContactInfo {
+            get {
+                return ResourceManager.GetString("DefaultContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Aktualnie brak oferty promocyjnej..
+        /// </summary>
+        internal static string DefaultSale {
+            get {
+                return ResourceManager.GetString("DefaultSale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Witamy w systemie SOSM.
+        ///Życzymy przyjemnego użytkowania..
+        /// </summary>
+        internal static string DefaultWelcomeMessage {
+            get {
+                return ResourceManager.GetString("DefaultWelcomeMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon logo {
@@ -77,6 +105,15 @@ namespace SOSM1.Properties {
             get {
                 object obj = ResourceManager.GetObject("logoBig", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kontakt z obsługą systemu SOSM dostępny pod adresem mailowym: sosm@interia.com.
+        /// </summary>
+        internal static string SOSMContactInfo {
+            get {
+                return ResourceManager.GetString("SOSMContactInfo", resourceCulture);
             }
         }
     }

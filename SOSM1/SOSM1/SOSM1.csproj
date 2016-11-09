@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InterfaceToDataBase\InterfaceToDataBaseOtherMethods.cs" />
     <Compile Include="MainFormUserControls\AdminUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -174,6 +175,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\ContactUserControl.resx">
+      <DependentUpon>ContactUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainFormUserControls\HomeUserControl.resx">
       <DependentUpon>HomeUserControl.cs</DependentUpon>

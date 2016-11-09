@@ -15,6 +15,20 @@ namespace SOSM1
         public ContactUserControl()
         {
             InitializeComponent();
+            SetContactInfo();
+        }
+        private void SetContactInfo()
+        {
+            try
+            {
+                contactLabel.Text = InterfaceToDataBaseOtherMethods.GetContactInfo();
+            }
+            catch (NotImplementedException)//kick when implemented (empty contact info is their choice)
+            {
+                contactLabel.Text = Properties.Resources.DefaultContactInfo;
+            }
+            contactLabel.Text += "\n\n" + Properties.Resources.SOSMContactInfo;
+
         }
     }
 }

@@ -117,6 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DefaultContactInfo" xml:space="preserve">
+    <value>Brak informacji kontaktowych sklepu.</value>
+    <comment>default Contact Info</comment>
+  </data>
+  <data name="DefaultSale" xml:space="preserve">
+    <value>Aktualnie brak oferty promocyjnej.</value>
+    <comment>default Sale Info</comment>
+  </data>
+  <data name="DefaultWelcomeMessage" xml:space="preserve">
+    <value>Witamy w systemie SOSM.
+Życzymy przyjemnego użytkowania.</value>
+    <comment>default Welcome Message</comment>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="logo" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6293,7 +6306,7 @@
   <data name="logoBig" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAGYktHRAApAH4AszmVUWYAAAAHdElNRQfgCwMSOBs9rS3U
+        YQUAAAAJcEhZcwAACw8AAAsPAZL5A6UAAAAGYktHRAApAH4AszmVUWYAAAAHdElNRQfgCwMSOBs9rS3U
         AAAAHWlUWHRDb21tZW50AAAAAABDcmVhdGVkIHdpdGggR0lNUGQuZQcAAP9XSURBVHhe7J0FWFRZ/8f/
         KqCIqKiAHdjd3d2ggoqKCAYYYKAgGNgIdnfXuru63d3dHW65ne/Gu/Fu+P3/fnfumTn3zplhUHSN832e
         z3NP3LkDw3A/c87c+D8dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0d
@@ -7867,5 +7880,9 @@
         ezOUBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP
         g3r1/g8B4qmOjQR7xQAAAABJRU5ErkJggg==
 </value>
+  </data>
+  <data name="SOSMContactInfo" xml:space="preserve">
+    <value>Kontakt z obsługą systemu SOSM dostępny pod adresem mailowym: sosm@interia.com</value>
+    <comment>SOSM Contact Info</comment>
   </data>
 </root>

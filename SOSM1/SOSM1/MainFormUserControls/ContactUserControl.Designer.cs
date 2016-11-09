@@ -28,10 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.contactLabel = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // contactLabel
+            // 
+            this.contactLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactLabel.Font = new System.Drawing.Font("Arial", 18F);
+            this.contactLabel.Location = new System.Drawing.Point(0, 0);
+            this.contactLabel.Name = "contactLabel";
+            this.contactLabel.Size = new System.Drawing.Size(618, 360);
+            this.contactLabel.TabIndex = 0;
+            this.contactLabel.Text = "Contact_Info";
+            this.contactLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // ContactUserControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.contactLabel);
+            this.Name = "ContactUserControl";
+            this.Size = new System.Drawing.Size(618, 360);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label contactLabel;
     }
 }
