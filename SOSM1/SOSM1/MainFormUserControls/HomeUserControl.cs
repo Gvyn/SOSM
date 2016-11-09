@@ -12,6 +12,7 @@ namespace SOSM1
 {
     public partial class HomeUserControl : UserControl
     {
+        Product productOnSale;
         public HomeUserControl()
         {
             InitializeComponent();
@@ -36,12 +37,11 @@ namespace SOSM1
         {
             try
             {
-                Product productSale;
-                if(InterfaceToDataBaseProductMethods.GetBiggestSale(out productSale))
+                if(InterfaceToDataBaseProductMethods.GetBiggestSale(out productOnSale))
                 {
-                    salePictureBox.Image = productSale.Picture;
-                    saleLabel.Text = "Promocja na: " + productSale.ProductName + "!\n" + "Jedyne " + productSale.Discount + "zł z " + productSale.Price + "zł za ";
-                    switch(productSale.UnitType)
+                    salePictureBox.Image = productOnSale.Picture;
+                    saleLabel.Text = "Promocja na: " + productOnSale.ProductName + "!\n" + "Jedyne " + productOnSale.Discount + "zł z " + productOnSale.Price + "zł za ";
+                    switch(productOnSale.UnitType)
                     {
                         case 0:
                             saleLabel.Text += "sztukę!";
@@ -69,5 +69,15 @@ namespace SOSM1
             }
 
         }
+
+        private void salePanel_Click(object sender, EventArgs e)
+        {
+            productOnSale = new Product("testkek", 1, 1, 1, 1, new Bitmap(100, 100), 1, 1);//kick when testing finished
+            if (productOnSale != null)
+            {
+                (ParentForm as MainWindowForm).CreatePoductWindow(productOnSale);
+            }
+        }
+        
     }
 }

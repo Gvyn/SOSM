@@ -13,6 +13,7 @@ namespace SOSM1
     public partial class MainWindowForm : Form
     {
         private User loggedUserData;
+        private int basketSize;
         public MainWindowForm(User loggedUserData)
         {
             InitializeComponent();
@@ -20,6 +21,8 @@ namespace SOSM1
             profileButton.Text = this.loggedUserData.UserName;
             if (this.loggedUserData.Type == 1)
                 adminButton.Visible = true;
+            basketSize = 0; //insert Userc basket count
+            basketSizeLabel.Text = basketSize.ToString();
             SetHomeUserControl();
         }
 
@@ -31,6 +34,10 @@ namespace SOSM1
 
         private void SwapUserControl(UserControl newUserControl)
         {
+            if (newUserControl == null)
+                throw new ArgumentNullException();
+            if (userControlPanel.Controls.Count == 1 && newUserControl.GetType().Equals(userControlPanel.Controls[0].GetType()))
+                return;
             newUserControl.Dock = DockStyle.Fill;
             userControlPanel.Controls.Clear();
             userControlPanel.Controls.Add(newUserControl);
@@ -92,5 +99,42 @@ namespace SOSM1
             Close();
         }
 
+        private void basketButton_Click(object sender, EventArgs e)
+        {
+            SetBasketUserControl();
+        }
+
+        private void SetBasketUserControl()
+        {
+            sectionLabel.Text = "Koszyk";
+            SwapUserControl(new BasketUserControl());
+        }
+
+        private void profileButton_Click(object sender, EventArgs e)
+        {
+            SetProfileUserControl();
+        }
+
+        private void SetProfileUserControl()
+        {
+            sectionLabel.Text = "Profil";
+            SwapUserControl(new ProfileUserControl());
+        }
+
+        public void CreatePoductWindow(Product ProductDataObject)
+        {
+            SetProductWindowUserControl(ProductDataObject);
+        }
+        private void SetProductWindowUserControl(Product ProductDataObject)
+        {
+            sectionLabel.Text = ProductDataObject.ProductName;
+            SwapUserControl(new ProductWindowUserControl(ProductDataObject));
+        }
+        
+        public void IncreaceBasketSize()
+        {
+            basketSize++;
+            basketSizeLabel.Text = basketSize.ToString();
+        }
     }
 }

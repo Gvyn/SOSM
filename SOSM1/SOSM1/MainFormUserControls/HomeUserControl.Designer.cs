@@ -78,6 +78,7 @@
             this.saleLabel.TabIndex = 0;
             this.saleLabel.Text = "Sale_Info";
             this.saleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.saleLabel.Click += new System.EventHandler(this.salePanel_Click);
             // 
             // salePictureBox
             // 
@@ -88,6 +89,7 @@
             this.salePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.salePictureBox.TabIndex = 1;
             this.salePictureBox.TabStop = false;
+            this.salePictureBox.Click += new System.EventHandler(this.salePanel_Click);
             // 
             // HomeUserControl
             // 

@@ -29,39 +29,94 @@
         private void InitializeComponent()
         {
             this.sideMenuPanel = new System.Windows.Forms.Panel();
+            this.profileButton = new System.Windows.Forms.Button();
+            this.basketSizeLabel = new System.Windows.Forms.Label();
+            this.basketButton = new System.Windows.Forms.Button();
+            this.sectionLabelPanel = new System.Windows.Forms.Panel();
+            this.sectionLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.logoutButton = new System.Windows.Forms.Button();
-            this.contactButton = new System.Windows.Forms.Button();
-            this.adminButton = new System.Windows.Forms.Button();
-            this.productsButton = new System.Windows.Forms.Button();
             this.homeButton = new System.Windows.Forms.Button();
+            this.productsButton = new System.Windows.Forms.Button();
+            this.adminButton = new System.Windows.Forms.Button();
+            this.contactButton = new System.Windows.Forms.Button();
+            this.logoutButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.mainMenuPanel = new System.Windows.Forms.Panel();
             this.userControlPanel = new System.Windows.Forms.Panel();
-            this.sectionLabelPanel = new System.Windows.Forms.Panel();
-            this.sectionLabel = new System.Windows.Forms.Label();
-            this.cartButton = new System.Windows.Forms.Button();
-            this.cartSizeLabel = new System.Windows.Forms.Label();
-            this.profileButton = new System.Windows.Forms.Button();
             this.sideMenuPanel.SuspendLayout();
+            this.sectionLabelPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.mainMenuPanel.SuspendLayout();
-            this.sectionLabelPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // sideMenuPanel
             // 
             this.sideMenuPanel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.sideMenuPanel.Controls.Add(this.profileButton);
-            this.sideMenuPanel.Controls.Add(this.cartSizeLabel);
-            this.sideMenuPanel.Controls.Add(this.cartButton);
+            this.sideMenuPanel.Controls.Add(this.basketSizeLabel);
+            this.sideMenuPanel.Controls.Add(this.basketButton);
             this.sideMenuPanel.Controls.Add(this.sectionLabelPanel);
             this.sideMenuPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.sideMenuPanel.Location = new System.Drawing.Point(200, 0);
             this.sideMenuPanel.Name = "sideMenuPanel";
             this.sideMenuPanel.Size = new System.Drawing.Size(884, 66);
             this.sideMenuPanel.TabIndex = 0;
+            // 
+            // profileButton
+            // 
+            this.profileButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            this.profileButton.Location = new System.Drawing.Point(670, 23);
+            this.profileButton.Name = "profileButton";
+            this.profileButton.Size = new System.Drawing.Size(188, 37);
+            this.profileButton.TabIndex = 3;
+            this.profileButton.Text = "User_Name";
+            this.profileButton.UseVisualStyleBackColor = true;
+            this.profileButton.Click += new System.EventHandler(this.profileButton_Click);
+            // 
+            // basketSizeLabel
+            // 
+            this.basketSizeLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.basketSizeLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.basketSizeLabel.Location = new System.Drawing.Point(582, 23);
+            this.basketSizeLabel.Name = "basketSizeLabel";
+            this.basketSizeLabel.Size = new System.Drawing.Size(66, 37);
+            this.basketSizeLabel.TabIndex = 2;
+            this.basketSizeLabel.Text = "0";
+            this.basketSizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.basketSizeLabel.Click += new System.EventHandler(this.basketButton_Click);
+            // 
+            // basketButton
+            // 
+            this.basketButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.basketButton.Location = new System.Drawing.Point(468, 23);
+            this.basketButton.Name = "basketButton";
+            this.basketButton.Size = new System.Drawing.Size(108, 37);
+            this.basketButton.TabIndex = 1;
+            this.basketButton.Text = "Koszyk";
+            this.basketButton.UseVisualStyleBackColor = true;
+            this.basketButton.Click += new System.EventHandler(this.basketButton_Click);
+            // 
+            // sectionLabelPanel
+            // 
+            this.sectionLabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.sectionLabelPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.sectionLabelPanel.Controls.Add(this.sectionLabel);
+            this.sectionLabelPanel.Location = new System.Drawing.Point(0, 23);
+            this.sectionLabelPanel.Name = "sectionLabelPanel";
+            this.sectionLabelPanel.Size = new System.Drawing.Size(452, 43);
+            this.sectionLabelPanel.TabIndex = 0;
+            // 
+            // sectionLabel
+            // 
+            this.sectionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sectionLabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.sectionLabel.Location = new System.Drawing.Point(0, 0);
+            this.sectionLabel.Name = "sectionLabel";
+            this.sectionLabel.Size = new System.Drawing.Size(452, 43);
+            this.sectionLabel.TabIndex = 0;
+            this.sectionLabel.Text = "Section_Name";
+            this.sectionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel1
             // 
@@ -76,27 +131,27 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(170, 446);
             this.flowLayoutPanel1.TabIndex = 6;
             // 
-            // logoutButton
+            // homeButton
             // 
-            this.logoutButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.logoutButton.Location = new System.Drawing.Point(3, 311);
-            this.logoutButton.Name = "logoutButton";
-            this.logoutButton.Size = new System.Drawing.Size(143, 71);
-            this.logoutButton.TabIndex = 5;
-            this.logoutButton.Text = "Wyloguj";
-            this.logoutButton.UseVisualStyleBackColor = true;
-            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
+            this.homeButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.homeButton.Location = new System.Drawing.Point(3, 3);
+            this.homeButton.Name = "homeButton";
+            this.homeButton.Size = new System.Drawing.Size(143, 71);
+            this.homeButton.TabIndex = 1;
+            this.homeButton.Text = "Strona główna";
+            this.homeButton.UseVisualStyleBackColor = true;
+            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
             // 
-            // contactButton
+            // productsButton
             // 
-            this.contactButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.contactButton.Location = new System.Drawing.Point(3, 234);
-            this.contactButton.Name = "contactButton";
-            this.contactButton.Size = new System.Drawing.Size(143, 71);
-            this.contactButton.TabIndex = 4;
-            this.contactButton.Text = "Kontakt";
-            this.contactButton.UseVisualStyleBackColor = true;
-            this.contactButton.Click += new System.EventHandler(this.contactButton_Click);
+            this.productsButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.productsButton.Location = new System.Drawing.Point(3, 80);
+            this.productsButton.Name = "productsButton";
+            this.productsButton.Size = new System.Drawing.Size(143, 71);
+            this.productsButton.TabIndex = 2;
+            this.productsButton.Text = "Katalog produktów";
+            this.productsButton.UseVisualStyleBackColor = true;
+            this.productsButton.Click += new System.EventHandler(this.productsButton_Click);
             // 
             // adminButton
             // 
@@ -110,27 +165,27 @@
             this.adminButton.Visible = false;
             this.adminButton.Click += new System.EventHandler(this.adminButton_Click);
             // 
-            // productsButton
+            // contactButton
             // 
-            this.productsButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.productsButton.Location = new System.Drawing.Point(3, 80);
-            this.productsButton.Name = "productsButton";
-            this.productsButton.Size = new System.Drawing.Size(143, 71);
-            this.productsButton.TabIndex = 2;
-            this.productsButton.Text = "Katalog produktów";
-            this.productsButton.UseVisualStyleBackColor = true;
-            this.productsButton.Click += new System.EventHandler(this.productsButton_Click);
+            this.contactButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.contactButton.Location = new System.Drawing.Point(3, 234);
+            this.contactButton.Name = "contactButton";
+            this.contactButton.Size = new System.Drawing.Size(143, 71);
+            this.contactButton.TabIndex = 4;
+            this.contactButton.Text = "Kontakt";
+            this.contactButton.UseVisualStyleBackColor = true;
+            this.contactButton.Click += new System.EventHandler(this.contactButton_Click);
             // 
-            // homeButton
+            // logoutButton
             // 
-            this.homeButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.homeButton.Location = new System.Drawing.Point(3, 3);
-            this.homeButton.Name = "homeButton";
-            this.homeButton.Size = new System.Drawing.Size(143, 71);
-            this.homeButton.TabIndex = 1;
-            this.homeButton.Text = "Strona główna";
-            this.homeButton.UseVisualStyleBackColor = true;
-            this.homeButton.Click += new System.EventHandler(this.homeButton_Click);
+            this.logoutButton.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
+            this.logoutButton.Location = new System.Drawing.Point(3, 311);
+            this.logoutButton.Name = "logoutButton";
+            this.logoutButton.Size = new System.Drawing.Size(143, 71);
+            this.logoutButton.TabIndex = 5;
+            this.logoutButton.Text = "Wyloguj";
+            this.logoutButton.UseVisualStyleBackColor = true;
+            this.logoutButton.Click += new System.EventHandler(this.logoutButton_Click);
             // 
             // pictureBox1
             // 
@@ -164,58 +219,6 @@
             this.userControlPanel.Size = new System.Drawing.Size(884, 520);
             this.userControlPanel.TabIndex = 2;
             // 
-            // sectionLabelPanel
-            // 
-            this.sectionLabelPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.sectionLabelPanel.BackColor = System.Drawing.SystemColors.Control;
-            this.sectionLabelPanel.Controls.Add(this.sectionLabel);
-            this.sectionLabelPanel.Location = new System.Drawing.Point(0, 23);
-            this.sectionLabelPanel.Name = "sectionLabelPanel";
-            this.sectionLabelPanel.Size = new System.Drawing.Size(452, 43);
-            this.sectionLabelPanel.TabIndex = 0;
-            // 
-            // sectionLabel
-            // 
-            this.sectionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sectionLabel.Font = new System.Drawing.Font("Arial", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.sectionLabel.Location = new System.Drawing.Point(0, 0);
-            this.sectionLabel.Name = "sectionLabel";
-            this.sectionLabel.Size = new System.Drawing.Size(452, 43);
-            this.sectionLabel.TabIndex = 0;
-            this.sectionLabel.Text = "Section_Name";
-            this.sectionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cartButton
-            // 
-            this.cartButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.cartButton.Location = new System.Drawing.Point(468, 23);
-            this.cartButton.Name = "cartButton";
-            this.cartButton.Size = new System.Drawing.Size(108, 37);
-            this.cartButton.TabIndex = 1;
-            this.cartButton.Text = "Koszyk";
-            this.cartButton.UseVisualStyleBackColor = true;
-            // 
-            // cartSizeLabel
-            // 
-            this.cartSizeLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.cartSizeLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold);
-            this.cartSizeLabel.Location = new System.Drawing.Point(582, 23);
-            this.cartSizeLabel.Name = "cartSizeLabel";
-            this.cartSizeLabel.Size = new System.Drawing.Size(66, 37);
-            this.cartSizeLabel.TabIndex = 2;
-            this.cartSizeLabel.Text = "0";
-            this.cartSizeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // profileButton
-            // 
-            this.profileButton.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            this.profileButton.Location = new System.Drawing.Point(670, 23);
-            this.profileButton.Name = "profileButton";
-            this.profileButton.Size = new System.Drawing.Size(188, 37);
-            this.profileButton.TabIndex = 3;
-            this.profileButton.Text = "User_Name";
-            this.profileButton.UseVisualStyleBackColor = true;
-            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -229,10 +232,10 @@
             this.Text = "SOSM";
             this.Load += new System.EventHandler(this.MainWindowForm_Load);
             this.sideMenuPanel.ResumeLayout(false);
+            this.sectionLabelPanel.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.mainMenuPanel.ResumeLayout(false);
-            this.sectionLabelPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -250,9 +253,9 @@
         private System.Windows.Forms.Panel mainMenuPanel;
         private System.Windows.Forms.Panel userControlPanel;
         private System.Windows.Forms.Panel sectionLabelPanel;
-        private System.Windows.Forms.Button cartButton;
+        private System.Windows.Forms.Button basketButton;
         private System.Windows.Forms.Label sectionLabel;
         private System.Windows.Forms.Button profileButton;
-        private System.Windows.Forms.Label cartSizeLabel;
+        private System.Windows.Forms.Label basketSizeLabel;
     }
 }

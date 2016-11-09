@@ -74,6 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainFormUserControls\BasketUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFormUserControls\BasketUserControl.Designer.cs">
+      <DependentUpon>BasketUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfaceToDataBase\InterfaceToDataBaseOtherMethods.cs" />
     <Compile Include="MainFormUserControls\AdminUserControl.cs">
       <SubType>UserControl</SubType>
@@ -133,6 +139,12 @@
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Data objects\Product.cs" />
+    <Compile Include="MainFormUserControls\ProductDataUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFormUserControls\ProductDataUserControl.Designer.cs">
+      <DependentUpon>ProductDataUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
@@ -142,7 +154,19 @@
     <Compile Include="MainFormUserControls\ProductUserControl.Designer.cs">
       <DependentUpon>ProductUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data objects\Program.cs" />
+    <Compile Include="MainFormUserControls\ProductWindowUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFormUserControls\ProductWindowUserControl.Designer.cs">
+      <DependentUpon>ProductWindowUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFormUserControls\ProfileUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFormUserControls\ProfileUserControl.Designer.cs">
+      <DependentUpon>ProfileUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Data objects\Sale.cs" />
     <Compile Include="Sale_history.cs">
@@ -187,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainWindowForm.resx">
       <DependentUpon>MainWindowForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\ProductWindowUserControl.resx">
+      <DependentUpon>ProductWindowUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
