@@ -165,7 +165,7 @@ namespace SOSM1
             Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
             if (found != null)
             {
-                found.Amount = Amount;
+                found.Amount += Amount;
             }
             else
             {

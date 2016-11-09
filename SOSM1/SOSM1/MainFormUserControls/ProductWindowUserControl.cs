@@ -94,7 +94,15 @@ namespace SOSM1
         }
         private void GenerateCategoryLabelChain()
         {
-
+            try
+            {
+                currentCategoryLabel.Text = ">" + InterfaceToDataBaseCategoryMethods.GetCategory(productDataObject.CategoryID).Name;
+            }
+            catch(NullReferenceException)
+            {
+                currentCategoryLabel.Visible = false;
+            }
+            currentObjectLabel.Text = ">" + productDataObject.ProductName;
         }
         private void searchTextBox_Enter(object sender, EventArgs e)
         {
@@ -178,7 +186,18 @@ namespace SOSM1
             amountLabel.Text = ProductAmountInforFormat(productDataObject.Amount, productDataObject.UnitType);
             MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
             mainForm.addBasket(productDataObject.ProductID, amount, productDataObject.Amount);
+            SetBasketData();
             MessageBox.Show("Dodano do koszyka.");
+        }
+
+        private void categoryRootLabel_Click(object sender, EventArgs e)
+        {
+            (ParentForm as MainWindowForm).CreateProductsCatalog();
+        }
+
+        private void currentCategoryLabel_Click(object sender, EventArgs e)
+        {
+            (ParentForm as MainWindowForm).CreateProductsCatalog(productDataObject.CategoryID);
         }
     }
 }

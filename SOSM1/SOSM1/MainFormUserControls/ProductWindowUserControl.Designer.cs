@@ -42,7 +42,11 @@
             this.amountBox = new System.Windows.Forms.TextBox();
             this.inBasketDescriptionLabel = new System.Windows.Forms.Label();
             this.inBasketLabel = new System.Windows.Forms.Label();
+            this.categoryRootLabel = new System.Windows.Forms.Label();
+            this.currentCategoryLabel = new System.Windows.Forms.Label();
+            this.currentObjectLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).BeginInit();
+            this.categoryFlowPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // productPictureBox
@@ -106,6 +110,9 @@
             // 
             // categoryFlowPanel
             // 
+            this.categoryFlowPanel.Controls.Add(this.categoryRootLabel);
+            this.categoryFlowPanel.Controls.Add(this.currentCategoryLabel);
+            this.categoryFlowPanel.Controls.Add(this.currentObjectLabel);
             this.categoryFlowPanel.Location = new System.Drawing.Point(20, 16);
             this.categoryFlowPanel.Name = "categoryFlowPanel";
             this.categoryFlowPanel.Size = new System.Drawing.Size(358, 34);
@@ -192,6 +199,41 @@
             this.inBasketLabel.Text = "InBasket";
             this.inBasketLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // categoryRootLabel
+            // 
+            this.categoryRootLabel.AutoSize = true;
+            this.categoryRootLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.categoryRootLabel.Location = new System.Drawing.Point(3, 0);
+            this.categoryRootLabel.Margin = new System.Windows.Forms.Padding(3, 0, 1, 0);
+            this.categoryRootLabel.Name = "categoryRootLabel";
+            this.categoryRootLabel.Size = new System.Drawing.Size(135, 17);
+            this.categoryRootLabel.TabIndex = 0;
+            this.categoryRootLabel.Text = "Wszystkie produkty";
+            this.categoryRootLabel.Click += new System.EventHandler(this.categoryRootLabel_Click);
+            // 
+            // currentCategoryLabel
+            // 
+            this.currentCategoryLabel.AutoSize = true;
+            this.currentCategoryLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.currentCategoryLabel.Location = new System.Drawing.Point(140, 0);
+            this.currentCategoryLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.currentCategoryLabel.Name = "currentCategoryLabel";
+            this.currentCategoryLabel.Size = new System.Drawing.Size(120, 17);
+            this.currentCategoryLabel.TabIndex = 1;
+            this.currentCategoryLabel.Text = "Current Category";
+            this.currentCategoryLabel.Click += new System.EventHandler(this.currentCategoryLabel_Click);
+            // 
+            // currentObjectLabel
+            // 
+            this.currentObjectLabel.AutoSize = true;
+            this.currentObjectLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.currentObjectLabel.Location = new System.Drawing.Point(1, 17);
+            this.currentObjectLabel.Margin = new System.Windows.Forms.Padding(1, 0, 3, 0);
+            this.currentObjectLabel.Name = "currentObjectLabel";
+            this.currentObjectLabel.Size = new System.Drawing.Size(135, 17);
+            this.currentObjectLabel.TabIndex = 2;
+            this.currentObjectLabel.Text = "CurrentObjectLabel";
+            // 
             // ProductWindowUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -213,6 +255,8 @@
             this.Name = "ProductWindowUserControl";
             this.Size = new System.Drawing.Size(712, 454);
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).EndInit();
+            this.categoryFlowPanel.ResumeLayout(false);
+            this.categoryFlowPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,5 +278,8 @@
         private System.Windows.Forms.TextBox amountBox;
         private System.Windows.Forms.Label inBasketDescriptionLabel;
         private System.Windows.Forms.Label inBasketLabel;
+        private System.Windows.Forms.Label categoryRootLabel;
+        private System.Windows.Forms.Label currentCategoryLabel;
+        private System.Windows.Forms.Label currentObjectLabel;
     }
 }

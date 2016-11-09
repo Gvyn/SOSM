@@ -23,8 +23,8 @@ namespace SOSM1
             {
                 contactLabel.Text = InterfaceToDataBaseOtherMethods.GetContactInfo();
             }
-            catch (NotImplementedException)//kick when implemented (empty contact info is their choice)
-            {
+            catch (InvalidOperationException)
+            { 
                 contactLabel.Text = Properties.Resources.DefaultContactInfo;
             }
             contactLabel.Text += "\n\n" + Properties.Resources.SOSMContactInfo;

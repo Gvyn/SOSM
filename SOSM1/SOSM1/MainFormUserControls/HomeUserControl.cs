@@ -35,8 +35,6 @@ namespace SOSM1
         }
         private void SetSaleInfo()
         {
-            try
-            {
                 if(InterfaceToDataBaseProductMethods.GetRandomSale(out productOnSale))
                 {
                     salePictureBox.Image = productOnSale.Picture;
@@ -60,19 +58,12 @@ namespace SOSM1
                     salePictureBox.Visible = false;
                     saleLabel.Text = Properties.Resources.DefaultSale;
                 }
-
-            }
-            catch (NotImplementedException)//kick when implemented 
-            {
-                salePictureBox.Visible = false;
-                saleLabel.Text = Properties.Resources.DefaultSale;
-            }
+                
 
         }
 
         private void salePanel_Click(object sender, EventArgs e)
         {
-            productOnSale = new Product("testkek", 1, 1, 1, 1,"lolololo", null, 1, 1);//kick when testing finished
             if (productOnSale != null)
             {
                 (ParentForm as MainWindowForm).CreateProductWindow(productOnSale);
