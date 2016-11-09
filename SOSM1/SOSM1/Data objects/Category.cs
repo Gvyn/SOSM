@@ -8,6 +8,13 @@ namespace SOSM1
 {
     class Category
     {
+        public Category(string Name, string Desription)
+        {
+            this.CategoryID = -1;
+            this.Name = Name;
+            this.Description = Description;
+        }
+
         private long categoryID;
         public long CategoryID
         {

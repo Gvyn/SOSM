@@ -16,7 +16,7 @@ namespace SOSM1
         /// </summary>
         /// <param name="newProduct">Product data object for creating new product.</param>
         /// <returns>True if it could add, false otherwise.</returns>
-        public static bool AddProduct(Product newProduct)
+        public static bool AddProduct(ref Product newProduct)
         {
             throw new NotImplementedException();
         }
