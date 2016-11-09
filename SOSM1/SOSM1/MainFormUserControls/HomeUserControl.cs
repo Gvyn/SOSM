@@ -28,7 +28,7 @@ namespace SOSM1
                 if (welcomeMessageLabel.Text.Length == 0)
                     welcomeMessagePanel.Visible = false;
             }
-            catch(NotImplementedException)//kick when implemented (empty contact info is their choice)
+            catch(InvalidOperationException)
             {
                 welcomeMessageLabel.Text = Properties.Resources.DefaultWelcomeMessage;
             }
@@ -75,7 +75,7 @@ namespace SOSM1
             productOnSale = new Product("testkek", 1, 1, 1, 1,"lolololo", null, 1, 1);//kick when testing finished
             if (productOnSale != null)
             {
-                (ParentForm as MainWindowForm).CreatePoductWindow(productOnSale);
+                (ParentForm as MainWindowForm).CreateProductWindow(productOnSale);
             }
         }
         

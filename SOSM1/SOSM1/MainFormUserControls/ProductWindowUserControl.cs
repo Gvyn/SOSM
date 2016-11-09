@@ -76,5 +76,36 @@ namespace SOSM1
             return result;
 
         }
+
+        private void searchTextBox_Enter(object sender, EventArgs e)
+        {
+            setSearchWatermarkOff();
+        }
+        private void setSearchWatermarkOff()
+        {
+            if (searchTextBox.ForeColor!=SystemColors.WindowText)
+            {
+                searchTextBox.ForeColor = SystemColors.WindowText;
+                searchTextBox.Text = "";
+            }
+        }
+        private void searchTextBox_Leave(object sender, EventArgs e)
+        {
+            setSearchWatermarkOn();
+        }
+        private void setSearchWatermarkOn()
+        {
+            if (searchTextBox.Text == "")
+            {
+                searchTextBox.ForeColor = Color.LightGray;
+                searchTextBox.Text = "atrybut wyszukiwania";
+            }
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            if(searchTextBox.ForeColor == SystemColors.WindowText && searchTextBox.Text != "")
+                (ParentForm as MainWindowForm).CreateProductsCatalog(searchTextBox.Text);
+        }
     }
 }

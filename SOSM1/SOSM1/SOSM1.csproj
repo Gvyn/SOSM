@@ -148,11 +148,11 @@
     <Compile Include="Products.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="MainFormUserControls\ProductUserControl.cs">
+    <Compile Include="MainFormUserControls\ProductsUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MainFormUserControls\ProductUserControl.Designer.cs">
-      <DependentUpon>ProductUserControl.cs</DependentUpon>
+    <Compile Include="MainFormUserControls\ProductsUserControl.Designer.cs">
+      <DependentUpon>ProductsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MainFormUserControls\ProductWindowUserControl.cs">
       <SubType>UserControl</SubType>

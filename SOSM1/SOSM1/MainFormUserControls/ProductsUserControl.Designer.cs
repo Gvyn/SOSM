@@ -1,6 +1,6 @@
 ﻿namespace SOSM1
 {
-    partial class ProductUserControl
+    partial class ProductsUserControl
     {
         /// <summary> 
         /// Required designer variable.

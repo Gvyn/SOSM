@@ -61,7 +61,7 @@ namespace SOSM1
         private void SetProductsUserControl()
         {
             sectionLabel.Text = "Katalog produktów";
-            SwapUserControl(new ProductUserControl());
+            SwapUserControl(new ProductsUserControl());
         }
 
 
@@ -121,7 +121,7 @@ namespace SOSM1
             SwapUserControl(new ProfileUserControl());
         }
 
-        public void CreatePoductWindow(Product ProductDataObject)
+        public void CreateProductWindow(Product ProductDataObject)
         {
             SetProductWindowUserControl(ProductDataObject);
         }
@@ -131,6 +131,32 @@ namespace SOSM1
             SwapUserControl(new ProductWindowUserControl(ProductDataObject));
         }
         
+        public void CreateProductsCatalog()
+        {
+            SetProductsUserControl();
+        }
+        public void CreateProductsCatalog(int CategoryID)
+        {
+            SetProductsUserControl(CategoryID);
+
+        }
+        public void CreateProductsCatalog(string SearchArgument)
+        {
+            SetProductsUserControl(SearchArgument);
+        }
+        private void SetProductsUserControl(int CategoryID)
+        {
+            sectionLabel.Text = "Katalog produktów";
+            SwapUserControl(new ProductsUserControl(CategoryID));
+        }
+        private void SetProductsUserControl(string SearchArgument)
+        {
+            sectionLabel.Text = "Katalog produktów";
+            SwapUserControl(new ProductsUserControl(SearchArgument));
+        }
+
+
+
         public void IncreaceBasketSize()
         {
             basketSize++;
