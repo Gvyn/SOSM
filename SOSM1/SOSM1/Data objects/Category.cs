@@ -24,7 +24,7 @@ namespace SOSM1
             }
             set
             {
-                CategoryID = value;
+                categoryID = value;
             }
         }
 

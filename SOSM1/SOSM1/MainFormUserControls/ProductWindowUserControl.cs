@@ -33,19 +33,48 @@ namespace SOSM1
             { 
                 productPictureBox.Image = productDataObject.Picture;
             }
-            priceLabel.Text ="Cena: "+productDataObject.Discount+ "zł za ";
-            switch (productDataObject.UnitType)
+
+            priceLabel.Text = ProductPriceInfoFormat(productDataObject.Discount, productDataObject.UnitType);
+            amountLabel.Text = ProductAmountInforFormat(productDataObject.Amount, productDataObject.UnitType);
+
+               
+        }
+
+        private string ProductPriceInfoFormat(decimal price, long unitType)
+        {
+            string result = "Cena: " + price + "zł za ";
+            switch (unitType)
             {
                 case 0:
-                    priceLabel.Text += "sztukę";
+                    result += "sztukę";
                     break;
                 case 1:
-                    priceLabel.Text += "kilogram";
+                    result += "kilogram";
                     break;
                 case 2:
-                    priceLabel.Text += "litr";
+                    result += "litr";
                     break;
             }
+            return result;
+        }
+        private string ProductAmountInforFormat(decimal amount, long unitType)
+        {
+            string result="";
+            switch (unitType)
+            {
+                case 0:
+                    result = "Sztuk";
+                    break;
+                case 1:
+                    result = "Kilogramów";
+                    break;
+                case 2:
+                    result = "Litrów";
+                    break;
+            }
+            result += " dostępnych: " + amount;
+            return result;
+
         }
     }
 }
