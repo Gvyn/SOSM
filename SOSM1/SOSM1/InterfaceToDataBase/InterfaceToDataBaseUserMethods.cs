@@ -101,9 +101,17 @@ namespace SOSM1
                     return false;
                 switch (user.State)
                 {
-                    case 0: // state - created, EREASE HIM
+                    case 0: // state - created, EREASE THEY AND THIER PROPERTY(BASKETS) TOO!!!
                         {
                             context.Users.Remove(user);
+                            var baskets = context.Baskets.Where(x => x.UserID == user.UserID).ToList();
+                            foreach (var basket in baskets)
+                            {
+                                context.Baskets.Remove(basket);
+                                var product = context.Products.Find(basket.ProductID);
+                                product.Amount += basket.Amount;
+                                context.Entry(product).Property(x => x.Amount).IsModified = true;
+                            }
                             context.SaveChanges();
                             break;
                         }

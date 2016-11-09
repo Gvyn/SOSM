@@ -18,20 +18,72 @@ namespace SOSM1
         /// <returns>True if it could add, false otherwise.</returns>
         public static bool AddProduct(ref Product newProduct)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                string name = newProduct.ProductName;
+                var products = context.Products.Where(
+                    x => x.Name == name
+                    && (x.State == 0 || x.State == 1)
+                ).ToList();
+                if (products.Count != 0)
+                    return false;
+                Products dbProduct = new Products();
+                dbProduct.Amount = newProduct.Amount;
+                dbProduct.CategoryID = newProduct.CategoryID;
+                dbProduct.Description = newProduct.Description;
+                dbProduct.Discount = newProduct.Discount;
+                dbProduct.Name = newProduct.ProductName;
+                dbProduct.Picture = (byte[])new ImageConverter().ConvertTo(newProduct.Picture, typeof(byte[]));
+                dbProduct.Price = newProduct.Price;
+                dbProduct.State = newProduct.State;
+                dbProduct.Unit_type = newProduct.UnitType;
+
+                context.Products.Add(dbProduct);
+                context.SaveChanges();
+                newProduct.ProductID = dbProduct.ProductID;
+                return true;
+            }
         }
 
         /// <summary>
         /// Changes the state of a specified product in database.
         /// If product state is Active, sets him as Archival.
-        /// If product state is Created, sets him as Active.
+        /// If product state is Created, CRUSH IT! SMASH, TEAR, RIP.
         /// If product state is Archival, does nothing.
         /// </summary>
         /// <param name="productName">Product name of the product we want to modify.</param>
         /// <returns>True if success, false otherwise.</returns>
         public static bool DeleteProduct(string productName)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                var dbProduct = context.Products.FirstOrDefault(
+                    x => x.Name == productName
+                    && (x.State == 0 || x.State == 1)
+                );
+                if (dbProduct == null)
+                    return false;
+                switch (dbProduct.State)
+                {
+                    case 0: //created, can be annihilated, and so its swarms in baskets
+                        {
+                            context.Products.Remove(dbProduct);
+                            var baskets = context.Baskets.Where(x => x.ProductID == dbProduct.ProductID).ToList();
+                            foreach (var basket in baskets)
+                                context.Baskets.Remove(basket);
+                            context.SaveChanges();
+                            return true;
+                        }
+                    case 1: //active, must be archived
+                        {
+                            dbProduct.State = 2;
+                            context.Entry(dbProduct).Property(e => e.State).IsModified = true;
+                            context.SaveChanges();
+                            return true;
+                        }
+                }
+                return false;
+            }
         }
 
         /// <summary>
@@ -46,37 +98,31 @@ namespace SOSM1
                 var product = context.Products.Find(productID);
                 if (product == null)
                     return null;
+                Bitmap image;
                 try
                 {
-                    Product p = new Product(
-                        product.Name,
-                        product.Price,
-                        product.Unit_type,
-                        product.Discount,
-                        product.Amount,
-                        product.Description,
-                        new Bitmap(Image.FromStream(new MemoryStream(product.Picture))),
-                        product.State,
-                        product.CategoryID
-                    );
-                    return p;
+                    MemoryStream stream = new MemoryStream(product.Picture);
+                    image = new Bitmap(Image.FromStream(stream));
+                    stream.Dispose();
                 }
-                // picture corrupted or no picture provided
-                catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException)  
+                // no image provided or is corrupted
+                catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException)
                 {
-                    Product p = new Product(
-                        product.Name,
-                        product.Price,
-                        product.Unit_type,
-                        product.Discount,
-                        product.Amount,
-                        product.Description,
-                        null,
-                        product.State,
-                        product.CategoryID
-                    );
-                    return p;
+                    image = null;
                 }
+
+                Product p = new Product(
+                    product.Name,
+                    product.Price,
+                    product.Unit_type,
+                    product.Discount,
+                    product.Amount,
+                    product.Description,
+                    image,
+                    product.State,
+                    product.CategoryID
+                );
+                return p;
             }
         }
 
@@ -90,7 +136,49 @@ namespace SOSM1
         /// <returns>List of Product data objects who match the terms.</returns>
         public static List<Product> CatalogProducts(string searchArgument = null, long? categoryID = null, long? state = null)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                var products = context.Products.Where(x => 1 == 1);
+                if (searchArgument != null)
+                    products = products.Where(x => x.Name.Contains(searchArgument));
+                if (categoryID != null)
+                    products = products.Where(x => x.CategoryID == categoryID);
+                if (state != null)
+                    products = products.Where(x => x.State == state);
+
+                var dbProductsList = products.ToList();
+                List<Product> productsList = new List<Product>();
+                foreach (Products dbProduct in dbProductsList)
+                {
+                    Bitmap image;
+                    try
+                    {
+                        MemoryStream stream = new MemoryStream(dbProduct.Picture);
+                        image = new Bitmap(Image.FromStream(stream));
+                        stream.Dispose();
+                    }
+                    // no image provided or is corrupted
+                    catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException)
+                    {
+                        image = null;
+                    }
+                    
+                    Product product = new Product(
+                        dbProduct.Name,
+                        dbProduct.Price,
+                        dbProduct.Unit_type,
+                        dbProduct.Discount,
+                        dbProduct.Amount,
+                        dbProduct.Description,
+                        image,
+                        dbProduct.State,
+                        dbProduct.CategoryID
+                    );
+                    product.ProductID = dbProduct.ProductID;
+                    productsList.Add(product);
+                }
+                return productsList;
+            }
         }
 
         /// <summary>
@@ -109,18 +197,54 @@ namespace SOSM1
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
         public static bool ProductModification(long productID, string productName = null, decimal? price = null, long? unitType = null, decimal? discount = null, decimal? amount = null, string description = null, Bitmap picture = null, long? categoryID = null)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Attempts to modify data of product with specified product ID.
-        /// </summary>
-        /// <param name="productID">Specifies a product.</param>
-        /// <param name="ProductData">Contains data of modified product.</param>
-        /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool ProductModificationFromProductData(long productID, Product ProductData)
-        {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                Products product = context.Products.Find(productID);
+                if (product == null)
+                    return false;
+                if (productName != null)
+                {
+                    product.Name = productName;
+                    context.Entry(product).Property(e => e.Name).IsModified = true;
+                }
+                if (price != null)
+                {
+                    product.Price = (decimal)price;
+                    context.Entry(product).Property(e => e.Price).IsModified = true;
+                }
+                if (unitType != null)
+                {
+                    product.Unit_type = (long)unitType;
+                    context.Entry(product).Property(e => e.Unit_type).IsModified = true;
+                }
+                if (discount != null)
+                {
+                    product.Discount = discount;
+                    context.Entry(product).Property(e => e.Discount).IsModified = true;
+                }
+                if (amount != null)
+                {
+                    product.Amount = (decimal)amount;
+                    context.Entry(product).Property(e => e.Amount).IsModified = true;
+                }
+                if (description != null)
+                {
+                    product.Description = description;
+                    context.Entry(product).Property(e => e.Description).IsModified = true;
+                }
+                if (picture != null)
+                {
+                    product.Picture = (byte[])new ImageConverter().ConvertTo(picture, typeof(byte[]));
+                    context.Entry(product).Property(e => e.Picture).IsModified = true;
+                }
+                if (categoryID != null)
+                {
+                    product.CategoryID = (long)categoryID;
+                    context.Entry(product).Property(e => e.CategoryID).IsModified = true;
+                }
+                context.SaveChanges();
+                return true;
+            }
         }
 
         /// <summary>
@@ -130,18 +254,70 @@ namespace SOSM1
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
         public static bool Activate(long productID)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                Products product = context.Products.FirstOrDefault(
+                    x => x.ProductID == productID
+                    && x.State == 0
+                );
+                if (product == null)
+                    return false;
+
+                product.State = 1;
+                context.Entry(product).Property(e => e.State).IsModified = true;
+                return true;
+            }
         }
 
         /// <summary>
-        /// Finds the product with the biggest sale (difference between price and discount) and returns it's Product data object.
-        /// If there are multiple such products, returns one of them.
+        /// Finds the product ON A SALE, MORTAL! And returns it's Product data object.
+        /// If there are multiple discounted products, returns one of them.
+        /// And adds BONUS DUCKS!
         /// </summary>
         /// <param name="ProductData">Data object of the product with biggest sale.</param>
         /// <returns>True if there was at least one product with sale, false otherwise.</returns>
-        public static bool GetBiggestSale(out Product ProductData)
+        public static bool GetRandomtSale(out Product ProductData)
         {
-            throw new NotImplementedException();
+            using (var context = new SOSMEntities())
+            {
+                var sales = context.Products.Where(x => x.Price > x.Discount).ToList();
+                if (sales.Count == 0)
+                {
+                    ProductData = null;
+                    return false;
+                }
+                Random rand = new Random();
+                int rand_index = rand.Next(0, sales.Count);
+                Products dbProduct = sales[rand_index];
+
+                Bitmap image;
+                try
+                {
+                    MemoryStream stream = new MemoryStream(dbProduct.Picture);
+                    image = new Bitmap(Image.FromStream(stream));
+                    stream.Dispose();
+                }
+                // no image provided or is corrupted
+                catch (Exception ex) when (ex is ArgumentException || ex is ArgumentNullException)
+                {
+                    image = null;
+                }
+                
+                Product product = new Product(
+                    dbProduct.Name,
+                    dbProduct.Price,
+                    dbProduct.Unit_type,
+                    dbProduct.Discount,
+                    dbProduct.Amount,
+                    dbProduct.Description,
+                    image,
+                    dbProduct.State,
+                    dbProduct.CategoryID
+                );
+                product.ProductID = dbProduct.ProductID;
+                ProductData = product;
+            }
+            return true;
         }
 
         ///// <summary>
