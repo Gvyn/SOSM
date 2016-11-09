@@ -8,7 +8,7 @@ namespace SOSM1
 {
     public class Order
     {
-        public Order(long SaleID, int ProductID, decimal Amount, decimal Price)
+        public Order(long SaleID, long ProductID, decimal Amount, decimal Price)
         {
             this.OrderID = -1;
             this.SaleID = SaleID;
