@@ -25,6 +25,9 @@ namespace SOSM1
             InterfaceToDataBaseBasketMethods.DeleteBaskets(loggedUserData.UserID);
             basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             SetHomeUserControl();
+
+            //test
+            basketButton.Text = GetBasketAmount(1).ToString();
         }
 
         private void MainWindowForm_Load(object sender, EventArgs e)
@@ -150,15 +153,21 @@ namespace SOSM1
             SwapUserControl(new ProductsUserControl(SearchArgument));
         }
         
-        public decimal GetBasket(long ProductID)
+        public decimal GetBasketAmount(long ProductID)
         {
-            if (loggedUserBasket == null)
-                return 0;
+            //foreach(Basket basket in loggedUserBasket)
+            //sectionLabel.Text = loggedUserBasket.Count.ToString();
+            //for (int i = 0; i < loggedUserBasket.Count; i++)
+            //    if (loggedUserBasket[i].ProductID == ProductID)
+            //        return loggedUserBasket[i].Amount;
             Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
-            sectionLabel.Text = "lololo";
             if (found != null)
                 return found.Amount;
             return 0;
+        }
+        public void test(string kek = "")
+        {
+            basketButton.Text = "lolo" + kek;
         }
     }
 }
