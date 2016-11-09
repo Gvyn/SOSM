@@ -37,7 +37,7 @@ namespace SOSM1
         {
             try
             {
-                if(InterfaceToDataBaseProductMethods.GetBiggestSale(out productOnSale))
+                if(InterfaceToDataBaseProductMethods.GetRandomtSale(out productOnSale))
                 {
                     salePictureBox.Image = productOnSale.Picture;
                     saleLabel.Text = "Promocja na: " + productOnSale.ProductName + "!\n" + "Jedyne " + productOnSale.Discount + "zł z " + productOnSale.Price + "zł za ";

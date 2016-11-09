@@ -54,7 +54,8 @@ namespace SOSM1
         }
         private void SetBasketData()
         {
-            //(ParentForm as MainWindowForm).test();
+            //if(ParentFrom is null)
+            (ParentForm as MainWindowForm).test();
             //(ParentForm as MainWindowForm).GetBasketAmount(productDataObject.ProductID);
             //inBasketLabel.Text = (ParentForm as MainWindowForm).GetBasketAmount(productDataObject.ProductID).ToString();
         }
