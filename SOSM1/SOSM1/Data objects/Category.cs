@@ -8,7 +8,7 @@ namespace SOSM1
 {
     class Category
     {
-        public Category(string Name, string Desription)
+        public Category(string Name, string Description)
         {
             this.CategoryID = -1;
             this.Name = Name;

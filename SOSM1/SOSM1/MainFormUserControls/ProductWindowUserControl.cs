@@ -26,9 +26,7 @@ namespace SOSM1
             descriptionLabel.Text = productDataObject.Description;
             if (productDataObject.Picture == null)
             {
-                productPictureBox.Image = Properties.Resources.YukoCrying;
-                noPictureLabel.Text = Properties.Resources.DefaultNoProductPictureText;
-                noPictureLabel.Visible = true;
+                productPictureBox.Image = Properties.Resources.NoPicture;
             }
             else
             { 
@@ -104,6 +102,7 @@ namespace SOSM1
             }
             currentObjectLabel.Text = ">" + productDataObject.ProductName;
         }
+
         private void searchTextBox_Enter(object sender, EventArgs e)
         {
             setSearchWatermarkOff();

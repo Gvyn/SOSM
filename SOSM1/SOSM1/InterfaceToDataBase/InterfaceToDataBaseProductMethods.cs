@@ -140,7 +140,7 @@ namespace SOSM1
             {
                 var products = context.Products.Where(x => 1 == 1);
                 if (searchArgument != null)
-                    products = products.Where(x => x.Name.Contains(searchArgument));
+                    products = products.Where(x => x.Name.Contains(searchArgument)||x.Description.Contains(searchArgument));
                 if (categoryID != null)
                     products = products.Where(x => x.CategoryID == categoryID);
                 if (state != null)

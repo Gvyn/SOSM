@@ -32,9 +32,11 @@
             this.descriptionLabel = new System.Windows.Forms.Label();
             this.descriptionDescriptionLabel = new System.Windows.Forms.Label();
             this.priceLabel = new System.Windows.Forms.Label();
-            this.noPictureLabel = new System.Windows.Forms.Label();
             this.amountLabel = new System.Windows.Forms.Label();
             this.categoryFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.categoryRootLabel = new System.Windows.Forms.Label();
+            this.currentCategoryLabel = new System.Windows.Forms.Label();
+            this.currentObjectLabel = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchButton = new System.Windows.Forms.Button();
             this.toBasketButton = new System.Windows.Forms.Button();
@@ -42,9 +44,6 @@
             this.amountBox = new System.Windows.Forms.TextBox();
             this.inBasketDescriptionLabel = new System.Windows.Forms.Label();
             this.inBasketLabel = new System.Windows.Forms.Label();
-            this.categoryRootLabel = new System.Windows.Forms.Label();
-            this.currentCategoryLabel = new System.Windows.Forms.Label();
-            this.currentObjectLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).BeginInit();
             this.categoryFlowPanel.SuspendLayout();
             this.SuspendLayout();
@@ -87,17 +86,6 @@
             this.priceLabel.TabIndex = 3;
             this.priceLabel.Text = "Price_Info";
             // 
-            // noPictureLabel
-            // 
-            this.noPictureLabel.Font = new System.Drawing.Font("Impact", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.noPictureLabel.Location = new System.Drawing.Point(20, 237);
-            this.noPictureLabel.Name = "noPictureLabel";
-            this.noPictureLabel.Size = new System.Drawing.Size(263, 73);
-            this.noPictureLabel.TabIndex = 4;
-            this.noPictureLabel.Text = "No_Picture_Info";
-            this.noPictureLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.noPictureLabel.Visible = false;
-            // 
             // amountLabel
             // 
             this.amountLabel.AutoSize = true;
@@ -117,6 +105,41 @@
             this.categoryFlowPanel.Name = "categoryFlowPanel";
             this.categoryFlowPanel.Size = new System.Drawing.Size(358, 34);
             this.categoryFlowPanel.TabIndex = 6;
+            // 
+            // categoryRootLabel
+            // 
+            this.categoryRootLabel.AutoSize = true;
+            this.categoryRootLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.categoryRootLabel.Location = new System.Drawing.Point(3, 0);
+            this.categoryRootLabel.Margin = new System.Windows.Forms.Padding(3, 0, 1, 0);
+            this.categoryRootLabel.Name = "categoryRootLabel";
+            this.categoryRootLabel.Size = new System.Drawing.Size(135, 17);
+            this.categoryRootLabel.TabIndex = 0;
+            this.categoryRootLabel.Text = "Wszystkie produkty";
+            this.categoryRootLabel.Click += new System.EventHandler(this.categoryRootLabel_Click);
+            // 
+            // currentCategoryLabel
+            // 
+            this.currentCategoryLabel.AutoSize = true;
+            this.currentCategoryLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.currentCategoryLabel.Location = new System.Drawing.Point(140, 0);
+            this.currentCategoryLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.currentCategoryLabel.Name = "currentCategoryLabel";
+            this.currentCategoryLabel.Size = new System.Drawing.Size(120, 17);
+            this.currentCategoryLabel.TabIndex = 1;
+            this.currentCategoryLabel.Text = "Current Category";
+            this.currentCategoryLabel.Click += new System.EventHandler(this.currentCategoryLabel_Click);
+            // 
+            // currentObjectLabel
+            // 
+            this.currentObjectLabel.AutoSize = true;
+            this.currentObjectLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.currentObjectLabel.Location = new System.Drawing.Point(1, 17);
+            this.currentObjectLabel.Margin = new System.Windows.Forms.Padding(1, 0, 3, 0);
+            this.currentObjectLabel.Name = "currentObjectLabel";
+            this.currentObjectLabel.Size = new System.Drawing.Size(135, 17);
+            this.currentObjectLabel.TabIndex = 2;
+            this.currentObjectLabel.Text = "CurrentObjectLabel";
             // 
             // searchTextBox
             // 
@@ -199,41 +222,6 @@
             this.inBasketLabel.Text = "InBasket";
             this.inBasketLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // categoryRootLabel
-            // 
-            this.categoryRootLabel.AutoSize = true;
-            this.categoryRootLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.categoryRootLabel.Location = new System.Drawing.Point(3, 0);
-            this.categoryRootLabel.Margin = new System.Windows.Forms.Padding(3, 0, 1, 0);
-            this.categoryRootLabel.Name = "categoryRootLabel";
-            this.categoryRootLabel.Size = new System.Drawing.Size(135, 17);
-            this.categoryRootLabel.TabIndex = 0;
-            this.categoryRootLabel.Text = "Wszystkie produkty";
-            this.categoryRootLabel.Click += new System.EventHandler(this.categoryRootLabel_Click);
-            // 
-            // currentCategoryLabel
-            // 
-            this.currentCategoryLabel.AutoSize = true;
-            this.currentCategoryLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.currentCategoryLabel.Location = new System.Drawing.Point(140, 0);
-            this.currentCategoryLabel.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
-            this.currentCategoryLabel.Name = "currentCategoryLabel";
-            this.currentCategoryLabel.Size = new System.Drawing.Size(120, 17);
-            this.currentCategoryLabel.TabIndex = 1;
-            this.currentCategoryLabel.Text = "Current Category";
-            this.currentCategoryLabel.Click += new System.EventHandler(this.currentCategoryLabel_Click);
-            // 
-            // currentObjectLabel
-            // 
-            this.currentObjectLabel.AutoSize = true;
-            this.currentObjectLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.currentObjectLabel.Location = new System.Drawing.Point(1, 17);
-            this.currentObjectLabel.Margin = new System.Windows.Forms.Padding(1, 0, 3, 0);
-            this.currentObjectLabel.Name = "currentObjectLabel";
-            this.currentObjectLabel.Size = new System.Drawing.Size(135, 17);
-            this.currentObjectLabel.TabIndex = 2;
-            this.currentObjectLabel.Text = "CurrentObjectLabel";
-            // 
             // ProductWindowUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -247,7 +235,6 @@
             this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.categoryFlowPanel);
             this.Controls.Add(this.amountLabel);
-            this.Controls.Add(this.noPictureLabel);
             this.Controls.Add(this.priceLabel);
             this.Controls.Add(this.descriptionDescriptionLabel);
             this.Controls.Add(this.descriptionLabel);
@@ -268,7 +255,6 @@
         private System.Windows.Forms.Label descriptionLabel;
         private System.Windows.Forms.Label descriptionDescriptionLabel;
         private System.Windows.Forms.Label priceLabel;
-        private System.Windows.Forms.Label noPictureLabel;
         private System.Windows.Forms.Label amountLabel;
         private System.Windows.Forms.FlowLayoutPanel categoryFlowPanel;
         private System.Windows.Forms.TextBox searchTextBox;

@@ -118,21 +118,21 @@ namespace SOSM1.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NoPicture {
+            get {
+                object obj = ResourceManager.GetObject("NoPicture", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Kontakt z obsługą systemu SOSM dostępny pod adresem mailowym: sosm@interia.com.
         /// </summary>
         internal static string SOSMContactInfo {
             get {
                 return ResourceManager.GetString("SOSMContactInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap YukoCrying {
-            get {
-                object obj = ResourceManager.GetObject("YukoCrying", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

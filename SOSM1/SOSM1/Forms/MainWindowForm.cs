@@ -25,9 +25,9 @@ namespace SOSM1
             InterfaceToDataBaseBasketMethods.DeleteBaskets(loggedUserData.UserID);
             basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             SetHomeUserControl();
-
-            //test
+            
             basketButton.Text = GetBasketAmount(1).ToString();
+
         }
 
         private void MainWindowForm_Load(object sender, EventArgs e)

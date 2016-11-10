@@ -120,6 +120,7 @@
             // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Controls.Add(this.homeButton);
             this.flowLayoutPanel1.Controls.Add(this.productsButton);
             this.flowLayoutPanel1.Controls.Add(this.adminButton);
@@ -130,6 +131,7 @@
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(170, 446);
             this.flowLayoutPanel1.TabIndex = 6;
+            this.flowLayoutPanel1.WrapContents = false;
             // 
             // homeButton
             // 
@@ -227,6 +229,7 @@
             this.Controls.Add(this.userControlPanel);
             this.Controls.Add(this.sideMenuPanel);
             this.Controls.Add(this.mainMenuPanel);
+            this.DoubleBuffered = true;
             this.Name = "MainWindowForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SOSM";

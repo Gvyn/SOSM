@@ -28,37 +28,43 @@ namespace SOSM1
                 if (welcomeMessageLabel.Text.Length == 0)
                     welcomeMessagePanel.Visible = false;
             }
-            catch(InvalidOperationException)
+            catch (InvalidOperationException)
             {
                 welcomeMessageLabel.Text = Properties.Resources.DefaultWelcomeMessage;
             }
         }
         private void SetSaleInfo()
         {
-                if(InterfaceToDataBaseProductMethods.GetRandomSale(out productOnSale))
-                {
-                    salePictureBox.Image = productOnSale.Picture;
-                    saleLabel.Text = "Promocja na: " + productOnSale.ProductName + "!\n" + "Jedyne " + productOnSale.Discount + "zł z " + productOnSale.Price + "zł za ";
-                    switch(productOnSale.UnitType)
-                    {
-                        case 0:
-                            saleLabel.Text += "sztukę!";
-                            break;
-                        case 1:
-                            saleLabel.Text += "kilogram!";
-                            break;
-                        case 2:
-                            saleLabel.Text += "litr!";
-                            break;
-                    }
-
-                }
-                else
+            if (InterfaceToDataBaseProductMethods.GetRandomSale(out productOnSale))
+            {
+                if (productOnSale.Picture == null)
                 {
                     salePictureBox.Visible = false;
-                    saleLabel.Text = Properties.Resources.DefaultSale;
+                    saleLabel.TextAlign = ContentAlignment.MiddleCenter;
                 }
-                
+                else
+                    salePictureBox.Image = productOnSale.Picture;
+                saleLabel.Text = "Promocja na: " + productOnSale.ProductName + "!\n" + "Jedyne " + productOnSale.Discount + "zł z " + productOnSale.Price + "zł za ";
+                switch (productOnSale.UnitType)
+                {
+                    case 0:
+                        saleLabel.Text += "sztukę!";
+                        break;
+                    case 1:
+                        saleLabel.Text += "kilogram!";
+                        break;
+                    case 2:
+                        saleLabel.Text += "litr!";
+                        break;
+                }
+
+            }
+            else
+            {
+                salePictureBox.Visible = false;
+                saleLabel.Text = Properties.Resources.DefaultSale;
+            }
+
 
         }
 
@@ -69,6 +75,6 @@ namespace SOSM1
                 (ParentForm as MainWindowForm).CreateProductWindow(productOnSale);
             }
         }
-        
+
     }
 }

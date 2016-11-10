@@ -77,7 +77,7 @@
             this.saleLabel.Size = new System.Drawing.Size(456, 292);
             this.saleLabel.TabIndex = 0;
             this.saleLabel.Text = "Sale_Info";
-            this.saleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.saleLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.saleLabel.Click += new System.EventHandler(this.salePanel_Click);
             // 
             // salePictureBox
