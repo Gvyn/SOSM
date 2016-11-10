@@ -44,6 +44,14 @@ namespace SOSM1
                     unitLabel.Text = "Litrów:";
                     break;
             }
+
+            if(productDataObject.Amount==0)
+            {
+                unitLabel.Visible = false;
+                amountBox.Visible = false;
+                toBasketButton.Text = "Brak na stanie";
+                toBasketButton.Enabled = false;
+            }
         }
         private string ProductPriceInfoFormat(decimal price, long unitType)
         {

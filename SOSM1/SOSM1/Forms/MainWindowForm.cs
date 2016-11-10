@@ -25,9 +25,6 @@ namespace SOSM1
             InterfaceToDataBaseBasketMethods.DeleteBaskets(loggedUserData.UserID);
             basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             SetHomeUserControl();
-            
-            basketButton.Text = GetBasketAmount(1).ToString();
-
         }
 
         private void MainWindowForm_Load(object sender, EventArgs e)
@@ -116,7 +113,7 @@ namespace SOSM1
         private void SetBasketUserControl()
         {
             sectionLabel.Text = "Koszyk";
-            SwapUserControl(new BasketUserControl());
+            SwapUserControl(new BasketUserControl(loggedUserBasket));
         }
 
         private void profileButton_Click(object sender, EventArgs e)
@@ -173,6 +170,39 @@ namespace SOSM1
                 basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             }
             InterfaceToDataBaseProductMethods.ProductModification(ProductID, null, null, null, null, newAmount);
+        }
+        public void ModifyBasket(Basket basketDataObject, decimal newAmount, Product modifiedProduct = null)
+        {
+            if (modifiedProduct == null)
+                modifiedProduct = InterfaceToDataBaseProductMethods.GetProductData(basketDataObject.ProductID);
+            InterfaceToDataBaseProductMethods.ProductModification(basketDataObject.ProductID, null, null, null, null, modifiedProduct.Amount + basketDataObject.Amount - newAmount);
+            int index = loggedUserBasket.FindIndex(x => x.BasketID == basketDataObject.BasketID);
+            loggedUserBasket[index].Amount=newAmount;
+            loggedUserBasket[index].Date = DateTime.Now;
+            ForceBasketRefresh();
+        }
+
+        public void RemoveBasket(Basket basketDataObject, Product modifiedProduct = null)
+        {
+            if(modifiedProduct == null)
+                modifiedProduct = InterfaceToDataBaseProductMethods.GetProductData(basketDataObject.ProductID);
+            InterfaceToDataBaseProductMethods.ProductModification(basketDataObject.ProductID, null, null, null, null, basketDataObject.Amount + modifiedProduct.Amount);
+            loggedUserBasket.Remove(basketDataObject);
+            ForceBasketRefresh();
+        }
+
+        private void ForceBasketRefresh()
+        {
+            BasketUserControl newUserControl = new BasketUserControl(loggedUserBasket);
+            newUserControl.Dock = DockStyle.Fill;
+            userControlPanel.Controls.Clear();
+            userControlPanel.Controls.Add(newUserControl);
+        }
+        public void CommitSale()
+        {
+            InterfaceToDataBaseSaleMethods.CreateSale(loggedUserBasket);
+            loggedUserBasket.Clear();
+            SetHomeUserControl();
         }
     }
 }

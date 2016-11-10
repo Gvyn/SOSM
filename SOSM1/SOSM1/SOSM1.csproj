@@ -74,6 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainFormUserControls\BasketDataUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFormUserControls\BasketDataUserControl.Designer.cs">
+      <DependentUpon>BasketDataUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainFormUserControls\BasketUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -199,6 +205,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\BasketDataUserControl.resx">
+      <DependentUpon>BasketDataUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainFormUserControls\BasketUserControl.resx">
       <DependentUpon>BasketUserControl.cs</DependentUpon>

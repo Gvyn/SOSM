@@ -48,6 +48,13 @@ namespace SOSM1
                     break;
             }
             GenerateCategoryLabelChain();
+            if(productDataObject.Amount == 0)
+            {
+                unitLabel.Visible = false;
+                amountBox.Visible = false;
+                toBasketButton.Text = "Brak na stanie";
+                toBasketButton.Enabled = false;
+            }
         }
         private void SetBasketData()
         {
