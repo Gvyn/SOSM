@@ -67,7 +67,6 @@ namespace SOSM1
             {
                 categoryID = (sender as RadioButtonWithID).ID;
                 SearchCatalog();
-                searchButton.Text = categoryID.ToString();
             }
         }
 
