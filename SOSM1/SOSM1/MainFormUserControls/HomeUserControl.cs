@@ -20,11 +20,12 @@ namespace SOSM1
             SetSaleInfo();
         }
 
-        private void SetWelcomeMessage()
+        private async void SetWelcomeMessage()
         {
             try
             {
-                welcomeMessageLabel.Text = InterfaceToDataBaseOtherMethods.GetWelcomeMessage();
+                InterfaceToDataBaseOtherMethods Method = new InterfaceToDataBaseOtherMethods();
+                welcomeMessageLabel.Text = await Method.GetWelcomeMessage();
                 if (welcomeMessageLabel.Text.Length == 0)
                     welcomeMessagePanel.Visible = false;
             }
