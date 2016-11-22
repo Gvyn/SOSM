@@ -45,9 +45,14 @@ namespace SOSM1
             if (userControlPanel.Controls.Count == 1 && newUserControl.GetType().Equals(userControlPanel.Controls[0].GetType()))
                 return;
             newUserControl.Dock = DockStyle.Fill;
-            foreach(Control c in userControlPanel.Controls)
-                c.Dispose();
+            
+            List<Control> ctrls = new List<Control>();
+            foreach (Control c in userControlPanel.Controls)
+                ctrls.Add(c);
             userControlPanel.Controls.Clear();
+            foreach (Control c in ctrls)
+                c.Dispose();
+
             userControlPanel.Controls.Add(newUserControl);
         }
         private void homeButton_Click(object sender, EventArgs e)
