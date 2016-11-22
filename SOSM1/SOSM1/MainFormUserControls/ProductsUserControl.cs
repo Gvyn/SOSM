@@ -72,7 +72,13 @@ namespace SOSM1
 
         private async void SearchCatalog()
         {
+            List<Control> ctrls = new List<Control>();
+            foreach (Control c in productsFlowPanel.Controls)
+                ctrls.Add(c);
             productsFlowPanel.Controls.Clear();
+            foreach (Control c in ctrls)
+                c.Dispose();
+
             InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
             List<Product> products = await Methods.CatalogProducts(searchArgument, categoryID, 1);
             foreach (Product product in products)
