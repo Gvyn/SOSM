@@ -21,8 +21,9 @@ namespace SOSM1
             profileButton.Text = this.loggedUserData.UserName;
             if (this.loggedUserData.Type == 1)
                 adminButton.Visible = true;
-            loggedUserBasket = InterfaceToDataBaseBasketMethods.RetrieveBaskets(loggedUserData.UserID);
-            InterfaceToDataBaseBasketMethods.DeleteBaskets(loggedUserData.UserID);
+            InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
+            loggedUserBasket = Methods.RetrieveBaskets(loggedUserData.UserID).Result;
+            bool deleted = Methods.DeleteBaskets(loggedUserData.UserID).Result;
             basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             SetHomeUserControl();
         }
@@ -32,9 +33,10 @@ namespace SOSM1
             Icon = Properties.Resources.logo;
         }
 
-        protected override void OnClosed(EventArgs e)
+        protected override async void OnClosed(EventArgs e)
         {
-            InterfaceToDataBaseBasketMethods.SaveBaskets(loggedUserBasket);
+            InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
+            await Methods.SaveBaskets(loggedUserBasket);
             base.OnClosed(e);
         }
 
@@ -209,9 +211,10 @@ namespace SOSM1
             userControlPanel.Controls.Clear();
             userControlPanel.Controls.Add(newUserControl);
         }
-        public void CommitSale()
+        public async void CommitSale()
         {
-            InterfaceToDataBaseSaleMethods.CreateSale(loggedUserBasket);
+            InterfaceToDataBaseSaleMethods Methods = new InterfaceToDataBaseSaleMethods();
+            await Methods.CreateSale(loggedUserBasket);
             loggedUserBasket.Clear();
             SetHomeUserControl();
         }
