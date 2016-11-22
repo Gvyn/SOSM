@@ -34,9 +34,11 @@ namespace SOSM1
                 welcomeMessageLabel.Text = Properties.Resources.DefaultWelcomeMessage;
             }
         }
-        private void SetSaleInfo()
+        private async void SetSaleInfo()
         {
-            if (InterfaceToDataBaseProductMethods.GetRandomSale(out productOnSale))
+            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+            productOnSale = await Methods.GetRandomSale();
+            if (productOnSale!= null)
             {
                 if (productOnSale.Picture == null)
                 {

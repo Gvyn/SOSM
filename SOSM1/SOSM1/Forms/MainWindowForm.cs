@@ -157,7 +157,7 @@ namespace SOSM1
                 return found.Amount;
             return 0;
         }
-        public void addBasket(long ProductID,decimal Amount, decimal newAmount)
+        public async void addBasket(long ProductID, decimal Amount, decimal newAmount)
         {
             Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
             if (found != null)
@@ -169,24 +169,28 @@ namespace SOSM1
                 loggedUserBasket.Add(new Basket(loggedUserData.UserID, ProductID, Amount));
                 basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             }
-            InterfaceToDataBaseProductMethods.ProductModification(ProductID, null, null, null, null, newAmount);
+            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+
+            await Methods.ProductModification(ProductID, null, null, null, null, newAmount);
         }
-        public void ModifyBasket(Basket basketDataObject, decimal newAmount, Product modifiedProduct = null)
+        public async void ModifyBasket(Basket basketDataObject, decimal newAmount, Product modifiedProduct = null)
         {
+            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
             if (modifiedProduct == null)
-                modifiedProduct = InterfaceToDataBaseProductMethods.GetProductData(basketDataObject.ProductID);
-            InterfaceToDataBaseProductMethods.ProductModification(basketDataObject.ProductID, null, null, null, null, modifiedProduct.Amount + basketDataObject.Amount - newAmount);
+                modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
+            await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, modifiedProduct.Amount + basketDataObject.Amount - newAmount);
             int index = loggedUserBasket.FindIndex(x => x.BasketID == basketDataObject.BasketID);
-            loggedUserBasket[index].Amount=newAmount;
+            loggedUserBasket[index].Amount = newAmount;
             loggedUserBasket[index].Date = DateTime.Now;
             ForceBasketRefresh();
         }
 
-        public void RemoveBasket(Basket basketDataObject, Product modifiedProduct = null)
+        public async void RemoveBasket(Basket basketDataObject, Product modifiedProduct = null)
         {
-            if(modifiedProduct == null)
-                modifiedProduct = InterfaceToDataBaseProductMethods.GetProductData(basketDataObject.ProductID);
-            InterfaceToDataBaseProductMethods.ProductModification(basketDataObject.ProductID, null, null, null, null, basketDataObject.Amount + modifiedProduct.Amount);
+            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+            if (modifiedProduct == null)
+                modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
+            await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, basketDataObject.Amount + modifiedProduct.Amount);
             loggedUserBasket.Remove(basketDataObject);
             ForceBasketRefresh();
         }

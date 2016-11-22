@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Drawing;
 using System.Data;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace SOSM1
         {
             InitializeComponent();
             this.basketDataObject = basketDataObject;
-            productDataObject = InterfaceToDataBaseProductMethods.GetProductData(basketDataObject.ProductID);
+            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+            productDataObject = await Methods.GetProductData(basketDataObject.ProductID);
             SetData();
             amountBox.TextChanged += amountBox_TextChanged;
         }

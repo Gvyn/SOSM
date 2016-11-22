@@ -70,11 +70,12 @@ namespace SOSM1
             }
         }
 
-        private void SearchCatalog()
+        private async void SearchCatalog()
         {
             productsFlowPanel.Controls.Clear();
-            List<Product> products = InterfaceToDataBaseProductMethods.CatalogProducts(searchArgument, categoryID, 1);
-            foreach(Product product in products)
+            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+            List<Product> products = await Methods.CatalogProducts(searchArgument, categoryID, 1);
+            foreach (Product product in products)
             {
                 productsFlowPanel.Controls.Add(new ProductDataUserControl(product));
             }
