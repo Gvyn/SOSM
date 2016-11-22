@@ -25,19 +25,15 @@ namespace SOSM1
         /// </summary>
         /// <param name="userName">Username to be checked.</param>
         /// <param name="password">Password to be checked.</param>
-        /// <param name="loggedUserData">User data object of the logged user.</param>
-        /// <returns>If operation succeded returns true, loggedUserDate is new User object.
-        /// False otherwise, loggedUserData is null</returns>
+        /// <returns>If operation succeded returns new User object.
+        /// Otherwise returns null</returns>
         public async Task<User> LogIn(string userName, string password)
         {
             var user = await context.Users.FirstOrDefaultAsync(
                 x => x.Name == userName // search by userName
+                && (x.Password == password) // search by password
                 && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
             if (user == null)
-            {
-                return null;
-            }
-            if (user.Password != password)
             {
                 return null;
             }
