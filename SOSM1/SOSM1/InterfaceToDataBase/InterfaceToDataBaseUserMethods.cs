@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +8,16 @@ using System.Security;
 
 namespace SOSM1
 {
-    public static class InterfaceToDataBaseUserMethods
+    public class InterfaceToDataBaseUserMethods
     {
+        SOSMEntities context;
+
+        public InterfaceToDataBaseUserMethods()
+        {
+            context = new SOSMEntities();
+        }
+
+
         /// <summary>
         /// Attempts to log in using specified user name and password.
         /// Checks Active and Created users.
@@ -19,40 +28,35 @@ namespace SOSM1
         /// <param name="loggedUserData">User data object of the logged user.</param>
         /// <returns>If operation succeded returns true, loggedUserDate is new User object.
         /// False otherwise, loggedUserData is null</returns>
-        public static bool LogIn(string userName, string password, out User loggedUserData)
+        public async Task<User> LogIn(string userName, string password)
         {
-            using (var context = new SOSMEntities())
+            var user = await context.Users.FirstOrDefaultAsync(
+                x => x.Name == userName // search by userName
+                && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
+            if (user == null)
             {
-                var user = context.Users.FirstOrDefault(
-                    x => x.Name == userName // search by userName
-                    && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
-                if (user == null)
-                {
-                    loggedUserData = null;
-                    return false;
-                }
-                if (user.Password != password)
-                {
-                    loggedUserData = null;
-                    return false;
-                }
-                if (user.State == 0)
-                {
-                    user.State = 1;
-                    context.Users.Attach(user);
-                    var entry = context.Entry(user);
-                    entry.Property(e => e.State).IsModified = true;
-
-                    context.SaveChanges();
-                }
-                loggedUserData = new User(
-                    user.Name,
-                    user.E_mail,
-                    user.Type,
-                    user.State);
-                loggedUserData.UserID = user.UserID;
-                return true;
+                return null;
             }
+            if (user.Password != password)
+            {
+                return null;
+            }
+            if (user.State == 0)
+            {
+                user.State = 1;
+                context.Users.Attach(user);
+                var entry = context.Entry(user);
+                entry.Property(e => e.State).IsModified = true;
+
+                await context.SaveChangesAsync();
+            }
+            User loggedUserData = new User(
+                user.Name,
+                user.E_mail,
+                user.Type,
+                user.State);
+            loggedUserData.UserID = user.UserID;
+            return loggedUserData;
         }
 
         /// <summary>
@@ -61,27 +65,24 @@ namespace SOSM1
         /// <param name="newUser">User data object for creating new user.</param>
         /// <param name="password">Password of created user.</param>
         /// <returns>True if it could add, false otherwise.</returns>
-        public static bool AddUser(User newUser, string password)
+        public async Task<bool> AddUser(User newUser, string password)
         {
-            using (var context = new SOSMEntities())
-            {
-                int usersAlreadyInDB = context.Users.Where(
-                    x => x.Name == newUser.UserName // search by UserName
-                    && (x.State == 0 || x.State == 1)).Count(); //user 'created' or 'active'
-                if (usersAlreadyInDB != 0)
-                    return false;
+            int usersAlreadyInDB = await context.Users.Where(
+                x => x.Name == newUser.UserName // search by UserName
+                && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
+            if (usersAlreadyInDB != 0)
+                return false;
 
-                Users user = new Users();
-                user.Name = newUser.UserName;
-                user.Password = password;
-                user.E_mail = newUser.Mail;
-                user.Type = newUser.Type;
-                user.State = newUser.State;
+            Users user = new Users();
+            user.Name = newUser.UserName;
+            user.Password = password;
+            user.E_mail = newUser.Mail;
+            user.Type = newUser.Type;
+            user.State = newUser.State;
 
-                context.Users.Add(user);
-                context.SaveChanges();
-                return true;
-            }
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
+            return true;
         }
 
         /// <summary>
@@ -92,44 +93,41 @@ namespace SOSM1
         /// </summary>
         /// <param name="userID">ID of modified user.</param>
         /// <returns>True if success, false otherwise.</returns>
-        public static bool DeleteUser(long userID)
+        public async Task<bool> DeleteUser(long userID)
         {
-            using (var context = new SOSMEntities())
+            Users user = await context.Users.FindAsync(userID);
+            if (user == null)
+                return false;
+            switch (user.State)
             {
-                Users user = context.Users.Find(userID);
-                if (user == null)
-                    return false;
-                switch (user.State)
-                {
-                    case 0: // state - created, EREASE THEY AND THIER PROPERTY(BASKETS) TOO!!!
+                case 0: // state - created, EREASE THEY AND THIER PROPERTY(BASKETS) TOO!!!
+                    {
+                        context.Users.Remove(user);
+                        var baskets = await context.Baskets.Where(x => x.UserID == user.UserID).ToListAsync();
+                        foreach (var basket in baskets)
                         {
-                            context.Users.Remove(user);
-                            var baskets = context.Baskets.Where(x => x.UserID == user.UserID).ToList();
-                            foreach (var basket in baskets)
-                            {
-                                context.Baskets.Remove(basket);
-                                var product = context.Products.Find(basket.ProductID);
-                                product.Amount += basket.Amount;
-                                context.Entry(product).Property(x => x.Amount).IsModified = true;
-                            }
-                            context.SaveChanges();
-                            break;
+                            context.Baskets.Remove(basket);
+                            var product = await context.Products.FindAsync(basket.ProductID);
+                            product.Amount += basket.Amount;
+                            context.Entry(product).Property(x => x.Amount).IsModified = true;
                         }
-                    case 1: // state - active, set as archival
-                        {
-                            user.State = 1;
-                            var entry = context.Entry(user);
-                            entry.Property(e => e.State).IsModified = true;
-                            context.SaveChanges();
-                            break;
-                        }
-                    case 2: // state - archival, nothing
-                        {
-                            return false;
-                        }
-                }
-                return true;
+                        await context.SaveChangesAsync();
+                        break;
+                    }
+                case 1: // state - active, set as archival
+                    {
+                        user.State = 1;
+                        var entry = context.Entry(user);
+                        entry.Property(e => e.State).IsModified = true;
+                        await context.SaveChangesAsync();
+                        break;
+                    }
+                case 2: // state - archival, nothing
+                    {
+                        return false;
+                    }
             }
+            return true;
         }
 
         /// <summary>
@@ -137,22 +135,20 @@ namespace SOSM1
         /// </summary>
         /// <param name="UserID">Specified userID</param>
         /// <returns>User data object if user exists, null otherwise.</returns>
-        public static User GetUserData(long userID)
+        public async Task<User> GetUserData(long userID)
         {
-            using (var context = new SOSMEntities())
-            {
-                Users dbUser = context.Users.Find(userID);
-                if (dbUser == null)
-                    return null;
+            Users dbUser = await context.Users.FindAsync(userID);
+            if (dbUser == null)
+                return null;
 
-                User user = new User(
-                    dbUser.Name,
-                    dbUser.E_mail,
-                    dbUser.Type,
-                    dbUser.State
-                );
-                return user;
-            }
+            User user = new User(
+                dbUser.Name,
+                dbUser.E_mail,
+                dbUser.Type,
+                dbUser.State
+            );
+            user.UserID = userID;
+            return user;
         }
 
         /// <summary>
@@ -163,32 +159,33 @@ namespace SOSM1
         /// <param name="type">User is of specified type.</param>
         /// <param name="state">User is of specified state.</param>
         /// <returns>List of User data objects who match the terms.</returns>
-        public static List<User> CatalogUsers(string searchArgument = null, long? type = null, long? state = null)
+        public async Task<List<User>> CatalogUsers(string searchArgument = null, long? type = null, long? state = null)
         {
-            using (var context = new SOSMEntities())
+            var users = context.Users.Where(x => 1 == 1);
+            if (searchArgument != null)
+                users = users.Where(
+                    x => x.Name.Contains(searchArgument)
+                    || x.E_mail.Contains(searchArgument));
+            if (type != null)
+                users = users.Where(x => x.Type == type);
+            if (state != null)
+                users = users.Where(x => x.State == state);
+
+            var dbUsersList = await users.ToListAsync();
+            List<User> usersList = new List<User>();
+            foreach (Users dbUser in dbUsersList)
             {
-                var users = context.Users.Where(x => 1 == 1);
-                if (searchArgument != null)
-                    users = users.Where(
-                        x => x.Name.Contains(searchArgument)
-                        || x.E_mail.Contains(searchArgument));
-                if (type != null)
-                    users = users.Where(x => x.Type == type);
-                if (state != null)
-                    users = users.Where(x => x.State == state);
-
-                var dbUsersList = users.ToList();
-                List<User> usersList = new List<User>();
-                foreach (Users dbUser in dbUsersList)
-                    usersList.Add(new User(
-                        dbUser.Name,
-                        dbUser.E_mail,
-                        dbUser.Type,
-                        dbUser.State
-                    ));
-
-                return usersList;
+                User kek = new User(
+                    dbUser.Name,
+                    dbUser.E_mail,
+                    dbUser.Type,
+                    dbUser.State
+                );
+                kek.UserID = dbUser.UserID;
+                usersList.Add(kek);
             }
+
+            return usersList;
         }
 
         /// <summary>
@@ -200,31 +197,28 @@ namespace SOSM1
         /// <param name="mail">New e-mail address.</param>
         /// <param name="password">New password.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool UserModification(long userID, string userName = null, string mail = null, string password = null)
+        public async Task<bool> UserModification(long userID, string userName = null, string mail = null, string password = null)
         {
-            using (var context = new SOSMEntities())
+            Users user = await context.Users.FindAsync(userID);
+            if (user == null)
+                return false;
+            if (userName != null)
             {
-                Users user = context.Users.Find(userID);
-                if (user == null)
-                    return false;
-                if (userName != null)
-                {
-                    user.Name = userName;
-                    context.Entry(user).Property(e => e.Name).IsModified = true;
-                }
-                if (mail != null)
-                {
-                    user.E_mail = mail;
-                    context.Entry(user).Property(e => e.E_mail).IsModified = true;
-                }
-                if (password != null)
-                {
-                    user.Password = password;
-                    context.Entry(user).Property(e => e.Password).IsModified = true;
-                }
-                context.SaveChanges();
-                return true;
+                user.Name = userName;
+                context.Entry(user).Property(e => e.Name).IsModified = true;
             }
+            if (mail != null)
+            {
+                user.E_mail = mail;
+                context.Entry(user).Property(e => e.E_mail).IsModified = true;
+            }
+            if (password != null)
+            {
+                user.Password = password;
+                context.Entry(user).Property(e => e.Password).IsModified = true;
+            }
+            await context.SaveChangesAsync();
+            return true;
         }
 
         /// <summary>
@@ -233,18 +227,15 @@ namespace SOSM1
         /// <param name="userID">Specifies a user.</param>
         /// <param name="type">New type.</param>
         /// <returns>True if operation could be completed, false otherwise.</returns>
-        public static bool ChangeType(long userID, long type)
+        public async Task<bool> ChangeType(long userID, long type)
         {
-            using (var context = new SOSMEntities())
-            {
-                Users user = context.Users.Find(userID);
-                if (user == null)
-                    return false;
-                user.Type = type;
-                context.Entry(user).Property(e => e.Type).IsModified = true;
-                context.SaveChanges();
-                return true;
-            }
+            Users user = await context.Users.FindAsync(userID);
+            if (user == null)
+                return false;
+            user.Type = type;
+            context.Entry(user).Property(e => e.Type).IsModified = true;
+            await context.SaveChangesAsync();
+            return true;
         }
 
         /// <summary>
@@ -252,20 +243,17 @@ namespace SOSM1
         /// </summary>
         /// <param name="userID">Specifies a user.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
-        public static bool Activate(long userID)
+        public async Task<bool> Activate(long userID)
         {
-            using (var context = new SOSMEntities())
-            {
-                Users user = context.Users.Find(userID);
-                if (user == null)
-                    return false;
-                if (user.State != 0)
-                    return false;
-                user.State = 1;
-                context.Entry(user).Property(e => e.State).IsModified = true;
-                context.SaveChanges();
-                return true;
-            }
+            Users user = await context.Users.FindAsync(userID);
+            if (user == null)
+                return false;
+            if (user.State != 0)
+                return false;
+            user.State = 1;
+            context.Entry(user).Property(e => e.State).IsModified = true;
+            await context.SaveChangesAsync();
+            return true;
         }
 
         ///// <summary>
