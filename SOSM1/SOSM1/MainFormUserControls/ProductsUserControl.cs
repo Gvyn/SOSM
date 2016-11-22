@@ -35,14 +35,15 @@ namespace SOSM1
             SearchCatalog();
         }
 
-        private void SetCategoryTree(long? MarkedId = null)
+        private async void SetCategoryTree(long? MarkedId = null)
         {
             RadioButtonWithID all = new RadioButtonWithID(null);
             all.Checked = true;
             all.Text = "Wszystkie";
             all.CheckedChanged += All_CheckedChanged;
             categoryFlowPanel.Controls.Add(all);
-            List<Category> Categories = InterfaceToDataBaseCategoryMethods.GetAllCategories();
+            InterfaceToDataBaseCategoryMethods Methods = new InterfaceToDataBaseCategoryMethods();
+            List<Category> Categories = await Methods.GetAllCategories();
             foreach (Category category in Categories)
             {
                 RadioButtonWithID add = new RadioButtonWithID(category.CategoryID);
@@ -59,7 +60,7 @@ namespace SOSM1
 
             }
         }
-        
+
         private void All_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButtonWithID).Checked == true)

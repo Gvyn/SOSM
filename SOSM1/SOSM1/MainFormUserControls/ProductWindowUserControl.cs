@@ -97,13 +97,15 @@ namespace SOSM1
             return result;
 
         }
-        private void GenerateCategoryLabelChain()
+        private async void GenerateCategoryLabelChain()
         {
             try
             {
-                currentCategoryLabel.Text = ">" + InterfaceToDataBaseCategoryMethods.GetCategory(productDataObject.CategoryID).Name;
+                InterfaceToDataBaseCategoryMethods Methods = new InterfaceToDataBaseCategoryMethods();
+                Category category = await Methods.GetCategory(productDataObject.CategoryID);
+                currentCategoryLabel.Text = ">" + category.Name;
             }
-            catch(NullReferenceException)
+            catch (NullReferenceException)
             {
                 currentCategoryLabel.Visible = false;
             }
