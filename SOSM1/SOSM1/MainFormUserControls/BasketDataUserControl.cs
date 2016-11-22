@@ -26,7 +26,7 @@ namespace SOSM1
             InitializeComponent();
             this.basketDataObject = basketDataObject;
             InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
-            productDataObject = await Methods.GetProductData(basketDataObject.ProductID);
+            productDataObject = Methods.GetProductData(basketDataObject.ProductID).Result;
             SetData();
             amountBox.TextChanged += amountBox_TextChanged;
         }

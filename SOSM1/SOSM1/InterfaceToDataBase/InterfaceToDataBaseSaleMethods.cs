@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    public static class InterfaceToDataBaseSaleMethods
+    public class InterfaceToDataBaseSaleMethods
     {
+        SOSMEntities context;
+
+        public InterfaceToDataBaseSaleMethods()
+        {
+            context = new SOSMEntities();
+        }
+
         /// <summary>
         /// Finilaize users' transaction, saves new Sale_history object in
         /// database and Orders objects accordingly to baskets from argument.
