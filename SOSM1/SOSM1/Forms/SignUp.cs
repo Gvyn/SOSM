@@ -21,7 +21,7 @@ namespace SOSM1
         {
             Icon = Properties.Resources.logo;
         }
-        private void signButton_Click(object sender, EventArgs e)
+        private async void signButton_Click(object sender, EventArgs e)
         {
             if (userNameBox.Text.Length == 0)
             {
@@ -29,7 +29,7 @@ namespace SOSM1
                 return;
 
             }
-            if (mailBox.Text.Length == 0) 
+            if (mailBox.Text.Length == 0)
             {
                 MessageBox.Show("Wpisz adres e-mail!");
             }
@@ -39,7 +39,7 @@ namespace SOSM1
                 MessageBox.Show("Wpisz hasło!");
                 return;
             }
-            if (passwordBox.Text.Length < 6) 
+            if (passwordBox.Text.Length < 6)
             {
                 MessageBox.Show("Hasło musi mieć przynajmniej 6 znaków.");
                 return;
@@ -49,8 +49,8 @@ namespace SOSM1
                 MessageBox.Show("Powtórz hasło!");
                 return;
             }
-            
-            if(!passwordBox.Text.Equals(repeatPasswordBox.Text))
+
+            if (!passwordBox.Text.Equals(repeatPasswordBox.Text))
             {
                 MessageBox.Show("Hasła muszą się zgadzać!");
                 return;
@@ -64,7 +64,9 @@ namespace SOSM1
                 data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
                 hash = Encoding.ASCII.GetString(data);
 
-                if (InterfaceToDataBaseUserMethods.AddUser(newUser, hash))
+
+                InterfaceToDataBaseUserMethods Method = new InterfaceToDataBaseUserMethods();
+                if (await Method.AddUser(newUser, hash))
                 {
                     this.Visible = false;
                     MessageBox.Show("Rejestracja przebiegła pomyślnie.");
@@ -76,7 +78,7 @@ namespace SOSM1
                     return;
                 }
             }
-            catch (Exception ex) when ( ex is ArgumentNullException)
+            catch (Exception ex) when (ex is ArgumentNullException)
             {
                 MessageBox.Show("Wpisz nazwę użytkownika!");
                 return;

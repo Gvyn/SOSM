@@ -18,27 +18,29 @@ namespace SOSM1
         {
             InitializeComponent();
         }
-        
-        private void button1_Click(object sender, EventArgs e)
+
+        private async void button1_Click(object sender, EventArgs e)
         {
-            if(userNameBox.Text.Length==0)
+            if (userNameBox.Text.Length == 0)
             {
                 MessageBox.Show("Wpisz nazwę użytkownika!");
                 return;
 
             }
-            if(passwordBox.Text.Length==0)
+            if (passwordBox.Text.Length == 0)
             {
                 MessageBox.Show("Wpisz hasło!");
                 return;
             }
-            
+
             String hash = passwordBox.Text + "PseudoSaltWhateverAKB48<3!" + userNameBox.Text;
             byte[] data = Encoding.ASCII.GetBytes(hash);
             data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
             hash = Encoding.ASCII.GetString(data);
 
-            if(InterfaceToDataBaseUserMethods.LogIn(userNameBox.Text, hash, out loggedUserData))
+            InterfaceToDataBaseUserMethods Method = new InterfaceToDataBaseUserMethods();
+            loggedUserData = await Method.LogIn(userNameBox.Text, hash);
+            if (loggedUserData != null)
             {
                 ToMain();
             }
