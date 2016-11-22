@@ -56,11 +56,8 @@ namespace SOSM1
         /// <returns>ContactInfo</returns>
         public async Task<string> GetContactInfo()
         {
-            using (var context = new SOSMEntities())
-            {
-                var message = context.Other.First();
+                var message = await context.Other.FirstAsync();
                 return message.Contact_info;
-            }
         }
 
         /// <summary>
@@ -68,26 +65,22 @@ namespace SOSM1
         /// </summary>
         /// <param name="newMessage">A new message.</param>
         /// <returns>True if succeded, false otherwise.</returns>
-        public static bool SetContactInfo(string newContactInfo)
+        public async Task<bool> SetContactInfo(string newContactInfo)
         {
-            using (var context = new SOSMEntities())
+            var message = await context.Other.FirstOrDefaultAsync();
+            if (message == null)
             {
-                var message = context.Other.FirstOrDefault();
-                if (message == null)
-                {
-                    Other dbOther = new Other();
-                    dbOther.Contact_info = newContactInfo;
-                    context.Other.Add(dbOther);
-                    context.SaveChanges();
-                }
-                else
-                {
-                    message.Contact_info = newContactInfo;
-                    context.Entry(message).Property(e => e.Contact_info).IsModified = true;
-                    context.SaveChanges();
-                }
-                return true;
+                Other dbOther = new Other();
+                dbOther.Contact_info = newContactInfo;
+                context.Other.Add(dbOther);
             }
+            else
+            {
+                message.Contact_info = newContactInfo;
+                context.Entry(message).Property(e => e.Contact_info).IsModified = true;
+            }
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }

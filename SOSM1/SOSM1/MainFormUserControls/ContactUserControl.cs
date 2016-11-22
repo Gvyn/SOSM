@@ -17,14 +17,15 @@ namespace SOSM1
             InitializeComponent();
             SetContactInfo();
         }
-        private void SetContactInfo()
+        private async void SetContactInfo()
         {
             try
             {
-                contactLabel.Text = InterfaceToDataBaseOtherMethods.GetContactInfo();
+                InterfaceToDataBaseOtherMethods Method = new InterfaceToDataBaseOtherMethods();
+                contactLabel.Text = await Method.GetContactInfo();
             }
             catch (InvalidOperationException)
-            { 
+            {
                 contactLabel.Text = Properties.Resources.DefaultContactInfo;
             }
             contactLabel.Text += "\n\n" + Properties.Resources.SOSMContactInfo;
