@@ -45,6 +45,8 @@ namespace SOSM1
             if (userControlPanel.Controls.Count == 1 && newUserControl.GetType().Equals(userControlPanel.Controls[0].GetType()))
                 return;
             newUserControl.Dock = DockStyle.Fill;
+            foreach(Control c in userControlPanel.Controls)
+                c.Dispose();
             userControlPanel.Controls.Clear();
             userControlPanel.Controls.Add(newUserControl);
         }
