@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -8,32 +9,37 @@ using System.Threading.Tasks;
 
 namespace SOSM1
 {
-    public static class InterfaceToDataBaseBasketMethods
+
+    public class InterfaceToDataBaseBasketMethods
     {
+        SOSMEntities context;
+
+        public InterfaceToDataBaseBasketMethods()
+        {
+            context = new SOSMEntities();
+        }
+
         /// <summary>
         /// Saves list of baskets, should be used to save users' buys in case
         /// hes logging out.
         /// </summary>
         /// <param name="basketsList">List of basket objects.</param>
         /// <returns>True if could save, false otherwise.</returns>
-        public static bool SaveBaskets(List<Basket> basketsList)
+        public async Task<bool> SaveBaskets(List<Basket> basketsList)
         {
-            using (var context = new SOSMEntities())
+            foreach (Basket basket in basketsList)
             {
-                foreach (Basket basket in basketsList)
-                {
-                    var basketEntity = new Baskets();
-                    basketEntity.UserID = basket.UserID;
-                    basketEntity.ProductID = basket.ProductID;
-                    basketEntity.Amount = basket.Amount;
-                    basketEntity.Date = basket.Date;
+                var basketEntity = new Baskets();
+                basketEntity.UserID = basket.UserID;
+                basketEntity.ProductID = basket.ProductID;
+                basketEntity.Amount = basket.Amount;
+                basketEntity.Date = basket.Date;
 
-                    context.Baskets.Add(basketEntity);
-                }
-                context.SaveChanges();
-
-                return true;
+                context.Baskets.Add(basketEntity);
             }
+            await context.SaveChangesAsync();
+
+            return true;
         }
 
         /// <summary>
@@ -42,23 +48,20 @@ namespace SOSM1
         /// </summary>
         /// <param name="user">Specifies user object whose baskets will be retrieved.</param>
         /// <returns>List of baskets. Empty list if user has no buys.</returns>
-        public static List<Basket> RetrieveBaskets(long UserID)
+        public async Task<List<Basket>> RetrieveBaskets(long UserID)
         {
-            using (var context = new SOSMEntities())
-            {
-                var basketsToRetrieve = context.Baskets.Where(x => x.UserID == UserID).ToList();
+            var basketsToRetrieve = await context.Baskets.Where(x => x.UserID == UserID).ToListAsync();
 
-                List<Basket> basketList = new List<Basket>();
-                foreach (var basket in basketsToRetrieve)
-                    basketList.Add(new Basket(
-                        basket.UserID,
-                        basket.ProductID,
-                        basket.Amount,
-                        basket.Date)
-                    );
+            List<Basket> basketList = new List<Basket>();
+            foreach (var basket in basketsToRetrieve)
+                basketList.Add(new Basket(
+                    basket.UserID,
+                    basket.ProductID,
+                    basket.Amount,
+                    basket.Date)
+                );
 
-                return basketList;
-            }
+            return basketList;
         }
 
         /// <summary>
@@ -66,18 +69,15 @@ namespace SOSM1
         /// </summary>
         /// <param name="user">Specifies user object whose baskets should be deleted.</param>
         /// <returns>True if succeded, false otherwise</returns>
-        public static bool DeleteBaskets(long UserID)
+        public async Task<bool> DeleteBaskets(long UserID)
         {
-            using (var context = new SOSMEntities())
-            {
-                var basketsToDelete = context.Baskets.Where(x => x.UserID == UserID);
-                foreach (var basket in basketsToDelete)
-                    context.Baskets.Remove(basket);
+            var basketsToDelete = await context.Baskets.Where(x => x.UserID == UserID).ToListAsync();
+            foreach (var basket in basketsToDelete)
+                context.Baskets.Remove(basket);
 
-                context.SaveChanges();
+            await context.SaveChangesAsync();
 
-                return true;
-            }
+            return true;
         }
     }
 }
