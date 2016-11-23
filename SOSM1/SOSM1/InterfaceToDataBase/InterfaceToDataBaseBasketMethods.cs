@@ -20,6 +20,38 @@ namespace SOSM1
         }
 
         /// <summary>
+        /// Saves a basket
+        /// </summary>
+        /// <param name="basket">Basket object.</param>
+        /// <returns>True if could save, false otherwise.</returns>
+        public async Task<Basket> AddBasket(Basket basket)
+        {
+            var basketEntity = new Baskets();
+            basketEntity.UserID = basket.UserID;
+            basketEntity.ProductID = basket.ProductID;
+            basketEntity.Amount = basket.Amount;
+            basketEntity.Date = basket.Date;
+
+            context.Baskets.Add(basketEntity);
+            await context.SaveChangesAsync();
+            basket.BasketID = basketEntity.BasketID;
+
+            return basket;
+        }
+
+
+        public async Task<bool> ModifyBasket(long BasketID, decimal amount)
+        {
+            var basketEntity = await context.Baskets.FindAsync(BasketID);
+            if (basketEntity == null)
+                return false;
+            basketEntity.Amount = amount;
+            context.Entry(basketEntity).Property(x => x.Amount).IsModified = true;
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        /// <summary>
         /// Saves list of baskets, should be used to save users' buys in case
         /// hes logging out.
         /// </summary>
@@ -64,10 +96,28 @@ namespace SOSM1
             return basketList;
         }
 
+
+        /// <summary>
+        /// Deletes basket in database by it's id.
+        /// </summary>
+        /// <param name="BasketID">Specifies user object whose baskets should be deleted.</param>
+        /// <returns>True if succeded, false otherwise</returns>
+        public async Task<bool> DeleteBasket(long BasketID)
+        {
+            var basketToDelete = await context.Baskets.FindAsync(BasketID);
+            if (basketToDelete == null)
+                return false;
+            context.Baskets.Remove(basketToDelete);
+
+            await context.SaveChangesAsync();
+
+            return true;
+        }
+
         /// <summary>
         /// Deletes all baskets in database owned by specified user.
         /// </summary>
-        /// <param name="user">Specifies user object whose baskets should be deleted.</param>
+        /// <param name="UserID">Specifies user object whose baskets should be deleted.</param>
         /// <returns>True if succeded, false otherwise</returns>
         public async Task<bool> DeleteBaskets(long UserID)
         {
