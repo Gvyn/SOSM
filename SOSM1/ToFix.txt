@@ -1,0 +1,11 @@
+Known bugs:
+1.It threw null on  loggedUserBasket = Methods.RetrieveBaskets(loggedUserData.UserID).Result; in BasketUserControl constructor
+2.The amount in Basket in product window is bugged
+3.Modifying baskets from BasketDataUserControl is totally fucked up
+
+
+To add:
+1. Finish ProfileUserControl
+2. Fill AdminUserControl
+3. Add tests
+4. Documentation

@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOSM1", "SOSM1\SOSM1.csproj", "{A79FF130-E3FF-45B3-9658-F46FFD9F2652}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{67F44EF6-DE7C-42C1-A398-CC74BD79DB05}"
+	ProjectSection(SolutionItems) = preProject
+		ToFix.txt = ToFix.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
