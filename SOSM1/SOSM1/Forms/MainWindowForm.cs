@@ -217,6 +217,7 @@ namespace SOSM1
             InterfaceToDataBaseSaleMethods Methods = new InterfaceToDataBaseSaleMethods();
             await Methods.CreateSale(loggedUserBasket);
             loggedUserBasket.Clear();
+            basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             SetHomeUserControl();
         }
     }
