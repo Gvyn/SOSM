@@ -13,7 +13,7 @@ namespace SOSM1
     public partial class MainWindowForm : Form
     {
         private User loggedUserData;
-        private List<Basket> loggedUserBasket;
+        //private List<Basket> loggedUserBasket;
         public MainWindowForm(User loggedUserData)
         {
             InitializeComponent();
@@ -22,9 +22,10 @@ namespace SOSM1
             if (this.loggedUserData.Type == 1)
                 adminButton.Visible = true;
             InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
-            loggedUserBasket = Methods.RetrieveBaskets(loggedUserData.UserID).Result;
-            bool deleted = Methods.DeleteBaskets(loggedUserData.UserID).Result;
-            basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            //loggedUserBasket = Methods.RetrieveBaskets(loggedUserData.UserID).Result;
+            //bool deleted = Methods.DeleteBaskets(loggedUserData.UserID).Result;
+            //basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            basketSizeLabel.Text = Methods.CountBaskets(loggedUserData.UserID).Result.ToString();
             SetHomeUserControl();
         }
 
@@ -33,10 +34,10 @@ namespace SOSM1
             Icon = Properties.Resources.logo;
         }
 
-        protected override async void OnClosed(EventArgs e)
+        protected override /*async*/ void OnClosed(EventArgs e)
         {
-            InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
-            await Methods.SaveBaskets(loggedUserBasket);
+            //InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
+            //await Methods.SaveBaskets(loggedUserBasket);
             base.OnClosed(e);
         }
 
@@ -122,7 +123,7 @@ namespace SOSM1
         private void SetBasketUserControl()
         {
             sectionLabel.Text = "Koszyk";
-            SwapUserControl(new BasketUserControl(loggedUserBasket));
+            SwapUserControl(new BasketUserControl(ref loggedUserData));
         }
 
         private void profileButton_Click(object sender, EventArgs e)
@@ -158,15 +159,17 @@ namespace SOSM1
             sectionLabel.Text = "Katalog produktów";
             SwapUserControl(new ProductsUserControl(SearchArgument));
         }
-        
-        public decimal GetBasketAmount(long ProductID)
+
+        public async Task<decimal> GetBasketAmount(long ProductID)
         {
-            Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
-            if (found != null)
-                return found.Amount;
-            return 0;
+            InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
+            return await Methods.AmountOfProductInUserBaskets(loggedUserData.UserID, ProductID);
+            //Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
+            //if (found != null)
+            //    return found.Amount;
+            //return 0;
         }
-        public async void addBasket(long ProductID, decimal Amount, decimal newAmount)
+        public async void AddBasket(long ProductID, decimal Amount, decimal newAmount)
         {
             Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
             if (found != null)
@@ -188,9 +191,11 @@ namespace SOSM1
             if (modifiedProduct == null)
                 modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
             await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, modifiedProduct.Amount + basketDataObject.Amount - newAmount);
-            int index = loggedUserBasket.FindIndex(x => x.BasketID == basketDataObject.BasketID);
-            loggedUserBasket[index].Amount = newAmount;
-            loggedUserBasket[index].Date = DateTime.Now;
+            //int index = loggedUserBasket.FindIndex(x => x.BasketID == basketDataObject.BasketID);
+            //loggedUserBasket[index].Amount = newAmount;
+            //loggedUserBasket[index].Date = DateTime.Now;
+            InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
+            await BasketMethods.ModifyBasket(basketDataObject.BasketID, newAmount);
             ForceBasketRefresh();
         }
 
@@ -200,14 +205,16 @@ namespace SOSM1
             if (modifiedProduct == null)
                 modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
             await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, basketDataObject.Amount + modifiedProduct.Amount);
-            loggedUserBasket.Remove(basketDataObject);
-            basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            //loggedUserBasket.Remove(basketDataObject);
+            //basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
+            await BasketMethods.DeleteBasket(basketDataObject.BasketID);
             ForceBasketRefresh();
         }
 
         private void ForceBasketRefresh()
         {
-            BasketUserControl newUserControl = new BasketUserControl(loggedUserBasket);
+            BasketUserControl newUserControl = new BasketUserControl(ref loggedUserData);
             newUserControl.Dock = DockStyle.Fill;
             userControlPanel.Controls.Clear();
             userControlPanel.Controls.Add(newUserControl);
@@ -215,9 +222,11 @@ namespace SOSM1
         public async void CommitSale()
         {
             InterfaceToDataBaseSaleMethods Methods = new InterfaceToDataBaseSaleMethods();
-            await Methods.CreateSale(loggedUserBasket);
-            loggedUserBasket.Clear();
-            basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            await Methods.CreateSale(loggedUserData.UserID);
+            //loggedUserBasket.Clear();
+            //basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
+            basketSizeLabel.Text = BasketMethods.CountBaskets(loggedUserData.UserID).Result.ToString();
             SetHomeUserControl();
         }
     }

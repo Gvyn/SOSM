@@ -59,6 +59,7 @@ namespace SOSM1
             if (basketEntity == null)
                 return false;
             basketEntity.Amount = amount;
+            basketEntity.Date = DateTime.Now;
             context.Entry(basketEntity).Property(x => x.Amount).IsModified = true;
             await context.SaveChangesAsync();
             return true;

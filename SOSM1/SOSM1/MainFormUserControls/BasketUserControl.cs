@@ -13,10 +13,13 @@ namespace SOSM1
     public partial class BasketUserControl : UserControl
     {
         private decimal sum = 0;
-        public BasketUserControl(List<Basket> loggedUserBasket)
+        List<Basket> loggedUserBasket;
+        public BasketUserControl(ref User loggedUserData)
         {
             InitializeComponent();
             basketsFlowPanel.Controls.Add(new BasketDataUserControl());
+            InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
+            loggedUserBasket = Methods.RetrieveBaskets(loggedUserData.UserID).Result;
             if (loggedUserBasket.Count != 0)
             {
                 foreach (Basket basket in loggedUserBasket)

@@ -120,7 +120,7 @@ namespace SOSM1
         {
             productDataObject.Amount -= amount;
             MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
-            mainForm.addBasket(productDataObject.ProductID, amount, productDataObject.Amount);
+            mainForm.AddBasket(productDataObject.ProductID, amount, productDataObject.Amount);
             MessageBox.Show("Dodano do koszyka.");
         }
 
