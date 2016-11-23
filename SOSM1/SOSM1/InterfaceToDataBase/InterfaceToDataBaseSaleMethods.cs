@@ -27,15 +27,13 @@ namespace SOSM1
         /// </summary>
         /// <param name="baskets">List of basket object</param>
         /// <returns>True if purchase succeded, false otherwise.</returns>
-        public async Task<bool> CreateSale(List<Basket> basketsList)
+        public async Task<bool> CreateSale(long UserID)
         {
+            var basketsList = await context.Baskets.Where(x => x.UserID == UserID).ToListAsync();
+
             if (basketsList.Count == 0)
                 return false;
             long userID = basketsList[0].UserID;
-
-            foreach (Basket basket in basketsList) //one user to rule all the baskets
-                if (basket.UserID != userID)
-                    return false;
 
             Sale_history transaction = new Sale_history();
             transaction.UserID = userID;
@@ -44,7 +42,7 @@ namespace SOSM1
             await context.SaveChangesAsync();
             long saleID = transaction.SaleID;
 
-            foreach (Basket basket in basketsList)
+            foreach (Baskets basket in basketsList)
             {
                 Orders dbOrder = new Orders();
                 dbOrder.SaleID = saleID;

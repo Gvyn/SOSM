@@ -40,6 +40,19 @@ namespace SOSM1
         }
 
 
+        public async Task<decimal> AmountOfProductInUserBaskets(long UserID, long ProductID)
+        {
+            var baskets = await context.Baskets.Where(x => x.UserID == UserID && x.ProductID == ProductID).ToListAsync();
+            if (baskets.Count == 0)
+                return 0;
+            decimal number = 0;
+            foreach (var basket in baskets)
+                number += basket.Amount;
+
+            return number;
+        }
+
+
         public async Task<bool> ModifyBasket(long BasketID, decimal amount)
         {
             var basketEntity = await context.Baskets.FindAsync(BasketID);
