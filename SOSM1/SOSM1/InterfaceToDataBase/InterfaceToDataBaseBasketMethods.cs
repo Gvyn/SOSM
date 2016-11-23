@@ -96,6 +96,12 @@ namespace SOSM1
             return basketList;
         }
 
+        public async Task<int> CountBaskets(long UserID)
+        {
+            var count = await context.Baskets.Where(x => x.UserID == UserID).CountAsync();
+            return count;
+        }
+
 
         /// <summary>
         /// Deletes basket in database by it's id.
