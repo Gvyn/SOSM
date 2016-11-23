@@ -233,6 +233,9 @@
     <EmbeddedResource Include="MainFormUserControls\ProductWindowUserControl.resx">
       <DependentUpon>ProductWindowUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\ProfileUserControl.resx">
+      <DependentUpon>ProfileUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

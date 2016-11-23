@@ -17,13 +17,22 @@ namespace SOSM1
         {
             InitializeComponent();
             basketsFlowPanel.Controls.Add(new BasketDataUserControl());
-            foreach (Basket basket in loggedUserBasket)
+            if (loggedUserBasket.Count != 0)
             {
-                BasketDataUserControl newBasket = new BasketDataUserControl(basket);
-                basketsFlowPanel.Controls.Add(newBasket);
-                sum += newBasket.sum;
+                foreach (Basket basket in loggedUserBasket)
+                {
+                    BasketDataUserControl newBasket = new BasketDataUserControl(basket);
+                    basketsFlowPanel.Controls.Add(newBasket);
+                    sum += newBasket.sum;
+                }
+                sumPriceLabel.Text = sum + "zł";
             }
-            sumPriceLabel.Text = sum + "zł";
+            else
+            {
+                sumPriceLabel.Visible = false;
+                finishTransactionButton.Text = "Koszyk pusty";
+                finishTransactionButton.Enabled = false;
+            }
         }
 
         private void finishTransactionButton_Click(object sender, EventArgs e)

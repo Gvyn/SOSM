@@ -132,8 +132,8 @@ namespace SOSM1
 
         private void SetProfileUserControl()
         {
-            sectionLabel.Text = "Profil";
-            SwapUserControl(new ProfileUserControl());
+            sectionLabel.Text = "Profil użytkownika";
+            SwapUserControl(new ProfileUserControl(ref loggedUserData));
         }
 
         public void CreateProductWindow(Product ProductDataObject)
@@ -201,6 +201,7 @@ namespace SOSM1
                 modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
             await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, basketDataObject.Amount + modifiedProduct.Amount);
             loggedUserBasket.Remove(basketDataObject);
+            basketSizeLabel.Text = loggedUserBasket.Count.ToString();
             ForceBasketRefresh();
         }
 

@@ -28,10 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.nameDesclabel = new System.Windows.Forms.Label();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.mailDescLabel = new System.Windows.Forms.Label();
+            this.mailLabel = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // nameDesclabel
+            // 
+            this.nameDesclabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.nameDesclabel.Location = new System.Drawing.Point(123, 64);
+            this.nameDesclabel.Name = "nameDesclabel";
+            this.nameDesclabel.Size = new System.Drawing.Size(140, 23);
+            this.nameDesclabel.TabIndex = 0;
+            this.nameDesclabel.Text = "Nazwa użykownika:";
+            // 
+            // nameLabel
+            // 
+            this.nameLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.nameLabel.Location = new System.Drawing.Point(269, 64);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(278, 23);
+            this.nameLabel.TabIndex = 1;
+            this.nameLabel.Text = "User_Name";
+            // 
+            // mailDescLabel
+            // 
+            this.mailDescLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.mailDescLabel.Location = new System.Drawing.Point(123, 100);
+            this.mailDescLabel.Name = "mailDescLabel";
+            this.mailDescLabel.Size = new System.Drawing.Size(140, 23);
+            this.mailDescLabel.TabIndex = 2;
+            this.mailDescLabel.Text = "Adres e-mail:";
+            // 
+            // mailLabel
+            // 
+            this.mailLabel.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.mailLabel.Location = new System.Drawing.Point(269, 100);
+            this.mailLabel.Name = "mailLabel";
+            this.mailLabel.Size = new System.Drawing.Size(278, 23);
+            this.mailLabel.TabIndex = 3;
+            this.mailLabel.Text = "User_Mail";
+            // 
+            // ProfileUserControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
+            this.Controls.Add(this.mailLabel);
+            this.Controls.Add(this.mailDescLabel);
+            this.Controls.Add(this.nameLabel);
+            this.Controls.Add(this.nameDesclabel);
+            this.Name = "ProfileUserControl";
+            this.Size = new System.Drawing.Size(712, 474);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label nameDesclabel;
+        private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.Label mailDescLabel;
+        private System.Windows.Forms.Label mailLabel;
     }
 }

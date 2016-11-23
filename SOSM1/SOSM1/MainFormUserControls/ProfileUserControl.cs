@@ -12,9 +12,18 @@ namespace SOSM1
 {
     public partial class ProfileUserControl : UserControl
     {
-        public ProfileUserControl()
+        User loggedUserData;
+        public ProfileUserControl(ref User loggedUserData)
         {
             InitializeComponent();
+            this.loggedUserData = loggedUserData;
+            SetLabels();
+        }
+
+        private void SetLabels()
+        {
+            nameLabel.Text = loggedUserData.UserName;
+            mailLabel.Text = loggedUserData.Mail;
         }
     }
 }
