@@ -193,7 +193,7 @@ namespace SOSM1
             productDataObject.Amount -= amount;
             amountLabel.Text = ProductAmountInforFormat(productDataObject.Amount, productDataObject.UnitType);
             MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
-            mainForm.AddBasket(productDataObject.ProductID, amount, productDataObject.Amount);
+            mainForm.AddBasket(productDataObject.ProductID, amount);
             SetBasketData();
             MessageBox.Show("Dodano do koszyka.");
         }

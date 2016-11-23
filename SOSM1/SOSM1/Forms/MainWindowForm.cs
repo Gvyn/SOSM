@@ -169,9 +169,14 @@ namespace SOSM1
             //    return found.Amount;
             //return 0;
         }
-        public async void AddBasket(long ProductID, decimal Amount, decimal newAmount)
+        public async void AddBasket(long ProductID, decimal Amount)
         {
-            //wstawić wywołanie
+            InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
+            if (!(await (Methods.MoveProductToBasket(loggedUserData.UserID, ProductID, Amount))))
+            {
+                throw new ArgumentException();
+            }
+            basketSizeLabel.Text = Methods.CountBaskets(loggedUserData.UserID).Result.ToString();
         }
         public async void ModifyBasket(Basket basketDataObject, decimal newAmount, Product modifiedProduct = null)
         {
