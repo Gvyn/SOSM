@@ -171,19 +171,7 @@ namespace SOSM1
         }
         public async void AddBasket(long ProductID, decimal Amount, decimal newAmount)
         {
-            Basket found = loggedUserBasket.Find(x => x.ProductID == ProductID);
-            if (found != null)
-            {
-                found.Amount += Amount;
-            }
-            else
-            {
-                loggedUserBasket.Add(new Basket(loggedUserData.UserID, ProductID, Amount));
-                basketSizeLabel.Text = loggedUserBasket.Count.ToString();
-            }
-            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
-
-            await Methods.ProductModification(ProductID, null, null, null, null, newAmount);
+            //wstawić wywołanie
         }
         public async void ModifyBasket(Basket basketDataObject, decimal newAmount, Product modifiedProduct = null)
         {

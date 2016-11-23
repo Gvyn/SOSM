@@ -40,6 +40,32 @@ namespace SOSM1
         }
 
 
+        public async Task<bool> MoveProductToBasket(long UserID, long ProductID, decimal Amount)
+        {
+            var product = await context.Products.FindAsync(ProductID);
+            if (product == null)
+                return false;
+            if (Amount > product.Amount)
+                return false;
+            var basket = await context.Baskets.FirstOrDefaultAsync(x => x.UserID == UserID && x.ProductID == ProductID);
+            if (basket == null)
+            {
+                basket = new Baskets();
+                basket.Amount = Amount;
+                basket.Date = DateTime.Now;
+                basket.ProductID = ProductID;
+                basket.UserID = UserID;
+                context.Baskets.Add(basket);
+            }
+            else
+            {
+                basket.Amount += Amount;
+                product.Amount -= Amount;
+            }
+            await context.SaveChangesAsync();
+            return true;
+        }
+
         public async Task<decimal> AmountOfProductInUserBaskets(long UserID, long ProductID)
         {
             var baskets = await context.Baskets.Where(x => x.UserID == UserID && x.ProductID == ProductID).ToListAsync();
