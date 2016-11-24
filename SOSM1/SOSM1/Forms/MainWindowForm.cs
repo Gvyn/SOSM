@@ -159,10 +159,10 @@ namespace SOSM1
             sectionLabel.Text = "Katalog produktów";
             SwapUserControl(new ProductsUserControl(SearchArgument));
         }
-        public void CreateHistoryControl()
+        public void CreateHistoryControl(User UserData)
         {
             sectionLabel.Text = "Historia transakcji";
-            SwapUserControl(new HistoryUserControl(loggedUserData));
+            SwapUserControl(new HistoryUserControl(UserData));
         }
 
         public async Task<decimal> GetBasketAmount(long ProductID)
