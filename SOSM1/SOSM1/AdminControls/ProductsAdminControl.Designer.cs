@@ -37,6 +37,7 @@
             // 
             // addProductButton
             // 
+            this.addProductButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.addProductButton.Location = new System.Drawing.Point(20, 20);
             this.addProductButton.Name = "addProductButton";
             this.addProductButton.Size = new System.Drawing.Size(96, 30);
@@ -46,9 +47,10 @@
             // 
             // categoryButton
             // 
-            this.categoryButton.Location = new System.Drawing.Point(142, 20);
+            this.categoryButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.categoryButton.Location = new System.Drawing.Point(122, 20);
             this.categoryButton.Name = "categoryButton";
-            this.categoryButton.Size = new System.Drawing.Size(127, 30);
+            this.categoryButton.Size = new System.Drawing.Size(164, 30);
             this.categoryButton.TabIndex = 1;
             this.categoryButton.Text = "EDYTUJ KATEGORIE";
             this.categoryButton.UseVisualStyleBackColor = true;
@@ -56,6 +58,7 @@
             // searchProductsButton
             // 
             this.searchProductsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchProductsButton.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.searchProductsButton.Location = new System.Drawing.Point(645, 20);
             this.searchProductsButton.Name = "searchProductsButton";
             this.searchProductsButton.Size = new System.Drawing.Size(96, 30);

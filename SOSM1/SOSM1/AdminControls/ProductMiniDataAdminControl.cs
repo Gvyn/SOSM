@@ -25,10 +25,10 @@ namespace SOSM1.AdminControls
             switch (product.State)
             {
                 case 0:
-                    label1.Text = "NIEAKTYWNY";
+                    label3.Text = "NIEAKTYWNY";
                     break;
                 case 1:
-                    label2.Text = "AKTYWNY";
+                    label3.Text = "AKTYWNY";
                     break;
                 case 2:
                     deleteButton.Hide();
@@ -39,9 +39,12 @@ namespace SOSM1.AdminControls
 
         private void editButton_Click(object sender, EventArgs e)
         {
+            List<Control> ctrls = new List<Control>();
             foreach (Control c in this.Parent.Controls)
                 if (c != this)
-                    this.Parent.Controls.Remove(c);
+                    ctrls.Add(c);
+            foreach (Control c in ctrls)
+                this.Parent.Controls.Remove(c);
             this.Parent.Controls.Add(new ProductDataAdminControl(product));
             this.Parent.Controls.Remove(this);
         }

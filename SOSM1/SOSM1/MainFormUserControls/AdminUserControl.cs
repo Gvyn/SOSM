@@ -23,8 +23,7 @@ namespace SOSM1
         {
             if (newAdminControl == null)
                 throw new ArgumentNullException();
-            if (adminControlPanel.Controls.Count == 1 && newAdminControl.GetType().Equals(adminControlPanel.Controls[0].GetType()))
-                return;
+
             newAdminControl.Dock = DockStyle.Fill;
 
             List<Control> ctrls = new List<Control>();

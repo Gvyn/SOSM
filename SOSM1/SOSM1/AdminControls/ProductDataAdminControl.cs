@@ -14,11 +14,13 @@ namespace SOSM1.AdminControls
     public partial class ProductDataAdminControl : UserControl
     {
         private Product product;
-        List<string> categoriesList = new List<string>();
+        List<Category> categoriesList = new List<Category>();
+        InterfaceToDataBaseProductMethods kek2;
 
         public ProductDataAdminControl(Product productDataObject)
         {
             InitializeComponent();
+            kek2 = new InterfaceToDataBaseProductMethods();
             this.product = productDataObject;
             GetCategories();
             SetProductData();
@@ -44,7 +46,7 @@ namespace SOSM1.AdminControls
             switch (product.State)
             {
                 case 0:
-                    stateLabel.Text = "NIE AKTYWNY";
+                    stateLabel.Text = "NIEAKTYWNY";
                     break;
                 case 1:
                     radioButton1.Enabled = false;
@@ -68,27 +70,47 @@ namespace SOSM1.AdminControls
 
         async private void GetCategories()
         {
-            string selectedCategory = null;
+            Category selectedCategory = null;
             InterfaceToDataBaseCategoryMethods kek = new InterfaceToDataBaseCategoryMethods();
             var categories = await kek.GetAllCategories();
             foreach (var category in categories)
             {
-                categoriesList.Add(category.Name);
+                Category new_category = new Category(category.Name, category.Description);
+                new_category.CategoryID = category.CategoryID;
+                categoriesList.Add(new_category);
                 if (category.CategoryID == product.CategoryID)
-                    selectedCategory = category.Name;
+                    selectedCategory = category;
             }
             categoryComboBox.DataSource = categoriesList;
             categoryComboBox.SelectedItem = selectedCategory;
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        async private void deleteButton_Click(object sender, EventArgs e)
         {
-
+            await kek2.DeleteProduct(product.ProductName);
+            if (product.State == 0)
+            {
+                InterfaceToDataBaseProductMethods methods = new InterfaceToDataBaseProductMethods();
+                List<Product> products = await methods.CatalogProducts();
+                foreach (var product in products)
+                    this.Parent.Controls.Add(new ProductMiniDataAdminControl(product));
+                this.Parent.Controls.Remove(this);
+            }
+            if (product.State == 1)
+            {
+                product.State = 2;
+                radioButton1.Checked = false;
+                radioButton2.Checked = true;
+                deleteButton.Visible = false;
+                this.stateLabel.Text = "ARCHIWALNY";
+            }
         }
 
-        private void activateButton_Click(object sender, EventArgs e)
+        async private void activateButton_Click(object sender, EventArgs e)
         {
-
+            await kek2.Activate(product.ProductID);
+            stateLabel.Text = "AKTYWNY";
+            activateButton.Visible = false;
         }
 
         private void imageButton_Click(object sender, EventArgs e)
@@ -96,9 +118,42 @@ namespace SOSM1.AdminControls
 
         }
 
-        private void saveChangesButton_Click(object sender, EventArgs e)
+        async private void saveChangesButton_Click(object sender, EventArgs e)
         {
+            int state;
+            Bitmap image;
+            if (productPictureBox.Image == Properties.Resources.NoPicture)
+                image = null;
+            else
+                image = (Bitmap)productPictureBox.Image;
+            if (radioButton1.Checked)
+                state = 0;
+            else if (radioButton2.Checked)
+                state = 1;
+            else
+                state = 2;
+            decimal discount;
+            decimal? discoun2 = null;
+            if (decimal.TryParse(textBox1.Text, out discount))
+                discoun2 = discount;
+            long cat_id = categoriesList.Find(x => x == categoryComboBox.SelectedItem).CategoryID;
+            await kek2.ProductModification(
+                product.ProductID,
+                nameTextbox.Text,
+                decimal.Parse(priceTextbox.Text),
+                state,
+                discoun2,
+                decimal.Parse(amountTextbox.Text),
+                descriptionTextBox.Text,
+                image,
+                cat_id
+            );
 
+            InterfaceToDataBaseProductMethods methods = new InterfaceToDataBaseProductMethods();
+            List<Product> products = await methods.CatalogProducts();
+            foreach (var product in products)
+                this.Parent.Controls.Add(new ProductMiniDataAdminControl(product));
+            this.Parent.Controls.Remove(this);
         }
     }
 }
