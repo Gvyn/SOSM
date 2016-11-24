@@ -323,6 +323,9 @@
     <EmbeddedResource Include="MainFormUserControls\SaleDataUserControl.resx">
       <DependentUpon>SaleDataUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\SaleWindowUserControl.resx">
+      <DependentUpon>SaleWindowUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
