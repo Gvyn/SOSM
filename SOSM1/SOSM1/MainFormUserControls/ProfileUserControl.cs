@@ -25,5 +25,10 @@ namespace SOSM1
             nameLabel.Text = loggedUserData.UserName;
             mailLabel.Text = loggedUserData.Mail;
         }
+
+        private void historyButton_Click(object sender, EventArgs e)
+        {
+            (ParentForm as MainWindowForm).CreateHistoryControl();
+        }
     }
 }

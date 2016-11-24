@@ -98,6 +98,12 @@
     <Compile Include="AdminControls\UsersAdminControl.Designer.cs">
       <DependentUpon>UsersAdminControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainFormUserControls\HistoryUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainFormUserControls\HistoryUserControl.Designer.cs">
+      <DependentUpon>HistoryUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainFormUserControls\BasketDataUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

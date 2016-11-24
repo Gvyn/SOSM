@@ -32,6 +32,7 @@
             this.nameLabel = new System.Windows.Forms.Label();
             this.mailDescLabel = new System.Windows.Forms.Label();
             this.mailLabel = new System.Windows.Forms.Label();
+            this.historyButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nameDesclabel
@@ -70,11 +71,23 @@
             this.mailLabel.TabIndex = 3;
             this.mailLabel.Text = "User_Mail";
             // 
+            // historyButton
+            // 
+            this.historyButton.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.historyButton.Location = new System.Drawing.Point(126, 161);
+            this.historyButton.Name = "historyButton";
+            this.historyButton.Size = new System.Drawing.Size(239, 23);
+            this.historyButton.TabIndex = 4;
+            this.historyButton.Text = "Historia transakcji";
+            this.historyButton.UseVisualStyleBackColor = true;
+            this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
+            // 
             // ProfileUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.historyButton);
             this.Controls.Add(this.mailLabel);
             this.Controls.Add(this.mailDescLabel);
             this.Controls.Add(this.nameLabel);
@@ -91,5 +104,6 @@
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label mailDescLabel;
         private System.Windows.Forms.Label mailLabel;
+        private System.Windows.Forms.Button historyButton;
     }
 }
