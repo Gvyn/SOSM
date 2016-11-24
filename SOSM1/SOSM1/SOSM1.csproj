@@ -322,6 +322,7 @@
       <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Categories.datasource" />
     <None Include="Properties\DataSources\Users.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

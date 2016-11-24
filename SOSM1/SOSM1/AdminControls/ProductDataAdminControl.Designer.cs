@@ -28,73 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.amountBox = new System.Windows.Forms.TextBox();
-            this.unitLabel = new System.Windows.Forms.Label();
-            this.toBasketButton = new System.Windows.Forms.Button();
-            this.priceLabel = new System.Windows.Forms.Label();
-            this.productNameLabel = new System.Windows.Forms.Label();
+            this.components = new System.ComponentModel.Container();
+            this.saveChangesButton = new System.Windows.Forms.Button();
             this.productPictureBox = new System.Windows.Forms.PictureBox();
+            this.imageButton = new System.Windows.Forms.Button();
+            this.nameTextbox = new System.Windows.Forms.TextBox();
+            this.amountTextbox = new System.Windows.Forms.TextBox();
+            this.priceTextbox = new System.Windows.Forms.TextBox();
+            this.unitCheckedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.categoryComboBox = new System.Windows.Forms.ComboBox();
+            this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // amountBox
+            // saveChangesButton
             // 
-            this.amountBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.amountBox.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.amountBox.Location = new System.Drawing.Point(511, 46);
-            this.amountBox.Name = "amountBox";
-            this.amountBox.Size = new System.Drawing.Size(139, 25);
-            this.amountBox.TabIndex = 11;
-            this.amountBox.Text = "0";
-            // 
-            // unitLabel
-            // 
-            this.unitLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.unitLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.unitLabel.Location = new System.Drawing.Point(415, 47);
-            this.unitLabel.Name = "unitLabel";
-            this.unitLabel.Size = new System.Drawing.Size(90, 23);
-            this.unitLabel.TabIndex = 10;
-            this.unitLabel.Text = "label2";
-            this.unitLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // toBasketButton
-            // 
-            this.toBasketButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.toBasketButton.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.toBasketButton.Location = new System.Drawing.Point(511, 7);
-            this.toBasketButton.Name = "toBasketButton";
-            this.toBasketButton.Size = new System.Drawing.Size(139, 33);
-            this.toBasketButton.TabIndex = 9;
-            this.toBasketButton.Text = "Do koszyka";
-            this.toBasketButton.UseVisualStyleBackColor = true;
-            // 
-            // priceLabel
-            // 
-            this.priceLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.priceLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.priceLabel.Location = new System.Drawing.Point(137, 47);
-            this.priceLabel.Name = "priceLabel";
-            this.priceLabel.Size = new System.Drawing.Size(294, 24);
-            this.priceLabel.TabIndex = 8;
-            this.priceLabel.Text = "label2";
-            this.priceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // productNameLabel
-            // 
-            this.productNameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.productNameLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.productNameLabel.Location = new System.Drawing.Point(137, 15);
-            this.productNameLabel.Name = "productNameLabel";
-            this.productNameLabel.Size = new System.Drawing.Size(294, 24);
-            this.productNameLabel.TabIndex = 7;
-            this.productNameLabel.Text = "label1";
-            this.productNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.saveChangesButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.saveChangesButton.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.saveChangesButton.Location = new System.Drawing.Point(733, 56);
+            this.saveChangesButton.Name = "saveChangesButton";
+            this.saveChangesButton.Size = new System.Drawing.Size(113, 34);
+            this.saveChangesButton.TabIndex = 9;
+            this.saveChangesButton.Text = "ZAPISZ";
+            this.saveChangesButton.UseVisualStyleBackColor = true;
             // 
             // productPictureBox
             // 
@@ -102,36 +64,154 @@
             this.productPictureBox.InitialImage = global::SOSM1.Properties.Resources.logoBig;
             this.productPictureBox.Location = new System.Drawing.Point(0, 0);
             this.productPictureBox.Name = "productPictureBox";
-            this.productPictureBox.Size = new System.Drawing.Size(106, 92);
-            this.productPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.productPictureBox.Size = new System.Drawing.Size(137, 183);
+            this.productPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.productPictureBox.TabIndex = 6;
             this.productPictureBox.TabStop = false;
+            // 
+            // imageButton
+            // 
+            this.imageButton.Location = new System.Drawing.Point(143, 3);
+            this.imageButton.Name = "imageButton";
+            this.imageButton.Size = new System.Drawing.Size(75, 45);
+            this.imageButton.TabIndex = 10;
+            this.imageButton.Text = "ZMIEŃ OBRAZEK";
+            this.imageButton.UseVisualStyleBackColor = true;
+            // 
+            // nameTextbox
+            // 
+            this.nameTextbox.Location = new System.Drawing.Point(224, 13);
+            this.nameTextbox.Name = "nameTextbox";
+            this.nameTextbox.Size = new System.Drawing.Size(182, 20);
+            this.nameTextbox.TabIndex = 11;
+            // 
+            // amountTextbox
+            // 
+            this.amountTextbox.Location = new System.Drawing.Point(224, 39);
+            this.amountTextbox.Name = "amountTextbox";
+            this.amountTextbox.Size = new System.Drawing.Size(48, 20);
+            this.amountTextbox.TabIndex = 12;
+            // 
+            // priceTextbox
+            // 
+            this.priceTextbox.Location = new System.Drawing.Point(224, 65);
+            this.priceTextbox.Name = "priceTextbox";
+            this.priceTextbox.Size = new System.Drawing.Size(48, 20);
+            this.priceTextbox.TabIndex = 13;
+            // 
+            // unitCheckedListBox1
+            // 
+            this.unitCheckedListBox1.FormattingEnabled = true;
+            this.unitCheckedListBox1.Items.AddRange(new object[] {
+            "sztuki",
+            "kilogramy",
+            "litry"});
+            this.unitCheckedListBox1.Location = new System.Drawing.Point(224, 92);
+            this.unitCheckedListBox1.Name = "unitCheckedListBox1";
+            this.unitCheckedListBox1.Size = new System.Drawing.Size(115, 49);
+            this.unitCheckedListBox1.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(412, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(47, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "NAZWA";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(412, 42);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(112, 13);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "ILOŚĆ NA SKŁADZIE";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(412, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "CENA W ZŁ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(412, 92);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(71, 13);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "JEDNOSTKA";
+            // 
+            // categoryComboBox
+            // 
+            this.categoryComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.categoriesBindingSource, "CategoryID", true));
+            this.categoryComboBox.DataSource = this.categoriesBindingSource;
+            this.categoryComboBox.DisplayMember = "Name";
+            this.categoryComboBox.FormattingEnabled = true;
+            this.categoryComboBox.Location = new System.Drawing.Point(224, 148);
+            this.categoryComboBox.Name = "categoryComboBox";
+            this.categoryComboBox.Size = new System.Drawing.Size(182, 21);
+            this.categoryComboBox.TabIndex = 19;
+            this.categoryComboBox.ValueMember = "CategoryID";
+            // 
+            // categoriesBindingSource
+            // 
+            this.categoriesBindingSource.DataSource = typeof(SOSM1.Categories);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(412, 148);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "KATEGORIA";
             // 
             // ProductDataAdminControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.amountBox);
-            this.Controls.Add(this.unitLabel);
-            this.Controls.Add(this.toBasketButton);
-            this.Controls.Add(this.priceLabel);
-            this.Controls.Add(this.productNameLabel);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.categoryComboBox);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.unitCheckedListBox1);
+            this.Controls.Add(this.priceTextbox);
+            this.Controls.Add(this.amountTextbox);
+            this.Controls.Add(this.nameTextbox);
+            this.Controls.Add(this.imageButton);
+            this.Controls.Add(this.saveChangesButton);
             this.Controls.Add(this.productPictureBox);
             this.Name = "ProductDataAdminControl";
-            this.Size = new System.Drawing.Size(675, 92);
+            this.Size = new System.Drawing.Size(860, 183);
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox amountBox;
-        private System.Windows.Forms.Label unitLabel;
-        private System.Windows.Forms.Button toBasketButton;
-        private System.Windows.Forms.Label priceLabel;
-        private System.Windows.Forms.Label productNameLabel;
+        private System.Windows.Forms.Button saveChangesButton;
         private System.Windows.Forms.PictureBox productPictureBox;
+        private System.Windows.Forms.Button imageButton;
+        private System.Windows.Forms.TextBox nameTextbox;
+        private System.Windows.Forms.TextBox amountTextbox;
+        private System.Windows.Forms.TextBox priceTextbox;
+        private System.Windows.Forms.CheckedListBox unitCheckedListBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox categoryComboBox;
+        private System.Windows.Forms.BindingSource categoriesBindingSource;
+        private System.Windows.Forms.Label label5;
     }
 }
