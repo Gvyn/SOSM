@@ -74,6 +74,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminControls\ProductsAdminControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminControls\ProductsAdminControl.Designer.cs">
+      <DependentUpon>ProductsAdminControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminControls\SalesAdminControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminControls\SalesAdminControl.Designer.cs">
+      <DependentUpon>SalesAdminControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminControls\SettingsAdminControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminControls\SettingsAdminControl.Designer.cs">
+      <DependentUpon>SettingsAdminControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminControls\UsersAdminControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminControls\UsersAdminControl.Designer.cs">
+      <DependentUpon>UsersAdminControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainFormUserControls\BasketDataUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -203,8 +227,23 @@
     <Compile Include="Users.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminControls\ProductsAdminControl.resx">
+      <DependentUpon>ProductsAdminControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminControls\SalesAdminControl.resx">
+      <DependentUpon>SalesAdminControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminControls\SettingsAdminControl.resx">
+      <DependentUpon>SettingsAdminControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminControls\UsersAdminControl.resx">
+      <DependentUpon>UsersAdminControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\AdminUserControl.resx">
+      <DependentUpon>AdminUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainFormUserControls\BasketDataUserControl.resx">
       <DependentUpon>BasketDataUserControl.cs</DependentUpon>
@@ -292,6 +331,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.103\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.103\build\net451\System.Data.SQLite.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
