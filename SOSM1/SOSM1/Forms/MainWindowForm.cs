@@ -178,35 +178,60 @@ namespace SOSM1
             }
             basketSizeLabel.Text = Methods.CountBaskets(loggedUserData.UserID).Result.ToString();
         }
-        public async void ModifyBasket(Basket basketDataObject, decimal newAmount, Product modifiedProduct = null)
+
+        //public async void ModifyBasket(Basket basketDataObject, decimal newAmount, Product modifiedProduct = null)
+        //{
+        //    InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+        //    if (modifiedProduct == null)
+        //        modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
+        //    await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, modifiedProduct.Amount + basketDataObject.Amount - newAmount);
+        //    //int index = loggedUserBasket.FindIndex(x => x.BasketID == basketDataObject.BasketID);
+        //    //loggedUserBasket[index].Amount = newAmount;
+        //    //loggedUserBasket[index].Date = DateTime.Now;
+        //    InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
+        //    await BasketMethods.ModifyBasket(basketDataObject.BasketID, newAmount);
+        //    ForceBasketRefresh();
+        //}
+        public async void MoveProductsToFromBasket(long ProductID, decimal Amount)
         {
-            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
-            if (modifiedProduct == null)
-                modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
-            await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, modifiedProduct.Amount + basketDataObject.Amount - newAmount);
-            //int index = loggedUserBasket.FindIndex(x => x.BasketID == basketDataObject.BasketID);
-            //loggedUserBasket[index].Amount = newAmount;
-            //loggedUserBasket[index].Date = DateTime.Now;
             InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
-            await BasketMethods.ModifyBasket(basketDataObject.BasketID, newAmount);
+            bool result = false;
+            if(Amount<0)
+            {
+                result = await BasketMethods.MoveProductFromBasket(loggedUserData.UserID, ProductID, -Amount);
+            }
+            else
+            {
+                result = await BasketMethods.MoveProductToBasket(loggedUserData.UserID, ProductID, -Amount);
+            }
+            if (result)
+                throw new ArgumentException();
             ForceBasketRefresh();
         }
 
         public async void RemoveBasket(Basket basketDataObject, Product modifiedProduct = null)
         {
-            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
-            if (modifiedProduct == null)
-                modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
-            await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, basketDataObject.Amount + modifiedProduct.Amount);
-            //loggedUserBasket.Remove(basketDataObject);
-            //basketSizeLabel.Text = loggedUserBasket.Count.ToString();
-            InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
-            await BasketMethods.DeleteBasket(basketDataObject.BasketID);
+            //InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+            //if (modifiedProduct == null)
+            //    modifiedProduct = await Methods.GetProductData(basketDataObject.ProductID);
+            //await Methods.ProductModification(basketDataObject.ProductID, null, null, null, null, basketDataObject.Amount + modifiedProduct.Amount);
+            ////loggedUserBasket.Remove(basketDataObject);
+            ////basketSizeLabel.Text = loggedUserBasket.Count.ToString();
+            //InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
+            //await BasketMethods.DeleteBasket(basketDataObject.BasketID);
+
+            InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();
+            if (!(await (Methods.MoveProductFromBasket(loggedUserData.UserID, basketDataObject.ProductID, basketDataObject.Amount))))
+            {
+                throw new ArgumentException();
+            }
             ForceBasketRefresh();
         }
 
-        private void ForceBasketRefresh()
+        private async void ForceBasketRefresh()
         {
+            InterfaceToDataBaseBasketMethods BasketMethods = new InterfaceToDataBaseBasketMethods();
+            basketSizeLabel.Text = (await BasketMethods.CountBaskets(loggedUserData.UserID)).ToString();
             BasketUserControl newUserControl = new BasketUserControl(ref loggedUserData);
             newUserControl.Dock = DockStyle.Fill;
             userControlPanel.Controls.Clear();

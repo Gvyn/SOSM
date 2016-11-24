@@ -201,10 +201,11 @@ namespace SOSM1
 
             }
         }
-        private void ChangeAmount(decimal newAmount)
+        private void ChangeAmount(decimal Amount)//newAmount)
         {
             MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
-            mainForm.ModifyBasket(basketDataObject, newAmount, productDataObject);
+            //mainForm.ModifyBasket(basketDataObject, newAmount, productDataObject);
+            mainForm.MoveProductsToFromBasket(basketDataObject.ProductID, Amount);
         }
 
     }
