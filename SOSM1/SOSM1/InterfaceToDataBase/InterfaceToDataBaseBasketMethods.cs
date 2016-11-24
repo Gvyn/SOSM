@@ -110,7 +110,9 @@ namespace SOSM1
             else
             {
                 basket.Amount -= Amount;
+                context.Entry(basket).Property(x => x.Amount).IsModified = true;
                 basket.Date = DateTime.Now;
+                context.Entry(basket).Property(x => x.Date).IsModified = true;
             }
             product.Amount += Amount;
             await context.SaveChangesAsync();
