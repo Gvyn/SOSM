@@ -224,7 +224,10 @@ namespace SOSM1
         private void amountBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
                 ChangeAmountVerify();
+                e.Handled = true;
+            }
         }
     }
 }
