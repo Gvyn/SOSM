@@ -16,6 +16,8 @@ namespace SOSM1
         public ProfileUserControl(ref User userData)
         {
             InitializeComponent();
+            if (userData.State == 2)
+                editButton.Visible = false;
             this.userData = userData;
             SetLabels();
             
