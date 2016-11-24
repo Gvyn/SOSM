@@ -32,8 +32,22 @@ namespace SOSM1
             amountBox.Enter += amountBox_Enter;
             amountBox.Leave += amountBox_Leave;
         }
+        public BasketDataUserControl(Order orderDataObject)
+        {
+            InitializeComponent();
+            CreateBasketDatafromOrder(orderDataObject);
+        }
 
+        public void CreateBasketDatafromOrder(Order orderDataObject)
+        {
+            DisableAmountBox();
+            removeButton.Visible = false;
 
+            InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+            productDataObject = Methods.GetProductData(orderDataObject.ProductID).Result;
+
+            SetData(orderDataObject);
+        }
         private void MakeLegend()
         {
             productNameLabel.Text = "Produkt";
@@ -41,18 +55,22 @@ namespace SOSM1
             productPriceLabel.Font = new Font("Arial", 14);
             sumPriceLabel.Text = "Łączny koszt";
             removeButton.Visible = false;
-            amountBox.ReadOnly = true;
             ActiveControl = null;
             amountBox.Text = "Ilość";
             amountBox.TextAlign = HorizontalAlignment.Center;
+            DisableAmountBox();
+            productNameLabel.Click -= productNameLabel_Click;
+        }
+        private void DisableAmountBox()
+        {
+            amountBox.ReadOnly = true;
             amountBox.Location = new Point(amountBox.Location.X, amountBox.Location.Y + 3);
             amountBox.GotFocus += AmountLabel_GotFocus;
             amountBox.ForeColor = SystemColors.WindowText;
             amountBox.BackColor = SystemColors.Control;
             amountBox.BorderStyle = BorderStyle.None;
-            productNameLabel.Click -= productNameLabel_Click;
-        }
 
+        }
         private void AmountLabel_GotFocus(object sender, EventArgs e)
         {
             ActiveControl = null;
@@ -64,6 +82,14 @@ namespace SOSM1
             productPriceLabel.Text = ProductPriceInfoFormat(productDataObject.Discount, productDataObject.UnitType);
             amountBox.Text = basketDataObject.Amount.ToString();
             sum = productDataObject.Discount * basketDataObject.Amount;
+            sumPriceLabel.Text = sum.ToString();
+        }
+        private void SetData(Order orderDataObject)
+        {
+            productNameLabel.Text = productDataObject.ProductName;
+            productPriceLabel.Text = ProductPriceInfoFormat(orderDataObject.Price, productDataObject.UnitType);
+            amountBox.Text = orderDataObject.Amount.ToString();
+            sum = orderDataObject.Price * orderDataObject.Amount;
             sumPriceLabel.Text = sum.ToString();
         }
 

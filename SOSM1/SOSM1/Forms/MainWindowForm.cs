@@ -165,6 +165,12 @@ namespace SOSM1
             sectionLabel.Text = "Historia transakcji";
             SwapUserControl(new HistoryUserControl(UserData));
         }
+        public async void CreateHistoryControl(long UserID)
+        {
+            sectionLabel.Text = "Historia transakcji";
+            InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
+            SwapUserControl(new HistoryUserControl(await Methods.GetUserData(UserID)));
+        }
 
         public void CreateProfileEditControl(User UserData)
         {
