@@ -52,10 +52,11 @@ namespace SOSM1
 
                 context.Orders.Add(dbOrder);
             }
-            await context.SaveChangesAsync();
-            var itdbbm = new InterfaceToDataBaseBasketMethods();
-            await itdbbm.DeleteBaskets(userID);
 
+            var baskets = await context.Baskets.Where(x => x.UserID == UserID).ToListAsync();
+            foreach (var basket in baskets)
+                context.Baskets.Remove(basket);
+            await context.SaveChangesAsync();
             return true;
     }
 

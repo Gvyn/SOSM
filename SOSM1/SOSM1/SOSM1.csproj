@@ -74,6 +74,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminControls\ProductDataAdminControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AdminControls\ProductDataAdminControl.Designer.cs">
+      <DependentUpon>ProductDataAdminControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminControls\ProductsAdminControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -239,6 +245,9 @@
     <Compile Include="Users.cs">
       <DependentUpon>SOSM Entity Data Model.tt</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminControls\ProductDataAdminControl.resx">
+      <DependentUpon>ProductDataAdminControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminControls\ProductsAdminControl.resx">
       <DependentUpon>ProductsAdminControl.cs</DependentUpon>
     </EmbeddedResource>
