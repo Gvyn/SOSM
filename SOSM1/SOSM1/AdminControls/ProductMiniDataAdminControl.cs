@@ -22,16 +22,42 @@ namespace SOSM1.AdminControls
                 pictureBox1.Image = product.Picture;
             else
                 pictureBox1.Image = Properties.Resources.NoPicture;
+            switch (product.State)
+            {
+                case 0:
+                    label1.Text = "NIEAKTYWNY";
+                    break;
+                case 1:
+                    label2.Text = "AKTYWNY";
+                    break;
+                case 2:
+                    deleteButton.Hide();
+                    label3.Text = "ARCHIWALNY";
+                    break;
+            }
         }
 
         private void editButton_Click(object sender, EventArgs e)
         {
-
+            foreach (Control c in this.Parent.Controls)
+                if (c != this)
+                    this.Parent.Controls.Remove(c);
+            this.Parent.Controls.Add(new ProductDataAdminControl(product));
+            this.Parent.Controls.Remove(this);
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        async private void deleteButton_Click(object sender, EventArgs e)
         {
+            InterfaceToDataBaseProductMethods kek = new InterfaceToDataBaseProductMethods();
+            await kek.DeleteProduct(product.ProductName);
+            product = await kek.GetProductData(product.ProductID);
 
+            if (product == null)
+                this.Parent.Controls.Remove(this);
+            if (product.State == 1)
+                label3.Text = "AKTYWNY";
+            if (product.State == 2)
+                label3.Text = "ARCHIWALNY";
         }
     }
 }

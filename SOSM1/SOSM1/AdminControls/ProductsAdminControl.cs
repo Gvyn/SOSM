@@ -23,7 +23,7 @@ namespace SOSM1.AdminControls
         {
             List<Product> products = await methods.CatalogProducts();
             foreach (var product in products)
-                flowLayoutPanel1.Controls.Add(new ProductDataAdminControl(product));
+                flowLayoutPanel1.Controls.Add(new ProductMiniDataAdminControl(product));
         }
     }
 }

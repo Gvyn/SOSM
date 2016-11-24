@@ -40,18 +40,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.categoryComboBox = new System.Windows.Forms.ComboBox();
-            this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label5 = new System.Windows.Forms.Label();
             this.descriptionTextBox = new System.Windows.Forms.RichTextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.categoriesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.label7 = new System.Windows.Forms.Label();
             this.stateLabel = new System.Windows.Forms.Label();
             this.activateButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
+            this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.categoriesBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.productPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource1)).BeginInit();
@@ -75,7 +75,7 @@
             this.productPictureBox.Location = new System.Drawing.Point(0, 0);
             this.productPictureBox.Name = "productPictureBox";
             this.productPictureBox.Size = new System.Drawing.Size(200, 200);
-            this.productPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.productPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.productPictureBox.TabIndex = 6;
             this.productPictureBox.TabStop = false;
             // 
@@ -164,10 +164,6 @@
             this.categoryComboBox.Size = new System.Drawing.Size(334, 25);
             this.categoryComboBox.TabIndex = 19;
             // 
-            // categoriesBindingSource
-            // 
-            this.categoriesBindingSource.DataSource = typeof(SOSM1.Categories);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -233,10 +229,6 @@
             this.radioButton3.Text = "litry";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
-            // categoriesBindingSource1
-            // 
-            this.categoriesBindingSource1.DataSource = typeof(SOSM1.Categories);
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -278,6 +270,14 @@
             this.deleteButton.Text = "USUŃ";
             this.deleteButton.UseVisualStyleBackColor = true;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
+            // categoriesBindingSource
+            // 
+            this.categoriesBindingSource.DataSource = typeof(SOSM1.Categories);
+            // 
+            // categoriesBindingSource1
+            // 
+            this.categoriesBindingSource1.DataSource = typeof(SOSM1.Categories);
             // 
             // ProductDataAdminControl
             // 
