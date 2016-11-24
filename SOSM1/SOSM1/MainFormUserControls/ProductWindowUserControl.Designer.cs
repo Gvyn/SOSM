@@ -219,7 +219,7 @@
             this.inBasketLabel.Name = "inBasketLabel";
             this.inBasketLabel.Size = new System.Drawing.Size(75, 23);
             this.inBasketLabel.TabIndex = 13;
-            this.inBasketLabel.Text = "InBasket";
+            this.inBasketLabel.Text = "In_Basket";
             this.inBasketLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ProductWindowUserControl

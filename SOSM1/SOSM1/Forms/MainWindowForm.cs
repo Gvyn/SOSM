@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SOSM1.MainFormUserControls;
 
 namespace SOSM1
 {
@@ -169,6 +170,11 @@ namespace SOSM1
         {
             sectionLabel.Text = "Edycja profilu";
             SwapUserControl(new ProfileEditControl(UserData));
+        }
+        public void CreateSaleWindowControl(Sale saleData)
+        {
+            sectionLabel.Text = "Szczegóły transakcji";
+            SwapUserControl(new SaleWindowUserControl(saleData));
         }
         public async Task<decimal> GetBasketAmount(long ProductID)
         {

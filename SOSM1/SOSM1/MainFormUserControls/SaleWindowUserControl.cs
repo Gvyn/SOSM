@@ -12,7 +12,7 @@ namespace SOSM1.MainFormUserControls
 {
     public partial class SaleWindowUserControl : UserControl
     {
-        public SaleWindowUserControl()
+        public SaleWindowUserControl(Sale saleData)
         {
             InitializeComponent();
         }

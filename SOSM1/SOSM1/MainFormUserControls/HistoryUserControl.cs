@@ -23,7 +23,7 @@ namespace SOSM1
             foreach(Sale sale in UserSaleList)
             {
                 sum += Methods.GetSaleValue(sale.SaleID).Result;
-                salesFlowPanel.Controls.Add(new SaleDataUserControl(sale));
+                salesFlowPanel.Controls.Add(new SaleDataUserControl(sale, sum));
             }
             numberLabel.Text = UserSaleList.Count.ToString();
             sumLabel.Text = sum.ToString()+"zł";
