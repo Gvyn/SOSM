@@ -22,8 +22,10 @@ namespace SOSM1
         /// <returns>WelcomeMessage</returns>
         public async Task<string> GetWelcomeMessage()
         {
-                var message = await context.Other.FirstAsync();
-                return message.Welcome_message;
+            var message = await context.Other.FirstOrDefaultAsync();
+            if (message == null)
+                return null;
+            return message.Welcome_message;
         }
 
         /// <summary>
@@ -38,6 +40,7 @@ namespace SOSM1
             {
                 Other dbOther = new Other();
                 dbOther.Welcome_message = newMessage;
+                dbOther.Contact_info = "";
                 context.Other.Add(dbOther);
                 await context.SaveChangesAsync();
             }
@@ -56,8 +59,10 @@ namespace SOSM1
         /// <returns>ContactInfo</returns>
         public async Task<string> GetContactInfo()
         {
-                var message = await context.Other.FirstAsync();
-                return message.Contact_info;
+            var message = await context.Other.FirstOrDefaultAsync();
+            if (message == null)
+                return null;
+            return message.Contact_info;
         }
 
         /// <summary>
@@ -71,6 +76,7 @@ namespace SOSM1
             if (message == null)
             {
                 Other dbOther = new Other();
+                dbOther.Welcome_message = "";
                 dbOther.Contact_info = newContactInfo;
                 context.Other.Add(dbOther);
             }

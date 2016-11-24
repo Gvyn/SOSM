@@ -22,17 +22,10 @@ namespace SOSM1
 
         private async void SetWelcomeMessage()
         {
-            try
-            {
-                InterfaceToDataBaseOtherMethods Method = new InterfaceToDataBaseOtherMethods();
-                welcomeMessageLabel.Text = await Method.GetWelcomeMessage();
-                if (welcomeMessageLabel.Text.Length == 0)
-                    welcomeMessagePanel.Visible = false;
-            }
-            catch (InvalidOperationException)
-            {
+            InterfaceToDataBaseOtherMethods Method = new InterfaceToDataBaseOtherMethods();
+            welcomeMessageLabel.Text = await Method.GetWelcomeMessage();
+            if (welcomeMessageLabel.Text == null)
                 welcomeMessageLabel.Text = Properties.Resources.DefaultWelcomeMessage;
-            }
         }
         private async void SetSaleInfo()
         {

@@ -38,10 +38,12 @@
             // 
             // lineLabel
             // 
-            this.lineLabel.AutoSize = true;
+            this.lineLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lineLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lineLabel.Location = new System.Drawing.Point(20, 50);
-            this.lineLabel.MaximumSize = new System.Drawing.Size(700, 2);
+            this.lineLabel.Margin = new System.Windows.Forms.Padding(3, 60, 3, 20);
+            this.lineLabel.MaximumSize = new System.Drawing.Size(2, 2);
             this.lineLabel.MinimumSize = new System.Drawing.Size(700, 2);
             this.lineLabel.Name = "lineLabel";
             this.lineLabel.Size = new System.Drawing.Size(700, 2);
@@ -122,9 +124,7 @@
             this.Controls.Add(this.lineLabel);
             this.Name = "AdminUserControl";
             this.Size = new System.Drawing.Size(751, 463);
-            this.SizeChanged += new System.EventHandler(this.AdminUserControl_SizeChanged);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

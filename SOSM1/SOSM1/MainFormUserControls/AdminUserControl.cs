@@ -19,12 +19,6 @@ namespace SOSM1
             InitializeComponent();
         }
 
-        private void AdminUserControl_SizeChanged(object sender, EventArgs e)
-        {
-            lineLabel.Width = this.Width - 20;
-            lineLabel.Invalidate();
-        }
-
         private void SwapAdminControl(UserControl newAdminControl)
         {
             if (newAdminControl == null)
