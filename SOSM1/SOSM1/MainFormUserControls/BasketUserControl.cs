@@ -28,7 +28,7 @@ namespace SOSM1
                     basketsFlowPanel.Controls.Add(newBasket);
                     sum += newBasket.sum;
                 }
-                sumPriceLabel.Text = sum + "zł";
+                sumPriceLabel.Text = "Łączny koszt transakcji: " + sum + "zł";
             }
             else
             {
