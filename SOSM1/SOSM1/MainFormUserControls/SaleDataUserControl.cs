@@ -15,6 +15,17 @@ namespace SOSM1
         public SaleDataUserControl()
         {
             InitializeComponent();
+            MakeExample();
+        }
+
+        private void MakeExample()
+        {
+
+        }
+
+        public SaleDataUserControl(Sale SaleData)
+        {
+            InitializeComponent();
         }
     }
 }

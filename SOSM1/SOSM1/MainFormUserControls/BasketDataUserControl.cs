@@ -50,6 +50,7 @@ namespace SOSM1
             amountBox.ForeColor = SystemColors.WindowText;
             amountBox.BackColor = SystemColors.Control;
             amountBox.BorderStyle = BorderStyle.None;
+            productNameLabel.Click -= productNameLabel_Click;
         }
 
         private void AmountLabel_GotFocus(object sender, EventArgs e)

@@ -287,6 +287,9 @@
     <EmbeddedResource Include="MainFormUserControls\ContactUserControl.resx">
       <DependentUpon>ContactUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\HistoryUserControl.resx">
+      <DependentUpon>HistoryUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainFormUserControls\HomeUserControl.resx">
       <DependentUpon>HomeUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -307,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainFormUserControls\ProfileUserControl.resx">
       <DependentUpon>ProfileUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\SaleDataUserControl.resx">
+      <DependentUpon>SaleDataUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
