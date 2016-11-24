@@ -69,9 +69,11 @@ namespace SOSM1
             else
             {
                 basket.Amount += Amount;
+                context.Entry(basket).Property(x => x.Amount).IsModified = true;
                 basket.Date = DateTime.Now;
             }
             product.Amount -= Amount;
+            context.Entry(product).Property(x => x.Amount).IsModified = true;
             // ok, problem jest taki, że zmieniamy basket i product, tylko, że zmieniamy lokalną zmienną chyba, a nie w samej kolekcji i to trzeba sfiksować
             await context.SaveChangesAsync();
             return true;
