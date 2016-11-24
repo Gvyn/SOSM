@@ -56,10 +56,10 @@ namespace SOSM1
                 toBasketButton.Enabled = false;
             }
         }
-        private void SetBasketData()
+        private async void SetBasketData()
         {
             MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
-            inBasketLabel.Text = mainForm.GetBasketAmount(productDataObject.ProductID).ToString();
+            inBasketLabel.Text = (await mainForm.GetBasketAmount(productDataObject.ProductID)).ToString();
         }
         private string ProductPriceInfoFormat(decimal price, long unitType)
         {
@@ -176,6 +176,7 @@ namespace SOSM1
                             DialogResult dialogResult = MessageBox.Show(question, "Brak produktu na stanie", MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.Yes)
                             {
+                                amountBox.Text = productDataObject.Amount.ToString();
                                 AddBasket(productDataObject.Amount);
                             }
                         }
@@ -190,10 +191,10 @@ namespace SOSM1
         
         private void AddBasket(decimal amount)
         {
-            productDataObject.Amount -= amount;
-            amountLabel.Text = ProductAmountInforFormat(productDataObject.Amount, productDataObject.UnitType);
             MainWindowForm mainForm = (MainWindowForm)Application.OpenForms["MainWindowForm"];
             mainForm.AddBasket(productDataObject.ProductID, amount);
+            amountLabel.Text = ProductAmountInforFormat(productDataObject.Amount, productDataObject.UnitType);
+            productDataObject.Amount -= amount;
             SetBasketData();
             MessageBox.Show("Dodano do koszyka.");
         }

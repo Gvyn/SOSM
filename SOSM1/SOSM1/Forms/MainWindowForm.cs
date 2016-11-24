@@ -200,11 +200,11 @@ namespace SOSM1
             {
                 result = await BasketMethods.MoveProductFromBasket(loggedUserData.UserID, ProductID, -Amount);
             }
-            else
+            else if(Amount>0)
             {
-                result = await BasketMethods.MoveProductToBasket(loggedUserData.UserID, ProductID, -Amount);
+                result = await BasketMethods.MoveProductToBasket(loggedUserData.UserID, ProductID, Amount);
             }
-            if (result)
+            if (!result)
                 throw new ArgumentException();
             ForceBasketRefresh();
         }

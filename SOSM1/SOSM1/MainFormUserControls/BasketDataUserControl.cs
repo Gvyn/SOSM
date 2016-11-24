@@ -28,7 +28,9 @@ namespace SOSM1
             InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
             productDataObject = Methods.GetProductData(basketDataObject.ProductID).Result;
             SetData();
-            amountBox.TextChanged += amountBox_TextChanged;
+            //amountBox.TextChanged += amountBox_TextChanged;
+            amountBox.Enter += amountBox_Enter;
+            amountBox.Leave += amountBox_Leave;
         }
 
 
@@ -107,10 +109,10 @@ namespace SOSM1
             }
 
         }
-        private void amountBox_TextChanged(object sender, EventArgs e)
-        {
-            ChangeAmountVerify();
-        }
+        //private void amountBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    ChangeAmountVerify();
+        //}
         private void ChangeAmountVerify()
         {
             decimal amount;
@@ -209,5 +211,20 @@ namespace SOSM1
             mainForm.MoveProductsToFromBasket(basketDataObject.ProductID, Amount);
         }
 
+        private void amountBox_Enter(object sender, EventArgs e)
+        {
+            amountBox.KeyPress += amountBox_KeyPress;
+        }
+
+        private void amountBox_Leave(object sender, EventArgs e)
+        {
+            amountBox.KeyPress -= amountBox_KeyPress;
+        }
+
+        private void amountBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+                ChangeAmountVerify();
+        }
     }
 }
