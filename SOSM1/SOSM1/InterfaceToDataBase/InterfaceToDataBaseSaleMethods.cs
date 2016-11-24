@@ -106,5 +106,24 @@ namespace SOSM1
             }
             return orders;
         }
+
+        /// <summary>
+        /// Calculates the summed price of every item in sale.
+        /// </summary>
+        /// <param name="saleID">SaleID.</param>
+        /// <returns>Sale value.</returns>
+        public async Task<Decimal> GetSaleValue(long saleID)
+        {
+            var dbOrders = await context.Orders.Where(x => x.SaleID == saleID).ToListAsync();
+            if (dbOrders.Count == 0)
+                return 0;
+            decimal sum = 0;
+            foreach (var dbOrder in dbOrders)
+            {
+                sum += dbOrder.Price * dbOrder.Amount;
+            }
+            return sum;
+
+        }
     }
 }
