@@ -38,6 +38,7 @@
             this.typeDescLabel = new System.Windows.Forms.Label();
             this.stateLabel = new System.Windows.Forms.Label();
             this.stateDescLabel = new System.Windows.Forms.Label();
+            this.editButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // nameDesclabel
@@ -132,11 +133,23 @@
             this.stateDescLabel.TabIndex = 8;
             this.stateDescLabel.Text = "Stan konta:";
             // 
+            // editButton
+            // 
+            this.editButton.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.editButton.Location = new System.Drawing.Point(126, 261);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(239, 25);
+            this.editButton.TabIndex = 10;
+            this.editButton.Text = "Edytuj dane użytkownika";
+            this.editButton.UseVisualStyleBackColor = true;
+            this.editButton.Click += new System.EventHandler(this.editButton_Click);
+            // 
             // ProfileUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.Controls.Add(this.editButton);
             this.Controls.Add(this.stateLabel);
             this.Controls.Add(this.stateDescLabel);
             this.Controls.Add(this.typeLabel);
@@ -165,5 +178,6 @@
         private System.Windows.Forms.Label typeDescLabel;
         private System.Windows.Forms.Label stateLabel;
         private System.Windows.Forms.Label stateDescLabel;
+        private System.Windows.Forms.Button editButton;
     }
 }

@@ -165,6 +165,11 @@ namespace SOSM1
             SwapUserControl(new HistoryUserControl(UserData));
         }
 
+        public void CreateProfileEditControl(User UserData)
+        {
+            sectionLabel.Text = "Edycja profilu";
+            SwapUserControl(new ProfileEditControl(UserData));
+        }
         public async Task<decimal> GetBasketAmount(long ProductID)
         {
             InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();

@@ -52,6 +52,7 @@
             // 
             // sideMenuPanel
             // 
+            this.sideMenuPanel.AutoScroll = true;
             this.sideMenuPanel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.sideMenuPanel.Controls.Add(this.profileButton);
             this.sideMenuPanel.Controls.Add(this.basketSizeLabel);

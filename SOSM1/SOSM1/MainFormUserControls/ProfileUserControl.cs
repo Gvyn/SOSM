@@ -72,5 +72,10 @@ namespace SOSM1
         {
             (ParentForm as MainWindowForm).CreateHistoryControl(userData);
         }
+
+        private void editButton_Click(object sender, EventArgs e)
+        {
+            (ParentForm as MainWindowForm).CreateProfileEditControl(userData);
+        }
     }
 }
