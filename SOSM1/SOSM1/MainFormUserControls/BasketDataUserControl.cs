@@ -138,7 +138,8 @@ namespace SOSM1
                         }
                         else
                         {
-                            if (amount - basketDataObject.Amount > productDataObject.Amount)
+                            decimal amountChange = amount - basketDataObject.Amount;
+                            if (amountChange > productDataObject.Amount)
                             {
                                 if (productDataObject.Amount == 0)
                                 {
@@ -167,7 +168,7 @@ namespace SOSM1
                                     DialogResult dialogResult = MessageBox.Show(question, "Brak produktu na stanie", MessageBoxButtons.YesNo);
                                     if (dialogResult == DialogResult.Yes)
                                     {
-                                        ChangeAmount(basketDataObject.Amount + productDataObject.Amount);
+                                        ChangeAmount(productDataObject.Amount);
                                     }
                                     else
                                     {
@@ -180,7 +181,7 @@ namespace SOSM1
                                 DialogResult dialogResult = MessageBox.Show("Czy na pewno chcesz zmienić ilość tego produktu?", "", MessageBoxButtons.YesNo);
                                 if (dialogResult == DialogResult.Yes)
                                 {
-                                    ChangeAmount(amount);
+                                    ChangeAmount(amountChange);
                                 }
                                 else
                                 {
