@@ -40,7 +40,7 @@ namespace SOSM1
             }
             
 
-            if (user.Password != Hash(password,user.UserID))
+            if (user.Password != Hash(password))
             {
                 return null;
             }
@@ -80,14 +80,14 @@ namespace SOSM1
             user.Name = newUser.UserName;
             user.Password = password;
             user.E_mail = newUser.Mail;
-            user.Type = newUser.Type;
+            user.Type = 1;//newUser.Type;
             user.State = newUser.State;
 
             long utest = user.UserID;
             Users u = context.Users.Add(user);
             utest = u.UserID;
             utest = context.Entry(u).Property(x => x.UserID).CurrentValue;
-            context.Entry(u).Property(x=>x.Password).CurrentValue = Hash(password, u.UserID);
+            context.Entry(u).Property(x=>x.Password).CurrentValue = Hash(password);
             //context.Entry(u).Property(e => e.Password).IsModified = true;
 
             await context.SaveChangesAsync();
@@ -260,7 +260,7 @@ namespace SOSM1
             }
             if (password != null)
             {
-                user.Password = Hash(password,user.UserID);
+                user.Password = Hash(password);
                 context.Entry(user).Property(e => e.Password).IsModified = true;
             }
             await context.SaveChangesAsync();
@@ -347,10 +347,10 @@ namespace SOSM1
             return true;
         }
 
-        private string Hash(string password, long userID)
+        private string Hash(string password)
         {
 
-            String hash = password + (1000 + userID).ToString() + "PseudoSaltWhateverAKB48<3!" + (1000 - userID).ToString();
+            String hash = password + "PseudoSaltWhateverAKB48<3!";
             byte[] data = Encoding.ASCII.GetBytes(hash);
             data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
             return Encoding.ASCII.GetString(data);
