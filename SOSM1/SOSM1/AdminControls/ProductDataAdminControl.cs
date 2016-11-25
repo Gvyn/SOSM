@@ -31,6 +31,7 @@ namespace SOSM1.AdminControls
             nameTextbox.Text = product.ProductName;
             amountTextbox.Text = product.Amount.ToString();
             priceTextbox.Text = product.Price.ToString();
+            textBox1.Text = product.Discount.ToString();
             switch(product.UnitType)
             {
                 case 0:
