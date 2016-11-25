@@ -13,13 +13,14 @@ namespace SOSM1
     public partial class SaleDataUserControl : UserControl
     {
         Sale SaleData;
-        public SaleDataUserControl()
+        User UserData;
+        public SaleDataUserControl(bool showName = false)
         {
             InitializeComponent();
-            MakeExample();
+            MakeExample(showName);
         }
 
-        private void MakeExample()
+        private void MakeExample(bool showName = false)
         {
             Click -= SaleDataUserControl_Click;
             idLabel.Click -= SaleDataUserControl_Click;
@@ -28,21 +29,45 @@ namespace SOSM1
             idLabel.Text = "ID transakcji";
             dateLabel.Text = "Data transakcji";
             sumLabel.Text = "Wartość transakcji";
+            userLabel.Click -= userLabel_Click;
+            if (showName)
+            {
+                userLabel.Text = "Nazwa użytkownika";
+            }
+            else
+            {
+                userLabel.Visible = false;
+            }
         }
 
-        public SaleDataUserControl(Sale SaleData, decimal sum)
+        public SaleDataUserControl(Sale SaleData, decimal sum, bool showName = false)
         {
             InitializeComponent();
             this.SaleData = SaleData;
             idLabel.Text = this.SaleData.SaleID.ToString();
             dateLabel.Text = this.SaleData.Date.ToString();
             sumLabel.Text = sum+"zł";
+            if (showName)
+            {
+                InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
+                UserData = Methods.GetUserData(SaleData.UserID).Result;
+                userLabel.Text = UserData.UserName;
+            }
+            else
+            {
+                userLabel.Visible = false;
+            }
         }
 
         private void SaleDataUserControl_Click(object sender, EventArgs e)
         {
             (ParentForm as MainWindowForm).CreateSaleWindowControl(SaleData);
 
+        }
+
+        private void userLabel_Click(object sender, EventArgs e)
+        {
+            (ParentForm as MainWindowForm).CreateProfileUserControl(UserData);
         }
     }
 }

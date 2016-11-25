@@ -182,6 +182,11 @@ namespace SOSM1
             sectionLabel.Text = "Szczegóły transakcji";
             SwapUserControl(new SaleWindowUserControl(saleData));
         }
+        public void CreateProfileUserControl(User UserData)
+        {
+            sectionLabel.Text = "Profil użytkownika";
+            SwapUserControl(new ProfileUserControl(ref UserData));
+        }
         public async Task<decimal> GetBasketAmount(long ProductID)
         {
             InterfaceToDataBaseBasketMethods Methods = new InterfaceToDataBaseBasketMethods();

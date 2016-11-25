@@ -61,18 +61,17 @@ namespace SOSM1
     }
 
         /// <summary>
-        /// Returns list of users' purchases.
+        /// Returns list of sales.
         /// </summary>
-        /// <param name="user">UserID. Like 666 or 420.</param>
         /// <returns>List of Sale object. Null if user has no purchases.</returns>
-        public async Task<List<Sale>> GetSalesHistory(long userID)
+        public async Task<List<Sale>> GetProductSalesHistory()
         {
-            var dbSales = await context.Sale_history.Where(x => x.UserID == userID).ToListAsync();
+            var dbSales = await context.Sale_history.ToListAsync();
 
             List<Sale> sales = new List<Sale>();
             foreach (var dbSale in dbSales)
             {
-                Sale sale = new Sale(userID);
+                Sale sale = new Sale(dbSale.UserID);
                 sale.SaleID = dbSale.SaleID;
                 sale.Date = dbSale.Date;
                 sales.Add(sale);
@@ -80,6 +79,87 @@ namespace SOSM1
 
             return sales;
         }
+        /// <summary>
+        /// Returns list of users' purchases.
+        /// </summary>
+        /// <param name="user">UserID.</param>
+        /// <returns>List of Sale object. Null if user has no purchases.</returns>
+        public async Task<List<Sale>> GetUserSalesHistory(long userID)
+        {
+            var dbSales = await context.Sale_history.Where(x => x.UserID == userID).ToListAsync();
+
+            List<Sale> sales = new List<Sale>();
+            foreach (var dbSale in dbSales)
+            {
+                Sale sale = new Sale(dbSale.UserID);
+                sale.SaleID = dbSale.SaleID;
+                sale.Date = dbSale.Date;
+                sales.Add(sale);
+            }
+
+            return sales;
+        }
+
+
+        /// <summary>
+        /// Returns list of sales specified product.
+        /// </summary>
+        /// <param name="user">ProductID.</param>
+        /// <returns>List of Sale object. Null if user has no purchases.</returns>
+        public async Task<List<Sale>> GetProductSalesHistory(long productID)
+        {
+
+            List<long> salesWithProduct = new List<long>();
+            var ordersWithProduct = await (context.Orders.Where(x => x.ProductID == productID).ToListAsync());
+            foreach(var order in ordersWithProduct)
+            {
+                salesWithProduct.Add(order.SaleID);
+            }
+
+            List<Sale_history> dbSales = new List<Sale_history>();
+            foreach(long saleId in salesWithProduct)
+            {
+                dbSales.Concat(await context.Sale_history.Where(x => x.SaleID == saleId).ToListAsync());
+            }
+
+            List<Sale> sales = new List<Sale>();
+            foreach (var dbSale in dbSales)
+            {
+                Sale sale = new Sale(dbSale.UserID);
+                sale.SaleID = dbSale.SaleID;
+                sale.Date = dbSale.Date;
+                sales.Add(sale);
+            }
+
+            return sales;
+        }
+        /// <summary>
+        /// Returns list of sales specified product.
+        /// </summary>
+        /// <param name="user">Date of sale.</param>
+        /// <returns>List of Sale object. Null if user has no purchases.</returns>
+        public async Task<List<Sale>> GetDateSalesHistory(DateTime Date, int comparePositions = 3)
+        {
+            if (comparePositions < 1 || comparePositions > 5)
+                throw new ArgumentOutOfRangeException();
+            var dbSales = await context.Sale_history.Where(x => (comparePositions<1 || x.Date.Year == Date.Year)
+                            && (comparePositions < 2 || x.Date.Month == Date.Month)
+                            && (comparePositions < 3 || x.Date.Day == Date.Day)
+                            && (comparePositions < 4 || x.Date.Hour == Date.Hour)
+                            && (comparePositions < 5 || x.Date.Minute == Date.Minute)).ToListAsync();
+
+            List<Sale> sales = new List<Sale>();
+            foreach (var dbSale in dbSales)
+            {
+                Sale sale = new Sale(dbSale.UserID);
+                sale.SaleID = dbSale.SaleID;
+                sale.Date = dbSale.Date;
+                sales.Add(sale);
+            }
+
+            return sales;
+        }
+
 
         /// <summary>
         /// Returns list of orders which the sale consist of.
