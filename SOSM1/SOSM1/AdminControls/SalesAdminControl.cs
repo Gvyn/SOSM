@@ -140,7 +140,7 @@ namespace SOSM1.AdminControls
         }
         private async void SearchHistory()
         {
-            HistoryUserControl history;
+            HistoryUserControl history = null;
 
             int category = ReverseCategory(categoryBox.SelectedItem.ToString());
             if (category == 0)
@@ -149,15 +149,13 @@ namespace SOSM1.AdminControls
                 User userData = await Methods.GetUserData(long.Parse(searchBox.Text));
                 if (userData != null)
                     history = new HistoryUserControl(userData, true);
-                else
-                    history = null;
             }
             else if (category == 1)
             {
                 InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
                 User userData = await Methods.GetUserData(searchBox.Text);
-                if (userData != null);
-                history = new HistoryUserControl(userData, true);
+                if (userData != null)
+                    history = new HistoryUserControl(userData, true);
             }
             else if (category == 2)
             {
@@ -176,8 +174,11 @@ namespace SOSM1.AdminControls
             {
                 throw new ArgumentException();
             }
-            history.Dock = DockStyle.Fill;
-            histPanel.Controls.Add(history);
+            if(history!= null)
+            {
+                history.Dock = DockStyle.Fill;
+                histPanel.Controls.Add(history);
+            }
         }
 
         private bool VerifyAttribute()
