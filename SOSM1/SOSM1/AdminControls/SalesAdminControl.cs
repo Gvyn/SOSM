@@ -17,6 +17,7 @@ namespace SOSM1.AdminControls
             InitializeComponent();
             SetCategory();
             SetHistory();
+            SetDefaultSearch();
         }
 
 
@@ -52,12 +53,17 @@ namespace SOSM1.AdminControls
                 CleanHistory();
                 SearchHistory();
             }
+            else
+            {
+                SetDefaultSearch();
+            }
 
         }
         private void SetCategory()
         {
             List<String> list = new List<string>();
-            for (int i = 0; i < 6; i++)
+            list.Add(ConverseCategory(1));
+            for (int i = 3; i < 9; i++)
             {
                 list.Add(ConverseCategory(i));
             }
@@ -153,7 +159,10 @@ namespace SOSM1.AdminControls
                 InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
                 history = new HistoryUserControl(await Methods.GetProductId(searchBox.Text), true);
             }
-
+            else if(category >3 && category < 9)
+            {
+                history = new HistoryUserControl(MakeDate(category - 3), category - 3, false);
+            }
             else
             {
                 throw new ArgumentException();
@@ -185,19 +194,73 @@ namespace SOSM1.AdminControls
         {
             long value;
             bool result = long.TryParse(searchBox.Text, out value);
+            if(!result)
+            {
+                MessageBox.Show("ID musi być liczbą całkowitą!");
+            }
             if (result && value < 0)
+            {
+                MessageBox.Show("ID musi być nieujemne!");
                 result = false;
+            }
             return result;
         }
         private bool VerifyDate(int comparePosition)
         {
             bool result = false;
+            string input = searchBox.Text;
 
+            if (input.Length != 4 + 3 * (comparePosition - 1))
+            {
+                MessageBox.Show("Długość daty jest nieprawidłowa!");
+                return false;
+            }
+
+            if (comparePosition > 0)
+            {
+                int check;
+                result = int.TryParse(input.Substring(0, 4), out check);
+            }
+            if (result && comparePosition > 1)
+            {
+                int check;
+                result = int.TryParse(input.Substring(5, 2), out check);
+            }
+            if (result && comparePosition > 2)
+            {
+                int check;
+                result = int.TryParse(input.Substring(8, 2), out check);
+            }
+            if (result && comparePosition > 3)
+            {
+                int check;
+                result = int.TryParse(input.Substring(11, 2), out check);
+            }
+            if (result && comparePosition > 4)
+            {
+                int check;
+                result = int.TryParse(input.Substring(14, 2), out check);
+            }
+            if (result)
+            {
+                try
+                {
+                    MakeDate(comparePosition);
+                }
+                catch(ArgumentOutOfRangeException)
+                {
+                    result = false;
+                }
+            }
+            if(result)
+            {
+                MessageBox.Show("To nie jest poprawna data!");
+            }
             return result;
         }
         private DateTime MakeDate( int comparePosition = 3)
         {
-            if (comparePosition < 1 || comparePosition < 5)
+            if (comparePosition < 1 || comparePosition > 5)
                 throw new ArgumentException();
             
 
@@ -235,6 +298,10 @@ namespace SOSM1.AdminControls
 
         private void categoryBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            SetDefaultSearch();
+        }
+        private void SetDefaultSearch()
+        {
             int category = ReverseCategory(categoryBox.SelectedItem.ToString());
             switch (category)
             {
@@ -266,6 +333,7 @@ namespace SOSM1.AdminControls
                     searchBox.Text = "YYYY:MM:DD:hh:mm";
                     break;
             }
+
         }
     }
 }
