@@ -24,7 +24,18 @@ namespace SOSM1
         {
             InitializeComponent();
             InterfaceToDataBaseSaleMethods Methods = new InterfaceToDataBaseSaleMethods();
-            List<Sale> UserSaleList = Methods.GetUserSalesHistory(UserData.UserID).Result;
+            List<Sale> UserSaleList = new List<Sale>();
+            if (UserData!=null)
+            {
+                UserSaleList = Methods.GetUserSalesHistory(UserData.UserID).Result;
+            }
+            Init(UserSaleList, showUserName);
+        }
+        public HistoryUserControl(User UserData, long UserID,bool showUserName = false)
+        {
+            InitializeComponent();
+            InterfaceToDataBaseSaleMethods Methods = new InterfaceToDataBaseSaleMethods();
+            List<Sale> UserSaleList = Methods.GetUserSalesHistory(UserID).Result;
             Init(UserSaleList, showUserName);
         }
         public HistoryUserControl(long ProductID, bool showUserName = false)

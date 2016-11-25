@@ -142,13 +142,18 @@ namespace SOSM1.AdminControls
             if (category == 0)
             {
                 InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
-
-                history = new HistoryUserControl(await Methods.GetUserData(long.Parse(searchBox.Text)), true);
+                User userData = await Methods.GetUserData(long.Parse(searchBox.Text));
+                if (userData != null)
+                    history = new HistoryUserControl(userData, true);
+                else
+                    history = null;
             }
             else if (category == 1)
             {
                 InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
-                history = new HistoryUserControl(await Methods.GetUserData(searchBox.Text), true);
+                User userData = await Methods.GetUserData(searchBox.Text);
+                if (userData != null);
+                history = new HistoryUserControl(userData, true);
             }
             else if (category == 2)
             {
