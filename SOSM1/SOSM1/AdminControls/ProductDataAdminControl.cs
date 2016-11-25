@@ -56,6 +56,16 @@ namespace SOSM1.AdminControls
                     break;
                 case 2:
                     stateLabel.Text = "ARCHIWALNY";
+                    radioButton1.Enabled = false;
+                    radioButton2.Enabled = false;
+                    radioButton3.Enabled = false;
+                    saveChangesButton.Visible = false;
+                    nameTextbox.Enabled = false;
+                    priceTextbox.Enabled = false;
+                    amountTextbox.Enabled = false;
+                    descriptionTextBox.Enabled = false;
+                    textBox1.Enabled = false;
+                    categoryComboBox.Enabled = false;
                     activateButton.Visible = false;
                     deleteButton.Visible = false;
                     break;
@@ -81,8 +91,11 @@ namespace SOSM1.AdminControls
                 if (category.CategoryID == product.CategoryID)
                     selectedCategory = category;
             }
-            categoryComboBox.DataSource = categoriesList;
-            categoryComboBox.SelectedItem = selectedCategory;
+            List<string> asd = new List<string>();
+            foreach (var x in categoriesList)
+                asd.Add(x.Name);
+            categoryComboBox.DataSource = asd;
+            categoryComboBox.SelectedItem = selectedCategory.Name;
         }
 
         async private void deleteButton_Click(object sender, EventArgs e)
@@ -136,7 +149,7 @@ namespace SOSM1.AdminControls
             decimal? discoun2 = null;
             if (decimal.TryParse(textBox1.Text, out discount))
                 discoun2 = discount;
-            long cat_id = categoriesList.Find(x => x == categoryComboBox.SelectedItem).CategoryID;
+            long cat_id = categoriesList.Find(x => x.Name == categoryComboBox.SelectedItem).CategoryID;
             await kek2.ProductModification(
                 product.ProductID,
                 nameTextbox.Text,
