@@ -173,6 +173,29 @@ namespace SOSM1
         }
 
         /// <summary>
+        /// Gets User data object from the user with the specified user name.
+        /// </summary>
+        /// <param name="UserID">Specified user name</param>
+        /// <returns>User data object if user exists, null otherwise.</returns>
+        public async Task<User> GetUserData(string userName)
+        {
+
+            var user = await context.Users.FirstOrDefaultAsync(
+                x => x.Name == userName // search by userName
+                && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
+            if (user == null)
+                return null;
+
+            User userData = new User(
+                user.Name,
+                user.E_mail,
+                user.Type,
+                user.State
+            );
+            userData.UserID = user.UserID;
+            return userData;
+        }
+        /// <summary>
         /// Gets list of users who match terms specified by arguments.
         /// If the argument is null, it's not checked.
         /// </summary>

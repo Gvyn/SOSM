@@ -128,19 +128,144 @@ namespace SOSM1.AdminControls
             }
             return result;
         }
-        private void SearchHistory()
+        private async void SearchHistory()
         {
-            throw new NotImplementedException();
+            HistoryUserControl history;
+
+            int category = ReverseCategory(categoryBox.SelectedItem.ToString());
+            if (category == 0)
+            {
+                InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
+
+                history = new HistoryUserControl(await Methods.GetUserData(long.Parse(searchBox.Text)), true);
+            }
+            else if (category == 1)
+            {
+                InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
+                history = new HistoryUserControl(await Methods.GetUserData(searchBox.Text), true);
+            }
+            else if (category == 2)
+            {
+                history = new HistoryUserControl(long.Parse(searchBox.Text), true);
+            }
+            else if (category == 3)
+            {
+                InterfaceToDataBaseProductMethods Methods = new InterfaceToDataBaseProductMethods();
+                history = new HistoryUserControl(await Methods.GetProductId(searchBox.Text), true);
+            }
+
+            else
+            {
+                throw new ArgumentException();
+            }
+            history.Dock = DockStyle.Fill;
+            histPanel.Controls.Add(history);
         }
 
         private bool VerifyAttribute()
         {
-            return false;
+            int category = ReverseCategory(categoryBox.SelectedItem.ToString());
+            bool result = false;
+            if (category == 0 || category == 2 )
+            {
+                result = VerifyID();
+            }
+            else if(category == 1 || category == 3)
+            {
+                result = true;
+            }
+            else
+            {
+                VerifyDate(category - 3);
+            }
+
+            return result;
         }
+        private bool VerifyID()
+        {
+            long value;
+            bool result = long.TryParse(searchBox.Text, out value);
+            if (result && value < 0)
+                result = false;
+            return result;
+        }
+        private bool VerifyDate(int comparePosition)
+        {
+            bool result = false;
+
+            return result;
+        }
+        private DateTime MakeDate( int comparePosition = 3)
+        {
+            if (comparePosition < 1 || comparePosition < 5)
+                throw new ArgumentException();
+            
+
+            string input = searchBox.Text;
+            int year, month, day, hour, minute;
+
+            year = DateTime.Now.Year;
+            month = DateTime.Now.Month;
+            day = DateTime.Now.Day;
+            hour = DateTime.Now.Hour;
+            minute = DateTime.Now.Minute;
+            if (comparePosition > 0) 
+            {
+                year = int.Parse(input.Substring(0, 4));
+            }
+            if (comparePosition > 1)
+            {
+                month = int.Parse(input.Substring(5, 2));
+            }
+            if (comparePosition > 2)
+            {
+                day = int.Parse(input.Substring(8, 2));
+            }
+            if (comparePosition > 3)
+            {
+                hour = int.Parse(input.Substring(11, 2));
+            }
+            if (comparePosition > 4)
+            {
+                minute = int.Parse(input.Substring(14, 2));
+            }
+
+            return new DateTime(year, month, day, hour, minute, DateTime.Now.Second);
+        }
+
         private void categoryBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int category = ReverseCategory(categoryBox.SelectedItem.ToString());
-            
+            switch (category)
+            {
+                case 0:
+                    searchBox.Text = "UserID";
+                    break;
+                case 1:
+                    searchBox.Text = "UserName";
+                    break;
+                case 2:
+                    searchBox.Text = "ProductID";
+                    break;
+                case 3:
+                    searchBox.Text = "ProductName";
+                    break;
+                case 4:
+                    searchBox.Text = "YYYY";
+                    break;
+                case 5:
+                    searchBox.Text = "YYYY:MM";
+                    break;
+                case 6:
+                    searchBox.Text = "YYYY:MM:DD";
+                    break;
+                case 7:
+                    searchBox.Text = "YYYY:MM:DD:hh";
+                    break;
+                case 8:
+                    searchBox.Text = "YYYY:MM:DD:hh:mm";
+                    break;
+            }
         }
     }
 }

@@ -125,6 +125,18 @@ namespace SOSM1
             return p;
         }
 
+        public async Task<long> GetProductId(string productaName)
+        {
+            
+            var user = await context.Products.FirstOrDefaultAsync(
+                x => x.Name == productaName // search by userName
+                && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
+            if (user == null)
+                return -1;
+
+            return user.ProductID;
+        }
+
         /// <summary>
         /// Gets list of products who match terms specified by arguments.
         /// If the argument is null, it's not checked.
