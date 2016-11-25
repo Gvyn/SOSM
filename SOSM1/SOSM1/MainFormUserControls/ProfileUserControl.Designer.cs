@@ -44,7 +44,7 @@
             // nameDesclabel
             // 
             this.nameDesclabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.nameDesclabel.Location = new System.Drawing.Point(123, 64);
+            this.nameDesclabel.Location = new System.Drawing.Point(124, 64);
             this.nameDesclabel.Name = "nameDesclabel";
             this.nameDesclabel.Size = new System.Drawing.Size(140, 23);
             this.nameDesclabel.TabIndex = 0;
@@ -53,7 +53,7 @@
             // nameLabel
             // 
             this.nameLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.nameLabel.Location = new System.Drawing.Point(269, 64);
+            this.nameLabel.Location = new System.Drawing.Point(270, 64);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(278, 23);
             this.nameLabel.TabIndex = 1;
@@ -62,7 +62,7 @@
             // mailDescLabel
             // 
             this.mailDescLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.mailDescLabel.Location = new System.Drawing.Point(123, 100);
+            this.mailDescLabel.Location = new System.Drawing.Point(124, 97);
             this.mailDescLabel.Name = "mailDescLabel";
             this.mailDescLabel.Size = new System.Drawing.Size(140, 23);
             this.mailDescLabel.TabIndex = 2;
@@ -71,7 +71,7 @@
             // mailLabel
             // 
             this.mailLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.mailLabel.Location = new System.Drawing.Point(269, 100);
+            this.mailLabel.Location = new System.Drawing.Point(270, 97);
             this.mailLabel.Name = "mailLabel";
             this.mailLabel.Size = new System.Drawing.Size(278, 23);
             this.mailLabel.TabIndex = 3;
@@ -100,7 +100,7 @@
             // typeLabel
             // 
             this.typeLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.typeLabel.Location = new System.Drawing.Point(270, 132);
+            this.typeLabel.Location = new System.Drawing.Point(270, 130);
             this.typeLabel.Name = "typeLabel";
             this.typeLabel.Size = new System.Drawing.Size(278, 23);
             this.typeLabel.TabIndex = 7;
@@ -109,7 +109,7 @@
             // typeDescLabel
             // 
             this.typeDescLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.typeDescLabel.Location = new System.Drawing.Point(124, 132);
+            this.typeDescLabel.Location = new System.Drawing.Point(124, 130);
             this.typeDescLabel.Name = "typeDescLabel";
             this.typeDescLabel.Size = new System.Drawing.Size(140, 23);
             this.typeDescLabel.TabIndex = 6;
@@ -118,7 +118,7 @@
             // stateLabel
             // 
             this.stateLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.stateLabel.Location = new System.Drawing.Point(270, 164);
+            this.stateLabel.Location = new System.Drawing.Point(270, 163);
             this.stateLabel.Name = "stateLabel";
             this.stateLabel.Size = new System.Drawing.Size(278, 23);
             this.stateLabel.TabIndex = 9;
@@ -127,7 +127,7 @@
             // stateDescLabel
             // 
             this.stateDescLabel.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.stateDescLabel.Location = new System.Drawing.Point(124, 164);
+            this.stateDescLabel.Location = new System.Drawing.Point(124, 163);
             this.stateDescLabel.Name = "stateDescLabel";
             this.stateDescLabel.Size = new System.Drawing.Size(140, 23);
             this.stateDescLabel.TabIndex = 8;
@@ -140,7 +140,7 @@
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(239, 25);
             this.editButton.TabIndex = 10;
-            this.editButton.Text = "Edytuj dane użytkownika";
+            this.editButton.Text = "Ustawienia konta";
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.editButton_Click);
             // 

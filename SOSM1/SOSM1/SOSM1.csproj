@@ -317,6 +317,9 @@
     <EmbeddedResource Include="MainFormUserControls\ProductWindowUserControl.resx">
       <DependentUpon>ProductWindowUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainFormUserControls\ProfileEditControl.resx">
+      <DependentUpon>ProfileEditControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainFormUserControls\ProfileUserControl.resx">
       <DependentUpon>ProfileUserControl.cs</DependentUpon>
     </EmbeddedResource>

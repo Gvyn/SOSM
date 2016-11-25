@@ -188,7 +188,7 @@ namespace SOSM1
         /// Attempts to modify data of user with specified user ID.
         /// If argument is null it's not modified.
         /// </summary>
-        /// <param name="userID">Specifies a user.</param>
+        /// <param name="userID">Specifies the user.</param>
         /// <param name="userName">New user name.</param>
         /// <param name="mail">New e-mail address.</param>
         /// <param name="password">New password.</param>
@@ -218,9 +218,24 @@ namespace SOSM1
         }
 
         /// <summary>
+        /// Checks if there is an active or created user with specified name.
+        /// </summary>
+        /// <param name="userName">Sepcifies the user.</param>
+        /// <returns>True if exists, false otherwise. </returns>
+        public async Task<bool> NameExists(string userName)
+        {
+            int usersAlreadyInDB = await context.Users.Where(
+                x => x.Name == userName // search by UserName
+                && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
+            if (usersAlreadyInDB != 0)
+                return true;
+            return false;
+        }
+
+        /// <summary>
         /// Attempts to change the type of user with specified user ID
         /// </summary>
-        /// <param name="userID">Specifies a user.</param>
+        /// <param name="userID">Specifies the user.</param>
         /// <param name="type">New type.</param>
         /// <returns>True if operation could be completed, false otherwise.</returns>
         public async Task<bool> ChangeType(long userID, long type)
@@ -237,7 +252,7 @@ namespace SOSM1
         /// <summary>
         /// Changes the state of user with userID from Created to Active.
         /// </summary>
-        /// <param name="userID">Specifies a user.</param>
+        /// <param name="userID">Specifies the user.</param>
         /// <returns>Returns true, if operation could be completed, false otherwise.</returns>
         public async Task<bool> Activate(long userID)
         {
