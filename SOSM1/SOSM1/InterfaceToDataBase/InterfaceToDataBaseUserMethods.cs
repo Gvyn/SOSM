@@ -38,13 +38,9 @@ namespace SOSM1
             {
                 return null;
             }
+            
 
-            String hash = password + (1000 + user.UserID).ToString() + "PseudoSaltWhateverAKB48<3!" + (1000 - user.UserID).ToString();
-            byte[] data = Encoding.ASCII.GetBytes(hash);
-            data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
-            hash = Encoding.ASCII.GetString(data);
-
-            if (user.Password != hash)
+            if (user.Password != Hash(password,user.UserID))
             {
                 return null;
             }
@@ -79,7 +75,7 @@ namespace SOSM1
                 && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
             if (usersAlreadyInDB != 0)
                 return false;
-
+            
             Users user = new Users();
             user.Name = newUser.UserName;
             user.Password = password;
@@ -87,7 +83,13 @@ namespace SOSM1
             user.Type = newUser.Type;
             user.State = newUser.State;
 
-            context.Users.Add(user);
+            long utest = user.UserID;
+            Users u = context.Users.Add(user);
+            utest = u.UserID;
+            utest = context.Entry(u).Property(x => x.UserID).CurrentValue;
+            context.Entry(u).Property(x=>x.Password).CurrentValue = Hash(password, u.UserID);
+            //context.Entry(u).Property(e => e.Password).IsModified = true;
+
             await context.SaveChangesAsync();
             return true;
         }
@@ -258,13 +260,7 @@ namespace SOSM1
             }
             if (password != null)
             {
-
-                String hash = password + (1000+userID).ToString()+ "PseudoSaltWhateverAKB48<3!" + (1000-userID).ToString();
-                byte[] data = Encoding.ASCII.GetBytes(hash);
-                data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
-                hash = Encoding.ASCII.GetString(data);
-
-                user.Password = hash;
+                user.Password = Hash(password,user.UserID);
                 context.Entry(user).Property(e => e.Password).IsModified = true;
             }
             await context.SaveChangesAsync();
@@ -351,36 +347,14 @@ namespace SOSM1
             return true;
         }
 
-        ///// <summary>
-        ///// Checks if there is an active user with specified user name and admin privileges.
-        ///// </summary>
-        ///// <param name="userName">Specified user name.</param>
-        ///// <returns>True if is an admin, false otherwise.</returns>
-        //public static bool CheckPrivilege(string userName)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private string Hash(string password, long userID)
+        {
 
-        ///// <summary>
-        ///// Checks if user with user name equal to UserName exists in database and is Active or Created.
-        ///// </summary>
-        ///// <param name="userName">String with user name that we want to check.</param>
-        ///// <returns>True if exists, false otherwise.</returns>
-        //public static bool UserExists(string userName)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        ///// <summary>
-        ///// Creates User data object from the active user with specified name in the database.
-        ///// </summary>
-        ///// <param name="userName">Nameof the user we want to get data from.</param>
-        ///// <returns>User data object if user exists, null otherwise.</returns>
-        //public static User GetUserData(string userName)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
+            String hash = password + (1000 + userID).ToString() + "PseudoSaltWhateverAKB48<3!" + (1000 - userID).ToString();
+            byte[] data = Encoding.ASCII.GetBytes(hash);
+            data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
+            return Encoding.ASCII.GetString(data);
+        }
+        
     }
 }
