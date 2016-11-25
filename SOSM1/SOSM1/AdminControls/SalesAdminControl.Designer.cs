@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.setPanel = new System.Windows.Forms.Panel();
-            this.histPanel = new System.Windows.Forms.Panel();
-            this.allButton = new System.Windows.Forms.Button();
-            this.categoryBox = new System.Windows.Forms.ComboBox();
-            this.searchButton = new System.Windows.Forms.Button();
             this.searchBox = new System.Windows.Forms.TextBox();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.categoryBox = new System.Windows.Forms.ComboBox();
+            this.allButton = new System.Windows.Forms.Button();
+            this.histPanel = new System.Windows.Forms.Panel();
             this.setPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,34 +49,14 @@
             this.setPanel.Size = new System.Drawing.Size(828, 66);
             this.setPanel.TabIndex = 0;
             // 
-            // histPanel
+            // searchBox
             // 
-            this.histPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.histPanel.Location = new System.Drawing.Point(0, 66);
-            this.histPanel.Name = "histPanel";
-            this.histPanel.Size = new System.Drawing.Size(828, 440);
-            this.histPanel.TabIndex = 1;
-            // 
-            // allButton
-            // 
-            this.allButton.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.allButton.Location = new System.Drawing.Point(12, 17);
-            this.allButton.Name = "allButton";
-            this.allButton.Size = new System.Drawing.Size(159, 29);
-            this.allButton.TabIndex = 0;
-            this.allButton.Text = "Wszystkie transakcje";
-            this.allButton.UseVisualStyleBackColor = true;
-            this.allButton.Click += new System.EventHandler(this.allButton_Click);
-            // 
-            // categoryBox
-            // 
-            this.categoryBox.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.categoryBox.FormattingEnabled = true;
-            this.categoryBox.Location = new System.Drawing.Point(369, 20);
-            this.categoryBox.Name = "categoryBox";
-            this.categoryBox.Size = new System.Drawing.Size(173, 25);
-            this.categoryBox.TabIndex = 1;
-            this.categoryBox.SelectionChangeCommitted += new System.EventHandler(this.categoryBox_SelectionChangeCommitted);
+            this.searchBox.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.searchBox.Location = new System.Drawing.Point(571, 20);
+            this.searchBox.Name = "searchBox";
+            this.searchBox.Size = new System.Drawing.Size(224, 25);
+            this.searchBox.TabIndex = 3;
+            this.searchBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.searchBox_KeyPress);
             // 
             // searchButton
             // 
@@ -90,13 +70,34 @@
             this.searchButton.UseVisualStyleBackColor = true;
             this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
             // 
-            // searchBox
+            // categoryBox
             // 
-            this.searchBox.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.searchBox.Location = new System.Drawing.Point(571, 20);
-            this.searchBox.Name = "searchBox";
-            this.searchBox.Size = new System.Drawing.Size(224, 25);
-            this.searchBox.TabIndex = 3;
+            this.categoryBox.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.categoryBox.FormattingEnabled = true;
+            this.categoryBox.Location = new System.Drawing.Point(369, 20);
+            this.categoryBox.Name = "categoryBox";
+            this.categoryBox.Size = new System.Drawing.Size(173, 25);
+            this.categoryBox.TabIndex = 1;
+            this.categoryBox.SelectionChangeCommitted += new System.EventHandler(this.categoryBox_SelectionChangeCommitted);
+            // 
+            // allButton
+            // 
+            this.allButton.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.allButton.Location = new System.Drawing.Point(12, 17);
+            this.allButton.Name = "allButton";
+            this.allButton.Size = new System.Drawing.Size(159, 29);
+            this.allButton.TabIndex = 0;
+            this.allButton.Text = "Wszystkie transakcje";
+            this.allButton.UseVisualStyleBackColor = true;
+            this.allButton.Click += new System.EventHandler(this.allButton_Click);
+            // 
+            // histPanel
+            // 
+            this.histPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.histPanel.Location = new System.Drawing.Point(0, 66);
+            this.histPanel.Name = "histPanel";
+            this.histPanel.Size = new System.Drawing.Size(828, 440);
+            this.histPanel.TabIndex = 1;
             // 
             // SalesAdminControl
             // 

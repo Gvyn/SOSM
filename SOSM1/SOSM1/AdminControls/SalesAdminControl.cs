@@ -43,7 +43,11 @@ namespace SOSM1.AdminControls
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            if (searchBox.Text.Length < 1) 
+            Search();
+        }
+        private void Search()
+        {
+            if (searchBox.Text.Length < 1)
             {
                 MessageBox.Show("Wprowadź atrybut wyszukiwania");
                 return;
@@ -166,7 +170,7 @@ namespace SOSM1.AdminControls
             }
             else if(category >3 && category < 9)
             {
-                history = new HistoryUserControl(MakeDate(category - 3), category - 3, false);
+                history = new HistoryUserControl(MakeDate(category - 3), category - 3, true);
             }
             else
             {
@@ -190,7 +194,7 @@ namespace SOSM1.AdminControls
             }
             else
             {
-                VerifyDate(category - 3);
+                result = VerifyDate(category - 3);
             }
 
             return result;
@@ -257,7 +261,7 @@ namespace SOSM1.AdminControls
                     result = false;
                 }
             }
-            if(result)
+            if(!result)
             {
                 MessageBox.Show("To nie jest poprawna data!");
             }
@@ -339,6 +343,16 @@ namespace SOSM1.AdminControls
                     break;
             }
 
+        }
+
+        private void searchBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == Convert.ToChar(Keys.Enter))
+            {
+
+                Search();
+                e.Handled = true;
+            }
         }
     }
 }
