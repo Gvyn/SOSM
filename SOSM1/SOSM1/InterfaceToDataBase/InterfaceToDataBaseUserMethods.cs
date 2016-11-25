@@ -29,11 +29,22 @@ namespace SOSM1
         /// Otherwise returns null</returns>
         public async Task<User> LogIn(string userName, string password)
         {
+
             var user = await context.Users.FirstOrDefaultAsync(
                 x => x.Name == userName // search by userName
-                && (x.Password == password) // search by password
                 && (x.State == 0 || x.State == 1)); //user 'created' or 'active'
+
             if (user == null)
+            {
+                return null;
+            }
+
+            String hash = password + (1000 + user.UserID).ToString() + "PseudoSaltWhateverAKB48<3!" + (1000 - user.UserID).ToString();
+            byte[] data = Encoding.ASCII.GetBytes(hash);
+            data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
+            hash = Encoding.ASCII.GetString(data);
+
+            if (user.Password != hash)
             {
                 return null;
             }
@@ -224,7 +235,13 @@ namespace SOSM1
             }
             if (password != null)
             {
-                user.Password = password;
+
+                String hash = password + (1000+userID).ToString()+ "PseudoSaltWhateverAKB48<3!" + (1000-userID).ToString();
+                byte[] data = Encoding.ASCII.GetBytes(hash);
+                data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
+                hash = Encoding.ASCII.GetString(data);
+
+                user.Password = hash;
                 context.Entry(user).Property(e => e.Password).IsModified = true;
             }
             await context.SaveChangesAsync();

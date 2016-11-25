@@ -130,15 +130,21 @@ namespace SOSM1
                 }
                 if (correctData)
                 {
-                    await Methods.UserModification(userData.UserID, null, mailBox.Text);
-                    mailLabel.Text = mailBox.Text;
-                    userData.Mail = mailLabel.Text;
-                    if(adminPrivilege)
+                    if (await Methods.UserModification(userData.UserID, null, mailBox.Text))
                     {
-                        typeLabel.Text = typeBox.SelectedItem.ToString();
-                        userData.Type = ReverseTypeString(typeBox.SelectedItem.ToString());
+                        mailLabel.Text = mailBox.Text;
+                        userData.Mail = mailLabel.Text;
+                        if (adminPrivilege)
+                        {
+                            typeLabel.Text = typeBox.SelectedItem.ToString();
+                            userData.Type = ReverseTypeString(typeBox.SelectedItem.ToString());
+                        }
+                        MessageBox.Show("Pomyślnie dokonano zmian.");
                     }
-                    MessageBox.Show("Pomyślnie dokonano zmian.");
+                    else
+                    {
+                        MessageBox.Show("Nie można było ukończyć operacji.");
+                    }
                 }
                 else
                 {
@@ -208,16 +214,17 @@ namespace SOSM1
 
             if (VerifyPasswords() && MakeSure()) 
             {
-                String hash = newPasBox.Text + "PseudoSaltWhateverAKB48<3!" + userData.UserName;
-                byte[] data = Encoding.ASCII.GetBytes(hash);
-                data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
-                hash = Encoding.ASCII.GetString(data);
-
                 InterfaceToDataBaseUserMethods Methods = new InterfaceToDataBaseUserMethods();
-                await Methods.UserModification(userData.UserID, null, null,hash);
-                newPasBox.Text = null;
-                newPas2Box.Text = null;
-                MessageBox.Show("Pomyślnie zmieniono hasło.");
+                if(await Methods.UserModification(userData.UserID, null, null,newPasBox.Text))
+                {
+                    newPasBox.Text = null;
+                    newPas2Box.Text = null;
+                    MessageBox.Show("Pomyślnie ustawiono nowe hasło.");
+                }
+                else
+                {
+                    MessageBox.Show("Nie można było ukończyć operacji.");
+                }
 
 
             }

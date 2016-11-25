@@ -32,14 +32,9 @@ namespace SOSM1
                 MessageBox.Show("Wpisz hasło!");
                 return;
             }
-
-            String hash = passwordBox.Text + "PseudoSaltWhateverAKB48<3!" + userNameBox.Text;
-            byte[] data = Encoding.ASCII.GetBytes(hash);
-            data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
-            hash = Encoding.ASCII.GetString(data);
-
+            
             InterfaceToDataBaseUserMethods Method = new InterfaceToDataBaseUserMethods();
-            loggedUserData = await Method.LogIn(userNameBox.Text, hash);
+            loggedUserData = await Method.LogIn(userNameBox.Text, passwordBox.Text);
             if (loggedUserData != null)
             {
                 ToMain();

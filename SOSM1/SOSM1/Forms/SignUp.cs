@@ -58,15 +58,9 @@ namespace SOSM1
             try
             {
                 User newUser = new User(userNameBox.Text, mailBox.Text, 0, 0);
-
-                String hash = passwordBox.Text + "PseudoSaltWhateverAKB48<3!" + userNameBox.Text;
-                byte[] data = Encoding.ASCII.GetBytes(hash);
-                data = new System.Security.Cryptography.SHA512Managed().ComputeHash(data);
-                hash = Encoding.ASCII.GetString(data);
-
-
+                
                 InterfaceToDataBaseUserMethods Method = new InterfaceToDataBaseUserMethods();
-                if (await Method.AddUser(newUser, hash))
+                if (await Method.AddUser(newUser, passwordBox.Text))
                 {
                     this.Visible = false;
                     MessageBox.Show("Rejestracja przebiegła pomyślnie.");
