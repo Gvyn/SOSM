@@ -280,7 +280,7 @@ namespace SOSM1
         /// <returns>A Product object if there was at least one product with sale, null otherwise.</returns>
         public async Task<Product> GetRandomSale()
         {
-            var sales = await context.Products.Where(x => x.Price > x.Discount).ToListAsync();
+            var sales = await context.Products.Where(x => x.Price > x.Discount && x.State == 1).ToListAsync();
             if (sales.Count == 0)
             {
                 return null;
