@@ -80,7 +80,7 @@ namespace SOSM1
             user.Name = newUser.UserName;
             user.Password = password;
             user.E_mail = newUser.Mail;
-            user.Type = 1;//newUser.Type;
+            user.Type = newUser.Type;
             user.State = newUser.State;
 
             long utest = user.UserID;
