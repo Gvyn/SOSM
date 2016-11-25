@@ -149,7 +149,7 @@ namespace SOSM1.AdminControls
             decimal? discoun2 = null;
             if (decimal.TryParse(textBox1.Text, out discount))
                 discoun2 = discount;
-            long cat_id = categoriesList.Find(x => x.Name == categoryComboBox.SelectedItem).CategoryID;
+            long cat_id = categoriesList.Find(x => x.Name == categoryComboBox.SelectedItem.ToString()).CategoryID;
             await kek2.ProductModification(
                 product.ProductID,
                 nameTextbox.Text,

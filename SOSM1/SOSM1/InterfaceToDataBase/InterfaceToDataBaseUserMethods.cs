@@ -94,6 +94,20 @@ namespace SOSM1
             Users user = await context.Users.FindAsync(userID);
             if (user == null)
                 return false;
+
+
+            int adminsInDB = await context.Users.Where(
+                x => x.Type == 1//check privilege
+                && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
+
+            int countAdminsWithID = await context.Users.Where(
+                x => x.Type == 1//check privilege
+                && x.UserID == userID//checkID
+                && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
+
+            if (adminsInDB <= countAdminsWithID)
+                return false;
+
             switch (user.State)
             {
                 case 0: // state - created, EREASE THEY AND THIER PROPERTY(BASKETS) TOO!!!
@@ -233,6 +247,20 @@ namespace SOSM1
         }
 
         /// <summary>
+        /// Checks if there is more than one active or created user with admin privileges.
+        /// </summary>
+        /// <returns>True if exists, false otherwise. </returns>
+        public async Task<bool> MoreThanOneAdmin()
+        {
+            int usersAlreadyInDB = await context.Users.Where(
+                x => x.Type==1//check privilege
+                && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
+            if (usersAlreadyInDB > 1)
+                return true;
+            return false;
+        }
+
+        /// <summary>
         /// Attempts to change the type of user with specified user ID
         /// </summary>
         /// <param name="userID">Specifies the user.</param>
@@ -243,6 +271,22 @@ namespace SOSM1
             Users user = await context.Users.FindAsync(userID);
             if (user == null)
                 return false;
+
+            if (type != 1)
+            {
+                int adminsInDB = await context.Users.Where(
+                    x => x.Type == 1//check privilege
+                    && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
+
+                int countAdminsWithID = await context.Users.Where(
+                    x => x.Type == 1//check privilege
+                    && x.UserID == userID//checkID
+                    && (x.State == 0 || x.State == 1)).CountAsync(); //user 'created' or 'active'
+
+                if (adminsInDB <= countAdminsWithID)
+                    return false;
+            }
+
             user.Type = type;
             context.Entry(user).Property(e => e.Type).IsModified = true;
             await context.SaveChangesAsync();

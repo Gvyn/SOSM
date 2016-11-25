@@ -108,7 +108,7 @@ namespace SOSM1
         {
             Logout();
         }
-        private void Logout()
+        public void Logout()
         {
             this.Visible = false;
             loggedUserData = null;

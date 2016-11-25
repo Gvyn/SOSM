@@ -177,6 +177,7 @@
             this.nameBox.Name = "nameBox";
             this.nameBox.Size = new System.Drawing.Size(275, 25);
             this.nameBox.TabIndex = 27;
+            this.nameBox.Visible = false;
             // 
             // mailBox
             // 
@@ -193,6 +194,7 @@
             this.newPasBox.Name = "newPasBox";
             this.newPasBox.Size = new System.Drawing.Size(275, 25);
             this.newPasBox.TabIndex = 30;
+            this.newPasBox.UseSystemPasswordChar = true;
             // 
             // newPasLabel
             // 
@@ -219,6 +221,7 @@
             this.newPas2Box.Name = "newPas2Box";
             this.newPas2Box.Size = new System.Drawing.Size(275, 25);
             this.newPas2Box.TabIndex = 32;
+            this.newPas2Box.UseSystemPasswordChar = true;
             // 
             // deleteButton
             // 
