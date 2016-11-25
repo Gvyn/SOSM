@@ -26,6 +26,8 @@ namespace SOSM1
             welcomeMessageLabel.Text = await Method.GetWelcomeMessage();
             if (welcomeMessageLabel.Text == null)
                 welcomeMessageLabel.Text = Properties.Resources.DefaultWelcomeMessage;
+            if (welcomeMessageLabel.Text == "")
+                welcomeMessagePanel.Visible = false;
         }
         private async void SetSaleInfo()
         {

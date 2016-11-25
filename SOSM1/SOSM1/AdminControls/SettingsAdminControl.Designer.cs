@@ -36,9 +36,10 @@
             // 
             // contactInfoButton
             // 
-            this.contactInfoButton.Location = new System.Drawing.Point(363, 182);
+            this.contactInfoButton.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.contactInfoButton.Location = new System.Drawing.Point(363, 167);
             this.contactInfoButton.Name = "contactInfoButton";
-            this.contactInfoButton.Size = new System.Drawing.Size(163, 35);
+            this.contactInfoButton.Size = new System.Drawing.Size(163, 58);
             this.contactInfoButton.TabIndex = 7;
             this.contactInfoButton.Text = "Zmień dane kontaktowe";
             this.contactInfoButton.UseVisualStyleBackColor = true;
@@ -46,6 +47,7 @@
             // 
             // contactInfoTextbox
             // 
+            this.contactInfoTextbox.Font = new System.Drawing.Font("Arial", 11.25F);
             this.contactInfoTextbox.Location = new System.Drawing.Point(27, 156);
             this.contactInfoTextbox.MinimumSize = new System.Drawing.Size(300, 80);
             this.contactInfoTextbox.Multiline = true;
@@ -55,9 +57,10 @@
             // 
             // welcomeMessageButton
             // 
-            this.welcomeMessageButton.Location = new System.Drawing.Point(363, 50);
+            this.welcomeMessageButton.Font = new System.Drawing.Font("Arial", 11.25F);
+            this.welcomeMessageButton.Location = new System.Drawing.Point(363, 39);
             this.welcomeMessageButton.Name = "welcomeMessageButton";
-            this.welcomeMessageButton.Size = new System.Drawing.Size(163, 35);
+            this.welcomeMessageButton.Size = new System.Drawing.Size(163, 58);
             this.welcomeMessageButton.TabIndex = 5;
             this.welcomeMessageButton.Text = "Zmień wiadomość powitalną";
             this.welcomeMessageButton.UseVisualStyleBackColor = true;
@@ -65,6 +68,7 @@
             // 
             // welcomeMessageTextbox
             // 
+            this.welcomeMessageTextbox.Font = new System.Drawing.Font("Arial", 11.25F);
             this.welcomeMessageTextbox.Location = new System.Drawing.Point(27, 28);
             this.welcomeMessageTextbox.MinimumSize = new System.Drawing.Size(300, 80);
             this.welcomeMessageTextbox.Multiline = true;

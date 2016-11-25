@@ -19,15 +19,10 @@ namespace SOSM1
         }
         private async void SetContactInfo()
         {
-            try
-            {
-                InterfaceToDataBaseOtherMethods Method = new InterfaceToDataBaseOtherMethods();
-                contactLabel.Text = await Method.GetContactInfo();
-            }
-            catch (InvalidOperationException)
-            {
+            InterfaceToDataBaseOtherMethods Method = new InterfaceToDataBaseOtherMethods();
+            contactLabel.Text = await Method.GetContactInfo();
+            if (contactLabel.Text == null)
                 contactLabel.Text = Properties.Resources.DefaultContactInfo;
-            }
             contactLabel.Text += "\n\n" + Properties.Resources.SOSMContactInfo;
 
         }

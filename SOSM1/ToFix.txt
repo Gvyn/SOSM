@@ -1,5 +1,5 @@
 To add:
-1. Finish ProfileEditControl
-2. Fill AdminUserControl
+1. Fill AdminUserControl
+2. Add database creation
 3. Add tests
 4. Documentation
